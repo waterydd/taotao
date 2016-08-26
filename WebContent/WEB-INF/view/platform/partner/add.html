@@ -1,0 +1,43 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/partner');">股东管理</a></li>
+			<li class="active">股东录入</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">股东录入</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form id="editForm" action="${cxt!}/jf/platform/partner/save" method="POST" role="form" class="form-horizontal">
+					
+					<% include("/platform/partner/form.html"){} %>
+					
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/platform/partner/save")){ %>
+								<button type="button" class="btn btn-red" onclick="platform_verify.formValiSubmit(this.form);">
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

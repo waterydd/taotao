@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.partner">
+	
+	<!-- 分页查询：from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pre_jn_partner
+			
+			where 1=1 
+			<% if(!isEmpty(phone)){ %>
+					and phone = #'$phone$'#
+			<% } %>
+			<% if(!isEmpty(realname)){ %>
+					and realname = #'$realname$'#
+			<% } %>
+			<% if(!isEmpty(authstate)){ %>
+					and authstate = #'$authstate$'#
+			<% } %>
+			
+			
+			order by inserttime desc
+				
+    	]]>
+	</sql>
+	
+</sql-statement>

@@ -6,7 +6,7 @@
 <div class="form-group">
 	<label class="col-sm-2 control-label">手机号</label>
 	<div class="col-sm-7">
-		<input type="text" name="partner.phone" value="${escapeXml(partner.phone!)}" 
+		<input type="text" id="phone" name="partner.phone" value="${escapeXml(partner.phone!)}" 
 			class="form-control" maxlength="11" vMin="1" vType="phone" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 11位数字 </span>
@@ -15,7 +15,7 @@
 <div class="form-group">
 	<label class="col-sm-2 control-label">真实姓名</label>
 	<div class="col-sm-7">
-		<input type="text" name="partner.realname" value="${escapeXml(partner.realname!)}" 
+		<input type="text" id="realname" name="partner.realname" value="${escapeXml(partner.realname!)}" 
 			class="form-control" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入用户真实姓名 </span>
@@ -28,7 +28,12 @@
 			class="form-control" maxlength="25"   vMin="3" vType="floatZ" onblur="submi();">
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入金额 </span>
-	<input type="hidden" name="partner.rechargegold" id="partner.rechargegold"  vMin="4" class="form-control"  value="${escapeXml(partner.jnb_balance!)}/>
+	<input type="hidden" name="partner.rechargegold" id="partner.rechargegold"  vMin="4" class="form-control"  value="${escapeXml(partner.jnb_balance!)}"/>
 
 </div>
-		
+<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/partner/form.js"></script>	
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

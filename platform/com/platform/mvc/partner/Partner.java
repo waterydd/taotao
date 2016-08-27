@@ -93,6 +93,12 @@ public class Partner extends BaseModel<Partner> {
 	 * 描述：分页from
 	 */
 	public static final String sqlId_splitPageFrom = "platform.partner.splitPageFrom";
+	
+	/**
+	 * sqlId : platform.partner.splitFindInfo
+	 * 描述：查询用户信息的sql
+	 */
+	public static final String sqlId_splitFindInfo = "platform.partner.splitFindInfo";
 
 	private String phone;
 	private String realname;

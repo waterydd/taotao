@@ -91,20 +91,24 @@
 					<table class="table table-bordered table-hover" id="dataTable" >
 						<thead>
 							<tr align="center">
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+								<th align="left" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
 									手机号
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
 									真实姓名
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
 									认证状态
 								</th>
-								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'inserttime')">
 									录入时间
+									${orderBy("inserttime")}
 								</th>
-								
-								<th class="hidden-xs">${i18nMap["admin.common.operation"]}</th>
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'approve_time')">
+									认证时间
+									${orderBy("approve_time")}
+								</th>
+								<th align="center" class="hidden-xs">${i18nMap["admin.common.operation"]}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -121,6 +125,9 @@
 									</td>
 									<td align="center">
 										${partner.inserttime !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
+									</td>
+									<td align="center">
+										${partner.approve_time !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
 									</td>
 									<td class="hidden-xs">
 										<% if(view == true){ %>

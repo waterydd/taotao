@@ -6,6 +6,7 @@ import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -13,16 +14,11 @@ import org.apache.log4j.Logger;
 import com.jfinal.aop.Before;
 
 /**
- * XXX 管理	
- * 描述：
+ * XXX 管理 描述：
  * 
- * /jf/platform/partner
- * /jf/platform/partner/save
- * /jf/platform/partner/edit
- * /jf/platform/partner/update
- * /jf/platform/partner/view
- * /jf/platform/partner/delete
- * /common/partner/add.html
+ * /jf/platform/partner /jf/platform/partner/save /jf/platform/partner/edit
+ * /jf/platform/partner/update /jf/platform/partner/view
+ * /jf/platform/partner/delete /common/partner/add.html
  * 
  */
 @Controller(controllerKey = "/jf/platform/partner")
@@ -30,34 +26,53 @@ public class PartnerController extends BaseController {
 
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(PartnerController.class);
-	
+
 	private PartnerService partnerService;
-	
+
 	/**
 	 * 列表
 	 */
 	public void index() {
-		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect, Partner.sqlId_splitPageFrom);
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect,
+				Partner.sqlId_splitPageFrom);
 		render("/platform/partner/list.html");
 	}
-	
+
 	/**
 	 * 保存
 	 */
-	@Before(PartnerValidator.class)
 	public void save() {
-	Map<String,Object> pkMap=new HashMap<String,Object>();
-//	Partner p= getAttr("partner");
-//	p.getPhone();
-//	getAttrForStr("partner");
-//	getAttrForStr("partner.phone");
-//	getParamMap();
-//	getPara("partner.phone");
-     //设置保存主键为空		
-    getModel(Partner.class).save(pkMap);
-		render("/jf/platform/partner");
+		Map<String,Object> pkMap=new HashMap<String,Object>();
+//		Partner p= getAttr("partner");
+//		p.getPhone();
+//		getAttrForStr("partner");
+//		getAttrForStr("partner.phone");
+//		getParamMap();
+//		getPara("partner.phone");   
+	     //设置保存主键为空		
+	    getModel(Partner.class).save(pkMap);
+//	    setAttr("url", "/jf/platform/partner");
+//			render("/platform/partner/add.html");
+	    redirect("/jf/platform/partner");
+
 	}
+
 	
+	/**
+	 * 
+	* <p>Description:验证用户信息是否存在 </p>
+	* <p>Company:jxsq </p>
+	* @author MINGHUA
+	* @date 2016年8月26日 下午4:42:43
+	 */
+	public void valiPartInfo()
+	{
+		String phone=getPara("partner.phone");
+		String realname=getPara("partner.realname");
+		boolean flag=partnerService.valiPartInfo(realname, phone);
+		renderText(String.valueOf(flag));
+		
+	}
 	/**
 	 * 准备更新
 	 */
@@ -66,7 +81,7 @@ public class PartnerController extends BaseController {
 		setAttr("partner", partner);
 		render("/platform/partner/update.html");
 	}
-	
+
 	/**
 	 * 更新
 	 */
@@ -84,7 +99,7 @@ public class PartnerController extends BaseController {
 		setAttr("partner", partner);
 		render("/platform/partner/view.html");
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -92,5 +107,5 @@ public class PartnerController extends BaseController {
 		partnerService.delete("pre_jn_partner", getPara() == null ? ids : getPara());
 		redirect("/jf/platform/partner");
 	}
-	
+
 }

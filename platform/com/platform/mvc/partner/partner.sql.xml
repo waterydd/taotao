@@ -18,10 +18,14 @@
 			<% if(!isEmpty(authstate)){ %>
 					and authstate = #'$authstate$'#
 			<% } %>
-			
-			
-			order by inserttime desc
+
 				
+    	]]>
+	</sql>
+	<!-- 查询用户信息 -->
+	<sql id="splitFindInfo">
+		<![CDATA[ 
+        	select realname from pre_jn_partner  where  phone =? or realname =?	
     	]]>
 	</sql>
 	

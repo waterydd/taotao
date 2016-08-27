@@ -15,6 +15,7 @@ public class PartnerValidator extends Validator {
 		if (actionKey.equals("/jf/platform/partner/save")){
 			// validateString("username", 6, 30, "usernameMsg", "请输入登录账号!");
 			
+			log.info("------------------------------------进入保存数据的拦截器-----------------------------------------------");
 		} else if (actionKey.equals("/jf/platform/partner/update")){
 			
 		}
@@ -22,13 +23,13 @@ public class PartnerValidator extends Validator {
 	
 	protected void handleError(Controller controller) {
 		controller.keepModel(Partner.class);
-		
+		log.info("---------2222222222222222----------进入保存数据的拦截器------------222222222222222---------------");
 		String actionKey = getActionKey();
 		if (actionKey.equals("/jf/platform/partner/save")){
-			controller.render("/platform/xxx.html");
+//			controller.render("/platform/user/add.html");
 		
 		} else if (actionKey.equals("/jf/platform/partner/update")){
-			controller.render("/platform/xxx.html");
+//			controller.render("/platform/xxx.html");
 		
 		}
 	}

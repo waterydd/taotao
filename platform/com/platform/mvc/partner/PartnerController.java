@@ -4,6 +4,9 @@ import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
+import com.platform.mvc.memberprofile.MemberProfile;
+import com.platform.mvc.memberprofile.MemberProfileService;
+import com.platform.mvc.members.Members;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +31,8 @@ public class PartnerController extends BaseController {
 	private static Logger log = Logger.getLogger(PartnerController.class);
 
 	private PartnerService partnerService;
+	private MemberProfileService memberProfileService;
+
 
 	/**
 	 * 列表
@@ -95,8 +100,16 @@ public class PartnerController extends BaseController {
 	 * 查看
 	 */
 	public void view() {
-		Partner partner = Partner.dao.findById(getPara());
+		String phone =getPara();
+		Partner partner = Partner.dao.findById(phone);
+		MemberProfile memberProfile=memberProfileService.queryByPhone(phone);
+		if(memberProfile!=null)
+		{
+			Members members=Members.dao.findById(memberProfile.getUid());
+			setAttr("members", members);
+		}
 		setAttr("partner", partner);
+		setAttr("memberProfile", memberProfile);
 		render("/platform/partner/view.html");
 	}
 

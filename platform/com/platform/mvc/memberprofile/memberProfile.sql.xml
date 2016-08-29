@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.memberProfile">
+
+	<!-- 分页查询：from -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+        	from 
+        		pre_common_member_profile
+			
+			where 1=1 
+				
+    	]]>
+	</sql>
+
+	<!-- 分页查询：from -->
+	<sql id="queryByPhone">
+		<![CDATA[ 
+        select 
+			uid, 
+			realname, 
+			gender, 
+			birthyear, 
+			birthmonth, 
+			birthday, 
+			constellation, 
+			zodiac, 
+			telephone, 
+			mobile, 
+			idcardtype, 
+			idcard, 
+			address, 
+			zipcode, 
+			nationality, 
+			birthprovince, 
+			birthcity, 
+			birthdist, 
+			birthcommunity, 
+			resideprovince, 
+			residecity, 
+			residedist, 
+			residecommunity, 
+			residesuite, 
+			graduateschool, 
+			company, 
+			education, 
+			occupation, 
+			POSITION, 
+			revenue, 
+			affectivestatus, 
+			lookingfor, 
+			bloodtype, 
+			height, 
+			weight, 
+			alipay, 
+			icq, 
+			qq, 
+			yahoo, 
+			msn, 
+			taobao, 
+			site, 
+			bio, 
+			interest, 
+			field1, 
+			field2, 
+			field3, 
+			field4, 
+			field5, 
+			field6, 
+			field7, 
+			field8
+         from 
+        		pre_common_member_profile
+			
+			where mobile=?
+				
+    	]]>
+	</sql>
+
+</sql-statement>

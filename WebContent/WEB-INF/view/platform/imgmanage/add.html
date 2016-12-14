@@ -1,0 +1,79 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li class="active">启动图录入</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">启动图录入</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form id="editForm" action="${cxt!}/jf/platform/validatecode/save" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data"> <!-- 【 填写信息的提交表单】 -->
+					
+					 <style type="text/css">  
+						 #preview, .img, .imgg {  width:243px; height:432px;}  
+						 #preview { border:1px solid #000; }  
+					 </style>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">上传图片</label>
+						<div class="col-sm-3">
+							<input type="file" id="image_url" name="image_url" onchange="preview(this)" />  
+						</div>
+						 <i class="fa fa-info-circle"></i>类型为 gif,jpg,jpeg,bmp,png </span>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">图片预览</label>
+						 <div class="col-sm-4">
+							<div id="preview"></div>
+						</div>
+					</div>
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/imgmanage/form.js"></script> 
+					
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+						/* ************************************ */
+						function preview(file) {  
+						 var prevDiv = document.getElementById('preview');  
+						 if (file.files && file.files[0]) {  
+							 var reader = new FileReader();  
+							 reader.onload = function(evt){  
+							 	prevDiv.innerHTML = '<img class="imgg" src="' + evt.target.result + '" />';  
+							}    
+							 reader.readAsDataURL(file.files[0]);
+						  } else {  
+							 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+							 }  
+						 } 
+						/* *************************************** */
+					</script>
+										
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							         
+									<button type="button" class="btn btn-red" onclick="platform_imgmanage_form.submitValiFunc(this.form,true);"> <!-- 【需要修改】 -->
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+							
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,105 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/partner');">股东管理</a></li>
+			<li class="active">股东更新</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">股东更新</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/partner/update" method="POST" role="form" class="form-horizontal">
+					<!-- <% include("/platform/partner/form.html"){} %> -->
+					
+					<script type="text/javascript">
+						function submi(){
+						document.getElementById("partner.rechargegold").value = document.getElementById("partner.jnb_balance").value;
+						}
+					</script>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">认证状态</label>
+						<div class="col-sm-7">
+							<!-- <input type="text" class="form-control" readonly="readonly" value="${escapeXml(partner.authstate!)}"> -->
+							<% if(escapeXml(partner.authstate!) == "1"){%>
+								<input type="text" class="form-control" readonly="readonly" value="已认证">
+							<% } else if(escapeXml(partner.authstate!) == "0"){%>
+								<input type="text" class="form-control" readonly="readonly" value="未认证">
+							<% } %>
+
+						</div>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">手机号</label>
+						<div class="col-sm-7">
+							<% if(escapeXml(partner.authstate!) == "1"){%>
+								<input type="text" id="phone" name="partner.phone" readonly="readonly" value="${escapeXml(partner.phone!)}"
+								class="form-control" maxlength="20" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+							<% } else if(escapeXml(partner.authstate!) == "0"){%>
+								<input type="text" id="phone" name="partner.phone" value="${escapeXml(partner.phone!)}" 
+									class="form-control" maxlength="20" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+							<% } %>
+						</div>
+							<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 手机号 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">真实姓名</label>
+						<div class="col-sm-7">
+							<input type="text" id="realname" name="partner.realname" value="${escapeXml(partner.realname!)}" 
+								class="form-control" maxlength="25" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入用户真实姓名 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">金额</label>
+						<div class="col-sm-7">
+							<input type="text" id="jnb_balance" name="partner.jnb_balance" value="${escapeXml(partner.jnb_balance!)}" 
+								class="form-control" maxlength="20"   vMin="1" vType="floatZ" onblur="submi();">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入金额 </span>
+						<input type="hidden" name="partner.rechargegold" id="partner.rechargegold"  vMin="4" class="form-control"  value="${escapeXml(partner.jnb_balance!)}"/>
+					
+					</div>
+					
+					
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/partner/form.js"></script>	
+					
+					
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+					</script>
+					
+					
+					
+					<div class="form-actions">
+						<% if(authUrl("/jf/platform/partner/save")){ %>
+							<button type="button" class="btn btn-red" onclick="platform_partner_form.submitValiFunc(this.form, false);">
+								${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						<% } %>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

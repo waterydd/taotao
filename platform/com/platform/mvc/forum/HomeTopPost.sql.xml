@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.forum"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom"><!-- [就等查询界面传参数了 名为subject] -->
+		<![CDATA[ 
+        	from 
+        		pre_common_home_top_post
+			
+			where 1=1 
+		
+			<% if(!isEmpty(subject)){ %>
+					and subject like #'%''$subject$''%'#
+			<% } %>
+				
+    	]]>
+	</sql>
+	
+		<!-- 根据tid进行查询 -->
+	<sql id="edit"><!-- [就等查询界面传参数了 名为subject] -->
+		<![CDATA[ 
+		select * from pre_common_home_top_post where tid = ?
+				
+    	]]>
+	</sql>
+		<!-- 根据tid进行查询 -->
+	<sql id="save">
+		<![CDATA[ 
+		insert into pre_common_home_top_post(author_id, author_name, image_url, replies, subject,tid) 
+   		 values(?, ?, ?, ?, ?, ?)
+    	]]>
+	</sql>
+	
+	<!-- 删除用户信息 -->
+	<sql id="deleteInfo">
+		<![CDATA[ 
+        	delete from ${table} where tid in( ${sqlIn} )
+    	]]>
+	</sql>
+	
+	<!-- 查询标题是否存在的sql -->
+	<sql id="valiHTPubjectInfo">
+		<![CDATA[ 
+        	select * from pre_common_home_top_post  where  subject =?	
+    	]]>
+	</sql>
+	
+</sql-statement>

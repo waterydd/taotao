@@ -9,11 +9,14 @@
         		pre_jn_partner
 			
 			where 1=1 
+			<% if(!isEmpty(inserttime) && !isEmpty(inserttime2)){ %>
+					and inserttime >= #'$inserttime$'# and inserttime <= #'$inserttime2$'#
+			<% } %>
 			<% if(!isEmpty(phone)){ %>
-					and phone = #'$phone$'#
+					and phone like #'%''$phone$''%'#
 			<% } %>
 			<% if(!isEmpty(realname)){ %>
-					and realname = #'$realname$'#
+					and realname like #'%''$realname$''%'#
 			<% } %>
 			<% if(!isEmpty(authstate)){ %>
 					and authstate = #'$authstate$'#
@@ -26,6 +29,13 @@
 	<sql id="splitFindInfo">
 		<![CDATA[ 
         	select realname from pre_jn_partner  where  phone =? or realname =?	
+    	]]>
+	</sql>
+	
+	<!-- 删除用户信息 -->
+	<sql id="deleteInfo">
+		<![CDATA[ 
+        	delete from ${table} where phone in( ${sqlIn} )
     	]]>
 	</sql>
 	

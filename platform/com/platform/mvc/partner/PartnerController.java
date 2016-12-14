@@ -4,9 +4,11 @@ import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
+import com.platform.mvc.group.Group;
 import com.platform.mvc.memberprofile.MemberProfile;
 import com.platform.mvc.memberprofile.MemberProfileService;
 import com.platform.mvc.members.Members;
+import com.platform.mvc.menu.Menu;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +25,17 @@ import com.jfinal.aop.Before;
  * /jf/platform/partner/update /jf/platform/partner/view
  * /jf/platform/partner/delete /common/partner/add.html
  * 
+ * /platform/partner/list.html 界面
+ * /platform/partner/update.html 界面
+ * /platform/partner/view.html 界面
+ * 增加显示内容 金额 Uid 和认证状态
+ * 
  */
 @Controller(controllerKey = "/jf/platform/partner")
 public class PartnerController extends BaseController {
 
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(PartnerController.class);
+	private static Logger log = Logger.getLogger(PartnerController.class);// log日志
 
 	private PartnerService partnerService;
 	private MemberProfileService memberProfileService;
@@ -37,27 +44,22 @@ public class PartnerController extends BaseController {
 	/**
 	 * 列表
 	 */
-	public void index() {
+	public void index() { 
 		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect,
-				Partner.sqlId_splitPageFrom);
+				Partner.sqlId_splitPageFrom);// 【BaseModel.sqlId_splitPageSelect = 分页  select *】
 		render("/platform/partner/list.html");
+
+		
 	}
 
 	/**
 	 * 保存
 	 */
 	public void save() {
-		Map<String,Object> pkMap=new HashMap<String,Object>();
-//		Partner p= getAttr("partner");
-//		p.getPhone();
-//		getAttrForStr("partner");
-//		getAttrForStr("partner.phone");
-//		getParamMap();
-//		getPara("partner.phone");   
+		
+		Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
 	     //设置保存主键为空		
 	    getModel(Partner.class).save(pkMap);
-//	    setAttr("url", "/jf/platform/partner");
-//			render("/platform/partner/add.html");
 	    redirect("/jf/platform/partner");
 
 	}
@@ -72,53 +74,78 @@ public class PartnerController extends BaseController {
 	 */
 	public void valiPartInfo()
 	{
-		String phone=getPara("partner.phone");
-		String realname=getPara("partner.realname");
-		boolean flag=partnerService.valiPartInfo(realname, phone);
-		renderText(String.valueOf(flag));
+		String phone=getPara("partner.phone");//获取手机号
+		String realname=getPara("partner.realname");//获取真实姓名
+		boolean flag=partnerService.valiPartInfo(realname, phone);//调用Service的验证用户信息是否存在方法
+		renderText(String.valueOf(flag));// 给界面传一个是否成功标示
 		
 	}
 	/**
 	 * 准备更新
 	 */
 	public void edit() {
-		Partner partner = Partner.dao.findById(getPara());
-		setAttr("partner", partner);
-		render("/platform/partner/update.html");
+		Partner partner = Partner.dao.findById(getPara());//根据ID查询信息
+		setAttr("partner", partner);//将查询到的信息给界面
+		render("/platform/partner/update.html");// 返回一个界面修改界面
 	}
 
 	/**
 	 * 更新
 	 */
-	@Before(PartnerValidator.class)
+	@Before(PartnerValidator.class)//后台验证 拦截器
 	public void update() {
-		getModel(Partner.class).update();
-		redirect("/jf/platform/partner");
+		getModel(Partner.class).update();// 获取前台的参数进行更新
+		redirect("/jf/platform/partner");// 跳转到当前Controller的index方法上
 	}
 
 	/**
 	 * 查看
 	 */
 	public void view() {
-		String phone =getPara();
-		Partner partner = Partner.dao.findById(phone);
-		MemberProfile memberProfile=memberProfileService.queryByPhone(phone);
-		if(memberProfile!=null)
+		String phone =getPara();// 获取手机号
+		Partner partner = Partner.dao.findById(phone);//根据手机号查询 Partner 表中的信息【表 1】
+		MemberProfile memberProfile=memberProfileService.queryByPhone(phone);//根据手机号查询 memberProfile 表中的信息【表 2】
+		if(memberProfile!=null)//判断memberProfile 表中查到的信息是否 不为空
 		{
-			Members members=Members.dao.findById(memberProfile.getUid());
-			setAttr("members", members);
+			Members members=Members.dao.findById(memberProfile.getUid());//根据memberProfile表的ID 查询members表中的信息【表 3】
+			setAttr("members", members);// 将members表中查到的信息 传到界面上去【表 3】
 		}
-		setAttr("partner", partner);
-		setAttr("memberProfile", memberProfile);
-		render("/platform/partner/view.html");
+		setAttr("partner", partner);// 将partner表中查到的信息 传到界面上去【表 1】
+		setAttr("memberProfile", memberProfile);// 将memberProfile表中查到的信息 传到界面上去【表 2】
+		render("/platform/partner/view.html");// 跳转到view.html界面上显示出来
 	}
 
 	/**
-	 * 删除
+	 * 删除 
 	 */
 	public void delete() {
-		partnerService.delete("pre_jn_partner", getPara() == null ? ids : getPara());
-		redirect("/jf/platform/partner");
+		partnerService.delete("pre_jn_partner", getPara() == null ? ids : getPara());//调用partnerService 的删除方法
+		redirect("/jf/platform/partner");// 跳转到当前Controller的index方法上
 	}
+	
+	/**
+	 * 取消认证
+	 */
+	public void editAuthstate() {
+		Partner partner = Partner.dao.findById(getPara());//根据ID查询信息
+		Integer uid = partner.getUid();// 获取uit值
+		System.out.println("UID 是多少"+uid);
+		if (partner.getUid()>0) {
+			//根据uid 去查pre_common_member 的信息
+			Members members = Members.dao.findById(uid);
+			String men = members.getExtgroupids().replace("21", "").trim();
+			members.setExtgroupids(men);
+			boolean shi = members.update();
+			System.out.println("修改是否成功"+shi);
+			
+			partner.setAuthstate("0");
+			partner.setUid(0-(uid));
+			partnerService.update(partner);
+		}
+		redirect("/jf/platform/partner");// 跳转到当前Controller的index方法上
+		
+
+	}
+	
 
 }

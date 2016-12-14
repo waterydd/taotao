@@ -7,6 +7,11 @@ package com.platform.constant;
 public interface ConstantInit {
 
 	/**
+	 * 上传图片文件的路径
+	 */
+	public static final String config_Upload_path = "F:\\jxsqAdm_img_file";
+
+	/**
 	 * 扫描的包
 	 */
 	public static final String config_scan_package = "config.scan.package";

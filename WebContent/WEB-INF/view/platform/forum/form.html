@@ -1,0 +1,60 @@
+<style type="text/css">  
+	 #preview, .img, .imgg {  width:375px; height:268px;}  
+	 #preview { border:1px solid #000; }  
+ </style>
+ 	
+<div class="form-group">
+	<label class="col-sm-2 control-label">标题</label>
+	<div class="col-sm-7">
+		<input type="text" id="subject" name="homeTopPost.subject" value="${escapeXml(homeTopPost.subject!)}" 
+			class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入文章标题 </span>
+</div>
+
+<!-- <div class="form-group">
+	<label class="col-sm-2 control-label">上传图片</label>
+	<div class="col-sm-7">
+		<input type="file" id="image_url" name="image_url"/>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请上传文章轮播图片 </span>
+</div> -->
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">上传图片</label>
+	<div class="col-sm-3">
+		<input type="file" id="image_url" name="image_url" onchange="preview(this)" />  
+	</div>
+	 <i class="fa fa-info-circle"></i>类型为 gif,jpg,jpeg,bmp,png </span>
+</div>
+<div class="form-group">
+	<label class="col-sm-2 control-label">图片预览</label>
+	 <div class="col-sm-4">
+		<div id="preview"></div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/forum/form.js"></script> <!-- 【看这个JS】 -->
+
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+	/* ************************************ */
+	function preview(file) {  
+	 var prevDiv = document.getElementById('preview');  
+	 if (file.files && file.files[0]) {  
+		 var reader = new FileReader();  
+		 reader.onload = function(evt){  
+		 	prevDiv.innerHTML = '<img class="imgg" src="' + evt.target.result + '" />';  
+		}    
+		 reader.readAsDataURL(file.files[0]);
+	  } else {  
+		 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+		 }  
+	 } 
+	/* *************************************** */
+</script>

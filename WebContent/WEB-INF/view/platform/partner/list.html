@@ -1,3 +1,7 @@
+<script type="text/javascript" src="${cxt!}/ui/rapido/assets/js/pages-calendar.js"></script>
+<!--
+
+//-->
 
 <div class="row">
 	<div class="col-md-12">
@@ -35,16 +39,52 @@
 						</div>
 				  	</div>
 				  	
+				  <!-- 	<div class="form-group">
+						<label class="col-sm-2 control-label">录入时间2</label>
+						<div class="col-sm-4 input-group">
+					  		<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'
+					  			 data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+							<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'
+					  			 data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+						</div>
+						<div class="col-sm-2 input-group">
+					  		<input type="text" name="_query.birthday" value='${escapeXml(paramMap["_query.birthday"])}'
+					  			 data-date-format="yyyy-mm-dd" data-date-viewmode="years" class="form-control date-picker">
+							<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
+						</div>
+				  	</div> -->
+				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">录入时间</label>
+						<div class="col-sm-4 Calendar" id="Calendar" >
+					  		<input class="form-control focused" type="date" name="_query.inserttime" value='${escapeXml(paramMap["_query.inserttime"])}' maxlength="25" >
+						</div>
+					
+						<div class="col-sm-4 Calendar" id="Calendar">
+					  		<input class="form-control focused" type="date" name="_query.inserttime2" value='${escapeXml(paramMap["_query.inserttime2"])}' maxlength="25" >
+						</div>
+							<script type="text/javascript">
+						jQuery(document).ready(function() {
+							Main.init();
+							SVExamples.init();
+							Calendar.init();
+						});
+						</script>
+				  	</div>
+				  	
 				  	
 				  	<div class="form-group">
 						<label class="col-sm-2 control-label" for="focusedInput">认证状态</label>
 						<div class="col-sm-4">
 					  		<select name="_query.authstate" class="combox">
-								<option></option>
+								<option value="">全部</option>
 								<option value="1" ${paramMap["_query.authstate"]! == "1" ? "selected='selected'":"" }>已认证</option>
 								<option value="0" ${paramMap["_query.authstate"]! == "0" ? "selected='selected'":"" }>未认证</option>
 							</select>
 						</div>
+
 				  	</div>
 				  	
 					<div class="form-group">
@@ -75,6 +115,11 @@
 				
 				<%
 					var view = authUrl("/jf/platform/partner/view");
+					var edit = authUrl("/jf/platform/partner/edit");
+					var delete = authUrl("/jf/platform/partner/delete");
+					
+					var editAuthstate = authUrl("/jf/platform/partner/editAuthstate");
+					
 				%>
 				
 				<div class="panel-body">	
@@ -91,6 +136,9 @@
 					<table class="table table-bordered table-hover" id="dataTable" >
 						<thead>
 							<tr align="center">
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									Uid
+								</th>
 								<th align="left" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
 									手机号
 								</th>
@@ -99,6 +147,9 @@
 								</th>
 								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
 									认证状态
+								</th>
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									江南币金额
 								</th>
 								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'inserttime')">
 									录入时间
@@ -114,6 +165,7 @@
 						<tbody>
 							<% for(partner in splitPage.list){ %>
 								<tr>
+									<td align="center">${escapeXml(partner["uid"]!)}</td>
 									<td align="center">${escapeXml(partner["phone"]!)}</td>
 									<td align="center">${escapeXml(partner["realname"]!)}</td>
 									<td align="center">
@@ -123,6 +175,7 @@
 											<span class="label label-warning">未认证</span>
 										<% } %>
 									</td>
+									<td align="center">${escapeXml(partner["jnb_balance"]!)}</td>
 									<td align="center">
 										${partner.inserttime !, dateFormat="yyyy-MM-dd HH:mm:ss.SSS"}
 									</td>
@@ -135,6 +188,34 @@
 												${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
 											</button>
 										<% } %>
+										
+										<% if(edit == true){ %>
+											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/partner/edit/${escapeXml(partner['phone']!)}');"> 
+												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
+											</button>
+										<% } %>
+										
+										<% if(delete == true){ %>
+											<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/partner/delete/${escapeXml(partner['phone']!)}"> 
+												${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+											</button>
+										<% } %>
+										
+										<% if(partner["authstate"] == "1"){%>
+											<% if(editAuthstate == true){ %>
+												<button type="button" class="btn btn-purple delete-row" data-bb="deleteOne" data-url="/jf/platform/partner/editAuthstate/${escapeXml(partner['phone']!)}"> 
+													取消认证 <i class="fa fa-trash-o"></i> 
+												</button>
+											<% } %>
+										<% } else if(partner["authstate"] == "0"){%>
+
+										<% } %>
+										
+									
+																				
+										
+							
+										
 									</td>
 								</tr>
 							<% } %>

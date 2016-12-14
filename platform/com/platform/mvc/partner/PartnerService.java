@@ -7,10 +7,13 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.annotation.Service;
-
+import com.platform.constant.ConstantInit;
+import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.base.BaseService;
+import com.platform.mvc.group.Group;
 
 @Service(name = PartnerService.serviceName)
 public class PartnerService extends BaseService {
@@ -33,8 +36,8 @@ public class PartnerService extends BaseService {
 	{
 
 //		List<Partner>sultList=Partner.dao.find(Partner.sqlId_splitFindInfo, param);
-		String sql=getSql(Partner.sqlId_splitFindInfo);
-		log.info("查询的sql:"+sql);
+		String sql=getSql(Partner.sqlId_splitFindInfo);// 查询的sql语句
+		log.info("查询的sql:"+sql);// 日志打印查询的sql语句
 		Partner result=Partner.dao.findFirst(sql,phone,realname);
 		if(result!=null)
 		{
@@ -42,4 +45,33 @@ public class PartnerService extends BaseService {
 		}
 		return true;
 	}
+	
+	/**
+	 * 删除用户信息
+	 */
+	@Before(Tx.class) //事物
+	public void delete(String table, String phone){//表名   参数名
+		System.out.println("表名是： "+table);
+		System.out.println("参数是： "+"参数是： "+phone);
+		String sqlIn = sqlIn(phone);
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("table", table);
+		param.put("sqlIn", sqlIn);
+		
+		String sql = getSqlByBeetl(Partner.sqlId_deleteInfo, param); //  String sqlId_deleteIn = "platform.baseModel.deleteIn";
+		
+		Db.use(ConstantInit.db_dataSource_main).update(sql);
+	}
+
+	/**
+	 * 更新股东认证信息
+	 * @param partner
+	 */
+	public void update(Partner partner){
+		// 更新
+		partner.update();
+	}
+	
+	
 }

@@ -1,0 +1,69 @@
+<script type="text/javascript" src="${cxt!}/ui/rapido/assets/js/pages-calendar.js"></script>
+
+
+
+						
+<form id="splitPage" action="${cxt!}/jf/platform/homeTopPost" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.partner.list.select"]}</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">轮播图信息列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<!-- 查看信息 编辑信息 删除信息 -->
+				<%
+					
+					var edit = authUrl("/jf/platform/homeTopPost/edit");
+					var delete = authUrl("/jf/platform/homeTopPost/delete");
+					
+				%>
+				
+				<div class="panel-body">
+				<div class="row">
+						<div class="col-md-12 space20">
+							<% if(authUrl("/platform/forum/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/homeTopPost/toUrl?toUrl=/platform/forum/add.html');">
+									轮播图信息录入 <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+							
+						</div>
+					</div>	
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

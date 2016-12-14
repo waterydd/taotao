@@ -1,4 +1,4 @@
-﻿package com.junit.test.blog;
+package com.junit.test.blog;
 
 import java.sql.SQLException;
 
@@ -17,7 +17,7 @@ public class TestBlog extends TestBase {
 	@Test
     public void delete() throws SQLException{
 		BaseService bService = (BaseService) ServicePlugin.getService(BaseService.baseServiceName);
-		bService.delete("testog", "ids001,ids002");
+		bService.delete("test_blog", "ids001,ids002");
     }
 
 }

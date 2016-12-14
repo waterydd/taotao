@@ -3,6 +3,7 @@ package com.platform.mvc.partner;
 import com.platform.annotation.Table;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseModel;
+import com.platform.mvc.memberprofile.MemberProfile;
 
 import java.sql.Timestamp; 
 
@@ -32,6 +33,13 @@ public class Partner extends BaseModel<Partner> {
 	 * 字段类型：varchar(20)  长度：20
 	 */
 	public static final String column_phone = "phone";
+	
+	/**
+	 * 字段描述：uid 
+	 * 字段类型：varchar(20)  长度：20
+	 */
+	public static final String column_uid = "uid";
+
 	
 	/**
 	 * 字段描述：姓名 
@@ -99,6 +107,12 @@ public class Partner extends BaseModel<Partner> {
 	 * 描述：查询用户信息的sql
 	 */
 	public static final String sqlId_splitFindInfo = "platform.partner.splitFindInfo";
+	
+	/**
+	 * sqlId : platform.partner.deleteInfo
+	 * 描述：删除用户信息的sql
+	 */
+	public static final String sqlId_deleteInfo = "platform.partner.deleteInfo";
 
 	private String phone;
 	private String realname;
@@ -110,7 +124,15 @@ public class Partner extends BaseModel<Partner> {
 	private String jnb_balance;
 	private String rechargegold;
 	private Timestamp approve_time;
+	private Integer uid;
 	
+
+	public void setUid(Integer uid) {
+		set(column_uid, uid);
+	}
+	public Integer getUid() {
+		return get(column_uid);
+	}
 	public void setPhone(String phone){
 		set(column_phone, phone);
 	}

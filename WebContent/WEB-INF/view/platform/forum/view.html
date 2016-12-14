@@ -1,0 +1,72 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/homeTopPost');">轮播图管理</a></li>
+			<li class="active">轮播图帖子信息查看</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">信息查看</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/homeTopPost/update" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+					<!-- <% include("/platform/partner/form.html"){} %> -->
+					
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Tid</label>
+						<div class="col-sm-7">
+							<input type="text" id="tid" name="homeTopPost.tid" readonly="readonly" value="${escapeXml(homeTopPost.tid!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">标题</label>
+						<div class="col-sm-7">
+							<input type="text" id="subject" name="homeTopPost.subject" readonly="readonly" value="${escapeXml(homeTopPost.subject!)}" 
+								class="form-control" maxlength="80" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">图片Url</label>
+						<div class="col-sm-7">
+							<input type="text" id="image_url" name="homeTopPost.image_url" readonly="readonly" value="${escapeXml(homeTopPost.image_url!)}" 
+								class="form-control" maxlength="80" vMin="2" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+					</div>
+		
+					
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+					</script>
+					
+					<div class="form-actions">
+						<% if(authUrl("/jf/platform/homeTopPost/save")){ %>
+							<button type="button" class="btn btn-red" onclick="platform_forum_form.submitValiFunc(this.form, false);">
+								${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						<% } %>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.forumThread"> <!-- OK！ -->
+	
+	<!-- 查询标题是否存在的sql -->
+	<sql id="splitFindInfo">
+		<![CDATA[ 
+        	select * from pre_forum_thread  where  subject =?	
+    	]]>
+	</sql>
+	
+</sql-statement>

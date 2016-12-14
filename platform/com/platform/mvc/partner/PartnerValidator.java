@@ -18,7 +18,7 @@ public class PartnerValidator extends Validator {
 			log.info("------------------------------------进入保存数据的拦截器-----------------------------------------------");
 		} else if (actionKey.equals("/jf/platform/partner/update")){
 			
-		}
+		} 
 	}
 	
 	protected void handleError(Controller controller) {

@@ -93,8 +93,8 @@ jQuery(function() {
         ratio = window.devicePixelRatio || 1,
 
         // 缩略图大小
-        thumbnailWidth = 100 * ratio,
-        thumbnailHeight = 100 * ratio,
+        thumbnailWidth = 230 * ratio,
+        thumbnailHeight = 400 * ratio,
 
         // Web Uploader实例
         uploader;

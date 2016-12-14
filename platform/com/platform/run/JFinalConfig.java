@@ -76,7 +76,8 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		//constants.setJsonFactory(JacksonFactory.me()); // Jackson
 
 		log.info("configConstant 设置path相关");
-		constants.setBaseUploadPath(PathKit.getWebRootPath() + "/files"); // 上传公共路径
+		//constants.setBaseUploadPath(PathKit.getWebRootPath() + "/files"); // 上传公共路径
+		constants.setBaseUploadPath(ConstantInit.config_Upload_path); // 上传公共路径
 		constants.setBaseDownloadPath(PathKit.getWebRootPath() + "/files"); // 下载公共路径
 		//constants.setBaseViewPath("/jf"); //设置路由公共路径
 		

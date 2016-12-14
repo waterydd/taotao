@@ -3,8 +3,8 @@
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/partner');">股东管理</a></li>
-			<li class="active">股东录入</li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/homeTopPost');">轮播图管理</a></li> <!-- 【】 -->
+			<li class="active">信息录入</li>
 		</ol>
 	</div>
 </div>
@@ -15,21 +15,21 @@
 		<div class="panel panel-white">
 			
 			<div class="panel-heading">
-				<h4 class="panel-title"><span class="text-bold">股东录入</span></h4>
+				<h4 class="panel-title"><span class="text-bold">信息录入</span></h4>
 				<div class="panel-tools">										
 					<% include("/common/panel-tools.html"){} %>
 				</div>
 			</div>
 			
 			<div class="panel-body">	
-				<form id="editForm" action="${cxt!}/jf/platform/partner/save" method="POST" role="form" class="form-horizontal">
+				<form id="editForm" action="${cxt!}/jf/platform/homeTopPost/save" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data"> <!-- 【 填写信息的提交表单】 -->
 					
-					<% include("/platform/partner/form.html"){} %>
+					<% include("/platform/forum/form.html"){} %>
 					
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							<% if(authUrl("/jf/platform/partner/save")){ %>
-									<button type="button" class="btn btn-red" onclick="platform_partner_form.submitValiFunc(this.form,true);">
+							<% if(authUrl("/jf/platform/homeTopPost/save")){ %>            
+									<button type="button" class="btn btn-red" onclick="platform_forum_form.submitValiFunc(this.form,true);"> <!-- 【需要修改】 -->
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>
 								

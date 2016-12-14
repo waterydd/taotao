@@ -31,5 +31,6 @@
 	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-core-2.7.2.jar"/>
 	<classpathentry kind="lib" path="build-lib/jfinal22/jackson-databind-2.7.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>

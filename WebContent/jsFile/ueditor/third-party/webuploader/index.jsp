@@ -28,7 +28,7 @@ String path = sb.toString();
 <body>
 
 <div id="uploader" class="wu-example">
-    <!--用来存放文件信息-->
+    用来存放文件信息
     <div id="thelist" class="uploader-list"></div>
     <div class="btns">
         <div id="picker">选择文件</div>
@@ -42,7 +42,7 @@ String path = sb.toString();
 
 <!--dom结构部分-->
 <div id="uploader-demo">
-    <!--用来存放item-->
+    用来存放item
     <div id="fileList" class="uploader-list"></div>
     <div id="filePicker">选择图片</div>
 </div>

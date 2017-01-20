@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.partnerTrade"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_trade
+		where 1=1 
+			<% if(!isEmpty(name)){ %>
+					and name like #'%''$name$''%'#
+			<% } %>
+			<% if(!isEmpty(status)){ %>
+					and status = #'$status$'#
+			<% } %>
+			<% if(!isEmpty(goods_type)){ %>
+					and goods_type = #'$goods_type$'#
+			<% } %>
+	
+				
+    	]]>
+	</sql>
+	
+		<!-- 删除用户信息 -->
+	<sql id="deleteInfo">
+		<![CDATA[ 
+        	delete from ${table} where id in( ${sqlIn} )
+    	]]>
+	</sql>
+	
+</sql-statement>

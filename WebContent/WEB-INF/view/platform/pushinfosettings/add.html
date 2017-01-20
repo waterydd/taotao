@@ -1,0 +1,121 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li class="active">推送信息录入</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">推送信息录入</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form id="editForm" action="${cxt!}/jf/platform/pushInfoSettings/pushInfo" method="POST" role="form" class="form-horizontal">
+					
+			
+					<div class="form-group">
+						<label class="col-sm-2 control-label">标题</label>
+						<div class="col-sm-5">
+							<input type="text" id="title" name="title" value="${escapeXml(title!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入标题</span>
+					</div>
+					
+				<!-- 	<div class="form-group">
+						<label class="col-sm-2 control-label">内容</label>
+						<div class="col-sm-5">
+							<input type="text" id="内容" name="内容" value="${escapeXml(goods.内容!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入内容 </span>
+					</div> -->
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">内容</label>
+						<div class="col-sm-5">
+							<textarea style="resize:none;" id="body" name="body" rows="4" cols="4" value="${escapeXml(body!)}" 
+							class="form-control" maxlength="65000" vMin="3" vType="length"></textarea>
+						</div>
+						
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入内容 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label" id="tid">链接</label>
+						<div class="col-sm-5">
+							<input type="text" id="url" name="url" value="${escapeXml(url!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> <span class="tid-info">请输入推送链接</span> </span>
+					</div>
+					
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">类型</label>
+						<div class="col-sm-5">
+						
+							<input type="text" id="类型" name="类型" value="${escapeXml(goods.类型!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入类型 </span>
+					</div> -->
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">类型</label>
+						<div class="col-sm-5">
+							<select name="operation_type" id="operation_type" class="combox">
+								<option value="APP_OPEN_URL" >APP内打开链接</option>
+								<option value="APP_OPEN_INDEX" >APP内打开首页</option>
+								<option value="APP_OPEN_POST" >APP内打开帖子</option>
+							</select>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择推送类型</span>
+					</div>
+
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/pushinfosettings/form.js"></script> 
+					
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+						/* ************************************ */
+						var x = "${result!}";
+						if(x!= ''){
+							alert(x);	
+						}
+						$('#operation_type').on('change',function(){
+							if($(this).val()=='APP_OPEN_POST'){
+								$('#tid').html('帖子id');
+								$('.tid-info').html('请输入帖子id');
+							}else{
+								$('#tid').html('链接');
+								$('.tid-info').html('请输入推送链接');
+							}
+						});
+					</script>
+										
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/platform/pushInfoSettings/pushInfo")){ %>   
+								<button type="button" class="btn btn-red" onclick="platform_pushinfosettings_form.submitValiFunc(this.form,true);"> 
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+							<% } %>	
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>	

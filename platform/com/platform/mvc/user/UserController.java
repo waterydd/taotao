@@ -41,7 +41,8 @@ public class UserController extends BaseController {
 		User user = getModel(User.class);
 		UserInfo userInfo = getModel(UserInfo.class);
 		userService.save(user, password, userInfo);
-		render("/platform/user/add.html");
+		/*render("/platform/user/add.html");*/
+		redirect("/jf/platform/user");
 	}
 	
 	/**
@@ -105,7 +106,8 @@ public class UserController extends BaseController {
 	 */
 	public void valiPassWord(){
 		String passWord = getPara("passWord");
-		boolean bool = userService.valiPassWord(ids, passWord);
+		String userName = getPara("userName");
+		boolean bool = userService.valiPassWord(userName, passWord);
 		renderText(String.valueOf(bool));
 	}
 	
@@ -113,11 +115,17 @@ public class UserController extends BaseController {
 	 * 密码变更
 	 */
 	public void passChange(){
+		String result = "";
 		String userName = getPara("userName");
 		String passOld = getPara("passOld");
 		String passNew = getPara("passNew");
-		userService.passChange(userName, passOld, passNew);
-		renderText("");
+		Boolean info = userService.passChange(userName, passOld, passNew);
+		if (info) {
+			result = "修改成功";
+		} else {
+			result = "修改失败";
+		}
+		renderText(String.valueOf(result));
 	}
 	
 }

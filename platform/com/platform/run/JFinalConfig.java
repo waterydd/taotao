@@ -3,6 +3,7 @@ package com.platform.run;
 import org.apache.log4j.Logger;
 import org.beetl.ext.jfinal.BeetlRenderFactory;
 
+import com.alibaba.druid.filter.config.ConfigTools;
 import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.wall.WallConfig;
 import com.alibaba.druid.wall.WallFilter;
@@ -77,7 +78,7 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 
 		log.info("configConstant 设置path相关");
 		//constants.setBaseUploadPath(PathKit.getWebRootPath() + "/files"); // 上传公共路径
-		constants.setBaseUploadPath(ConstantInit.config_Upload_path); // 上传公共路径
+//		constants.setBaseUploadPath(ConstantInit.config_Upload_path); // 上传公共路径
 		constants.setBaseDownloadPath(PathKit.getWebRootPath() + "/files"); // 下载公共路径
 		//constants.setBaseViewPath("/jf"); //设置路由公共路径
 		
@@ -112,9 +113,22 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		String driverClass = db.getDriverClass();
 		String jdbcUrl = db.getJdbcUrl();
 		String username = db.getUserName();
-		String password = db.getPassWord();
-		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
+		
 
+		String password = db.getPassWord();
+		String publicKey=db.getPublicKey();
+
+
+		try {
+			password=ConfigTools.decrypt(db.getPublicKey(), password);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error("数据库密码解密异常",e);
+			password=null;
+		}
+		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
 		log.info("configPlugin 配置Druid数据库连接池大小");
 		druidPlugin.set(
 				PropKit.getInt(ConstantInit.db_initialSize), 
@@ -238,25 +252,25 @@ public class JFinalConfig extends com.jfinal.config.JFinalConfig {
 		log.info("afterJFinalStart 启动操作日志入库线程");
 		ThreadSysLog.startSaveDBThread();
 
-		log.info("afterJFinalStart 系统负载");
-		TimerResources.start();
+//		log.info("afterJFinalStart 系统负载");
+//		TimerResources.start();
 		
-		log.info("afterJFinalStart 数据清理");
-		DataClear.start();
+//		log.info("afterJFinalStart 数据清理");
+//		DataClear.start();
 	}
 	
 	/**
 	 * 系统关闭前调用
 	 */
 	public void beforeJFinalStop() {
-		log.info("beforeJFinalStop 释放日志入库线程");
-		ThreadSysLog.setThreadRun(false);
-	
-		log.info("beforeJFinalStop 释放系统负载抓取线程");
-		TimerResources.stop();
-	
-		log.info("beforeJFinalStop 数据清理");
-		DataClear.stop();
+//		log.info("beforeJFinalStop 释放日志入库线程");
+//		ThreadSysLog.setThreadRun(false);
+//	
+//		log.info("beforeJFinalStop 释放系统负载抓取线程");
+//		TimerResources.stop();
+//	
+//		log.info("beforeJFinalStop 数据清理");
+//		DataClear.stop();
 	}
 
 	/**

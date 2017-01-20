@@ -715,4 +715,36 @@ public class MemberProfile extends BaseModel<MemberProfile> {
 		return get(column_field8);
 	}
 	
+	@Override
+	public String toString() {
+		return "MemberProfile [uid=" + uid + ", realname=" + realname
+				+ ", gender=" + gender + ", birthyear=" + birthyear
+				+ ", birthmonth=" + birthmonth + ", birthday=" + birthday
+				+ ", constellation=" + constellation + ", zodiac=" + zodiac
+				+ ", telephone=" + telephone + ", mobile=" + mobile
+				+ ", idcardtype=" + idcardtype + ", idcard=" + idcard
+				+ ", address=" + address + ", zipcode=" + zipcode
+				+ ", nationality=" + nationality + ", birthprovince="
+				+ birthprovince + ", birthcity=" + birthcity + ", birthdist="
+				+ birthdist + ", birthcommunity=" + birthcommunity
+				+ ", resideprovince=" + resideprovince + ", residecity="
+				+ residecity + ", residedist=" + residedist
+				+ ", residecommunity=" + residecommunity + ", residesuite="
+				+ residesuite + ", graduateschool=" + graduateschool
+				+ ", company=" + company + ", education=" + education
+				+ ", occupation=" + occupation + ", position=" + position
+				+ ", revenue=" + revenue + ", affectivestatus="
+				+ affectivestatus + ", lookingfor=" + lookingfor
+				+ ", bloodtype=" + bloodtype + ", height=" + height
+				+ ", weight=" + weight + ", alipay=" + alipay + ", icq=" + icq
+				+ ", qq=" + qq + ", yahoo=" + yahoo + ", msn=" + msn
+				+ ", taobao=" + taobao + ", site=" + site + ", bio=" + bio
+				+ ", interest=" + interest + ", field1=" + field1 + ", field2="
+				+ field2 + ", field3=" + field3 + ", field4=" + field4
+				+ ", field5=" + field5 + ", field6=" + field6 + ", field7="
+				+ field7 + ", field8=" + field8 + "]";
+	}
+	
+	
+	
 }

@@ -206,4 +206,16 @@ public class Station extends BaseModelCache<Station> {
 		return station;
 	}
 	
+	@Override
+	public String toString() {
+		return "Station [ids=" + ids + ", version=" + version
+				+ ", description=" + description + ", images=" + images
+				+ ", isparent=" + isparent + ", names=" + names + ", orderids="
+				+ orderids + ", parentstationids=" + parentstationids
+				+ ", operatorids=" + operatorids + ", moduleids=" + moduleids
+				+ "]";
+	}
+	
+	
+	
 }

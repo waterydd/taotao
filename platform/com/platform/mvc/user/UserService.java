@@ -51,9 +51,11 @@ public class UserService extends BaseService {
 			// 缓存
 			User.dao.cacheAdd(user.getPKValue());
 		} catch (NoSuchAlgorithmException  | InvalidKeySpecException e) {
+			log.error(e);
 			throw new RuntimeException("保存用户密码加密操作异常", e);
 		} catch (Exception e) {
-			throw new RuntimeException("保存用户异常", e);
+			log.error("保存用户异常【user】" + user.toString()+"【密码】： "+password+ "【userInfo】"+userInfo, e);
+		
 		}
 	}
 
@@ -81,6 +83,7 @@ public class UserService extends BaseService {
 			// 缓存
 			User.dao.cacheAdd(user.getPKValue());
 		} catch (Exception e) {
+			log.error(e);
 			throw new RuntimeException("更新用户异常", e);
 		}
 	}
@@ -185,9 +188,13 @@ public class UserService extends BaseService {
 	public boolean valiPassWord(String userName, String passWord) {
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
-			param.put("column", User.column_username);
-			String sql = getSqlByBeetl(User.sqlId_column, param);
-			User user = User.dao.findFirst(sql, userName);
+			param.put("column", User.column_username); // ("column",username)
+			String sql = getSqlByBeetl(User.sqlId_column, param); // (select * from pt_user where ${column} = ? ,param)
+			User user = User.dao.findFirst(sql, userName); // 通过用户名查这条记录
+			if (user == null) {
+				
+				return false;
+			}
 			byte[] salt = user.getBytes(User.column_salt);// 密码盐
 			byte[] encryptedPassword = user.getBytes(User.column_password);
 			boolean bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
@@ -207,7 +214,8 @@ public class UserService extends BaseService {
 	 * @param passOld
 	 * @param passNew
 	 */
-	public void passChange(String userName, String passOld, String passNew){
+	public Boolean passChange(String userName, String passOld, String passNew){
+		boolean bool = false;
 		try {
 			Map<String, Object> param = new HashMap<String, Object>();
 			param.put("column", User.column_username);
@@ -217,13 +225,17 @@ public class UserService extends BaseService {
 			// 验证密码
 			byte[] salt = user.getBytes(User.column_salt);// 密码盐
 			byte[] encryptedPassword = user.getBytes(User.column_password);
-			boolean bool = false;
+			
 			try {
 				bool = ToolPbkdf2.authenticate(passOld, encryptedPassword, salt);
 			} catch (NoSuchAlgorithmException e) {
+				log.error(e);
 				e.printStackTrace();
+				return false;
 			} catch (InvalidKeySpecException e) {
+				log.error(e);
 				e.printStackTrace();
+				return false;
 			}
 			if (bool) {
 				byte[] saltNew = ToolPbkdf2.generateSalt();// 密码盐
@@ -237,7 +249,9 @@ public class UserService extends BaseService {
 			}
 		} catch (Exception e) {
 			log.error("更新用户密码异常，userName:" + userName + "，旧密码：" + passOld + "，新密码：" + passNew, e);
+			return false;
 		}
+		return bool;
 	}
 	
 }

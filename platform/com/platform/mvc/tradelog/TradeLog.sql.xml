@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.tradeLog"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_forum_tradelog
+		where 1=1 
+			<% if(!isEmpty(orderid)){ %>
+					and orderid like #'%''$orderid$''%'#
+			<% } %>
+			<% if(!isEmpty(subject)){ %>
+					and subject like #'%''$subject$''%'#
+			<% } %>
+			<% if(!isEmpty(buyer)){ %>
+					and buyer like #'%''$buyer$''%'#
+			<% } %>
+			<% if(!isEmpty(lastupdate) && !isEmpty(lastupdate2)){ %>
+					and lastupdate >= unix_timestamp(#'$lastupdate$'#) and lastupdate < unix_timestamp(#'$lastupdate2$'#)
+			<% } %>
+			<% if(!isEmpty(status)){ %>
+					and status like #'%''$status$''%'#
+			<% } %>
+			order by lastupdate desc 
+
+	
+				
+    	]]>
+	</sql>
+	
+</sql-statement>

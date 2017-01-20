@@ -315,4 +315,19 @@ public class Operator extends BaseModelCache<Operator> {
 		return operator;
 	}
 	
+	@Override
+	public String toString() {
+		return "Operator [ids=" + ids + ", version=" + version
+				+ ", description=" + description + ", names=" + names
+				+ ", onemany=" + onemany + ", returnparamkeys="
+				+ returnparamkeys + ", returnurl=" + returnurl + ", rowfilter="
+				+ rowfilter + ", url=" + url + ", moduleids=" + moduleids
+				+ ", splitpage=" + splitpage + ", formtoken=" + formtoken
+				+ ", ipblack=" + ipblack + ", privilegess=" + privilegess
+				+ ", ispv=" + ispv + ", pvtype=" + pvtype + ", modulenames="
+				+ modulenames + "]";
+	}
+	
+	
+	
 }

@@ -194,4 +194,15 @@ public class Partner extends BaseModel<Partner> {
 		return get(column_approve_time);
 	}
 	
+	@Override
+	public String toString() {
+		return "Partner [phone=" + phone + ", realname=" + realname
+				+ ", receiptinfo=" + receiptinfo + ", msgcount=" + msgcount
+				+ ", authstate=" + authstate + ", checkcode=" + checkcode
+				+ ", inserttime=" + inserttime + ", jnb_balance=" + jnb_balance
+				+ ", rechargegold=" + rechargegold + ", approve_time="
+				+ approve_time + ", uid=" + uid + "]";
+	}
+	
+	
 }

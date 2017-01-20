@@ -39,8 +39,8 @@ public class VerifyDate extends Thread {
 						DataClear.stop();
 						DataClear.start();
 						
-						TimerResources.stop();
-						TimerResources.start();
+//						TimerResources.stop();
+//						TimerResources.start();
 						
 						// 重置时间变量
 						date = newDate;

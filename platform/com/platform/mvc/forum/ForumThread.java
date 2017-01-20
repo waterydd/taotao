@@ -281,9 +281,15 @@ public class ForumThread extends BaseModel<ForumThread> {
 	
 	/**
 	 * sqlId : platform.forumThread.splitFindInfo
-	 * 描述：查询标题信息是否存在的sql
+	 * 描述：查询标题信息是否存在的sql 
 	 */
 	public static final String sqlId_splitFindInfo = "platform.forumThread.splitFindInfo";
+	
+	/**
+	 * sqlId : platform.forumThread.findTidInfo
+	 * 描述：查询tid信息是否存在的sql 
+	 */
+	public static final String sqlId_findTidInfo = "platform.forumThread.findTidInfo";
 	
 	
 	private Integer tid;
@@ -576,20 +582,6 @@ public class ForumThread extends BaseModel<ForumThread> {
 	public void setHidden(Integer hidden) {
 		set(column_hidden, hidden);
 	}
-
-	
-//	public Integer getViews() {
-//		return get(column_views);
-//	}
-//	public void setViews(Integer views) {
-//		set(column_views, views);
-//	}
-//	public Integer getDateline() {
-//		return get(column_dateline);
-//	}
-//	public void setDateline(Integer dateline) {
-//		set(column_dateline, dateline);
-//	}
 	
 	public Long getViews() {
 		return get(column_views);
@@ -602,6 +594,30 @@ public class ForumThread extends BaseModel<ForumThread> {
 	}
 	public void setDateline(Long dateline) {
 		set(column_dateline, dateline);
+	}
+	
+	@Override
+	public String toString() {
+		return "ForumThread [tid=" + tid + ", fid=" + fid + ", posttableid="
+				+ posttableid + ", typeid=" + typeid + ", sortid=" + sortid
+				+ ", readperm=" + readperm + ", price=" + price + ", author="
+				+ author + ", authorid=" + authorid + ", subject=" + subject
+				+ ", lastpost=" + lastpost + ", lastposter=" + lastposter
+				+ ", views=" + views + ", dateline=" + dateline + ", replies="
+				+ replies + ", displayorder=" + displayorder + ", highlight="
+				+ highlight + ", digest=" + digest + ", rate=" + rate
+				+ ", special=" + special + ", attachment=" + attachment
+				+ ", moderated=" + moderated + ", closed=" + closed
+				+ ", stickreply=" + stickreply + ", recommends=" + recommends
+				+ ", recommend_add=" + recommend_add + ", recommend_sub="
+				+ recommend_sub + ", heats=" + heats + ", status=" + status
+				+ ", isgroup=" + isgroup + ", favtimes=" + favtimes
+				+ ", sharetimes=" + sharetimes + ", stamp=" + stamp + ", icon="
+				+ icon + ", pushedaid=" + pushedaid + ", cover=" + cover
+				+ ", replycredit=" + replycredit + ", relatebytag="
+				+ relatebytag + ", maxposition=" + maxposition + ", bgcolor="
+				+ bgcolor + ", comments=" + comments + ", hidden=" + hidden
+				+ "]";
 	}
 	
 

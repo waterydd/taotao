@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.scoreLog"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_score_log
+		where 1=1 
+			<% if(!isEmpty(operation_type)){ %>
+					and operation_type = #'$operation_type$'#
+			<% } %>
+			<% if(!isEmpty(status)){ %>
+					and status = #'$status$'#
+			<% } %>
+			<% if(!isEmpty(req_time) && !isEmpty(req_time2)){ %>
+					and unix_timestamp(req_time) >= unix_timestamp(#'$req_time$'#) and unix_timestamp(req_time) < unix_timestamp(#'$req_time2$'#)
+			<% } %>
+			<% if(!isEmpty(success_time) && !isEmpty(success_time2)){ %>
+					and unix_timestamp(success_time) >= unix_timestamp(#'$success_time$'#) and unix_timestamp(success_time) < unix_timestamp(#'$success_time2$'#)
+			<% } %>
+			<% if(!isEmpty(flow_no)){ %>
+					and flow_no like #'%''$flow_no$''%'#
+			<% } %>
+			<% if(!isEmpty(order_id)){ %>
+					and order_id like #'%''$order_id$''%'#
+			<% } %>
+
+    	]]>
+	</sql>
+	
+</sql-statement>

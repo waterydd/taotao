@@ -535,4 +535,19 @@ public class Param extends BaseModelCache<Param> {
 		return paramList;
 	}
 	
+	@Override
+	public String toString() {
+		return "Param [ids=" + ids + ", version=" + version + ", description="
+				+ description + ", images=" + images + ", names=" + names
+				+ ", orderids=" + orderids + ", paths=" + paths
+				+ ", zhuangtai=" + zhuangtai + ", parentids=" + parentids
+				+ ", isparent=" + isparent + ", levels=" + levels
+				+ ", numbers=" + numbers + ", val=" + val + ", i18n=" + i18n
+				+ ", val_zhcn=" + val_zhcn + ", val_zhhk=" + val_zhhk
+				+ ", val_zhtw=" + val_zhtw + ", val_ja=" + val_ja
+				+ ", val_enus=" + val_enus + ", status=" + status + "]";
+	}
+	
+	
+	
 }

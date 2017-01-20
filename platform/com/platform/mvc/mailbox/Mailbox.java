@@ -49,6 +49,11 @@ public class Mailbox extends BaseModel<Mailbox> {
 		set(column_email, email);
 	}
 	
+	@Override
+	public String toString() {
+		return "Mailbox [id=" + id + ", email=" + email + "]";
+	}
+	
 	
 
 }

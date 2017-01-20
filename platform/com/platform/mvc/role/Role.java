@@ -179,4 +179,14 @@ public class Role extends BaseModelCache<Role> {
 		return role;
 	}
 	
+	@Override
+	public String toString() {
+		return "Role [ids=" + ids + ", version=" + version + ", description="
+				+ description + ", names=" + names + ", operatorids="
+				+ operatorids + ", moduleids=" + moduleids + ", numbers="
+				+ numbers + "]";
+	}
+	
+	
+	
 }

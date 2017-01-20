@@ -11,6 +11,7 @@ import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.imgmanage.Validatecode;
+import com.platform.util.PropertyUtil;
 
 /**
  * 轮播图帖子管理
@@ -22,7 +23,7 @@ import com.platform.mvc.imgmanage.Validatecode;
  */							
 @Controller(controllerKey = "/jf/platform/homeTopPost")
 public class HomeTopPostController extends BaseController {
-
+	
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(HomeTopPostController.class);
 	
@@ -44,9 +45,14 @@ public class HomeTopPostController extends BaseController {
 	 */
 	public void save() {
 		
-		UploadFile uf = getFile("image_url");// 读取上传的图片文件
+		//UploadFile uf = getFile("image_url");// 读取上传的图片文件
+		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getCarouselImgPath());
 		String imgpath = uf.getFileName();
 		HomeTopPost homeTopPost = getModel(HomeTopPost.class);
+		if (homeTopPost.getContent() == null || "".equals(homeTopPost.getContent())) {
+			return;
+			
+		}
 		HomeTopPost HomeTop = homeTopPostService.saveme(homeTopPost, imgpath);
 		Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
 		//设置保存主键为空
@@ -54,7 +60,7 @@ public class HomeTopPostController extends BaseController {
 		
 		// 每次变动修改pre_common_validatecode 表validate_code字段的值
 		Validatecode validatecode = Validatecode.dao.findById(3);
-		validatecode.setValidate_code(System.currentTimeMillis()+HomeTop.getTid()+validatecode.getType());
+		validatecode.setValidate_code(System.currentTimeMillis()+validatecode.getType());
 		validatecode.update();
 		
 	    redirect("/jf/platform/homeTopPost");
@@ -114,23 +120,21 @@ public class HomeTopPostController extends BaseController {
 		HomeTopPost homeTopPostOld = HomeTopPost.dao.findById(tid);//根据ID查询信息
 		String subjectOld= homeTopPostOld.getSubject();//获取的原始标题
 		String subjectNew= getPara("homeTopPost.subject");// 获取的新标题
-		if (subjectOld.equals(subjectNew)) {// true 为没改动
-			//修改
-			String mark = "ture";
+		String mark = "";
+		if (subjectOld.equals(subjectNew)) {// true 为没改动 //修改
+			mark = "ture";
 			renderText(mark);
-		} else {
-			// 增加
-			String mark = "false";
-			renderText(mark);
+		} else {// 增加
+			mark = "false";
 		}
+		renderText(mark);
 	}
 	/**
 	 * 更新
 	 */
 	public void update() {
-		
-		UploadFile uf = getFile("image_url2");
-		
+		//UploadFile uf = getFile("image_url2");
+		UploadFile uf = getFileByConfigPath("image_url2", PropertyUtil.getCarouselImgPath());
 		HomeTopPost homeTopPost2 = getModel(HomeTopPost.class);//获取界面穿的参数
 		String tidc = homeTopPost2.getTid().toString();//获取tid
 		// 根据tid 获取原始标题 和新标题对比
@@ -213,7 +217,12 @@ public class HomeTopPostController extends BaseController {
 	 * 删除
 	 */
 	public void delete() {
+		String ids = getPara();
 		homeTopPostService.delete("pre_common_home_top_post", getPara() == null ? ids : getPara());//调用homeTopPostService 的删除方法
+		Validatecode validatecode = Validatecode.dao.findById(3);
+		validatecode.setValidate_code(System.currentTimeMillis()+ids+validatecode.getType());
+		validatecode.update();
+		
 		redirect("/jf/platform/homeTopPost");// 跳转到当前Controller的index方法上
 		
 	}

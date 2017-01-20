@@ -1,0 +1,72 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">首页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/goodsattribute');">商品属性列表</a></li>
+			<li class="active">查看商品属性信息</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">查看商品属性信息</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(goodsAttribute.id!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">类型</label>
+						<div class="col-sm-7">
+							<% if(goodsAttribute["type"] == "0"){%>
+								<input type="text" class="form-control" readonly="readonly" value="类型">
+							<% } else if(goodsAttribute["type"] == "1") {%>
+								<input type="text" class="form-control" readonly="readonly" value="属性">
+							<% } %>
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">父节点ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(goodsAttribute.parent_id!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(goodsAttribute.name!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">值</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(goodsAttribute.value!)}">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>	
+
+					
+				

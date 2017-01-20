@@ -108,7 +108,7 @@
 	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.mobilePhone"]}</label>
 	<div class="col-sm-7">
 		<input type="text" id="mobileId" name="userInfo.mobile" value="${escapeXml(userInfo.mobile!)}" 
-			class="form-control" maxlength="11" vMin="11" vType="phone" onblur="platform_verify.onblurVali(this);">
+			class="form-control" maxlength="11" vMin="11" vType="number" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 11位数字 </span>
 </div>
@@ -117,7 +117,7 @@
 	<label class="col-sm-2 control-label">${i18nMap["admin.user.property.telephone"]}</label>
 	<div class="col-sm-7">
 		<input type="text" name="userInfo.telephone" value="${escapeXml(userInfo.telephone!)}" 
-			class="form-control" maxlength="20" vMin="0" vType="tell" onblur="platform_verify.onblurVali(this);">
+			class="form-control" maxlength="20" vMin="5" vType="tell" onblur="platform_verify.onblurVali(this);">
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 5-20位 </span>
 </div>

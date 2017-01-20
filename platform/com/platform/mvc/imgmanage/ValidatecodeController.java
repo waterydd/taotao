@@ -1,9 +1,13 @@
 package com.platform.mvc.imgmanage;
 
 import org.apache.log4j.Logger;
+
 import com.jfinal.upload.UploadFile;
 import com.platform.annotation.Controller;
+import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
+import com.platform.mvc.base.BaseModel;
+import com.platform.util.PropertyUtil;
 
 
 @Controller(controllerKey = "/jf/platform/validatecode")
@@ -19,13 +23,23 @@ public class ValidatecodeController extends BaseController {
 		
 		render("/platform/imgmanage/add.html");		
 	}
+	/**
+	 * 列表显示信息
+	 * /jf/platform/validatecode/listInfo
+	 */
+	public void listInfo() {
+		paging(ConstantInit.db_dataSource_main, splitPage, BaseModel.sqlId_splitPageSelect,
+				Validatecode.sqlId_splitPageFrom);
+		render("/platform/imgmanage/list.html"); 
+	}
 	
 	/**
 	 * 增加
 	 * /jf/platform/validatecode/save
 	 */
 	public void save() {
-		UploadFile uf = getFile("image_url");// 读取上传的图片文件
+		//UploadFile uf = getFile("image_url");
+		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getStartImgPath());
 		String imgpath = uf.getFileName();
 	
 		// 每次变动修改pre_common_validatecode 表validate_code字段的值

@@ -158,4 +158,13 @@ public class Group extends BaseModelCache<Group> {
 		return group;
 	}
 	
+	@Override
+	public String toString() {
+		return "Group [ids=" + ids + ", version=" + version + ", description="
+				+ description + ", names=" + names + ", roleids=" + roleids
+				+ ", numbers=" + numbers + "]";
+	}
+	
+	
+	
 }

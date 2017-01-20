@@ -99,7 +99,6 @@ var platform_verify = function() {
 		if(letterNumber.test(str)){
 			return {"result" : true, "message" : ""};
 		}else {
-			showMessage = "";
 			return {"result" : false, "message" : i18n_utils_msg_lettersNumbers};
 		}
 	}

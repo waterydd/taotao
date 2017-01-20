@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.payFlow"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_eb_pay_flow
+		where 1=1 
+			<% if(!isEmpty(pay_flowno)){ %>
+					and pay_flowno like #'%''$pay_flowno$''%'#
+			<% } %>
+			<% if(!isEmpty(trade_flowno)){ %>
+					and trade_flowno like #'%''$trade_flowno$''%'#
+			<% } %>
+			<% if(!isEmpty(status)){ %>
+					and status like #'%''$status$''%'#
+			<% } %>
+	
+				
+    	]]>
+	</sql>
+	
+</sql-statement>

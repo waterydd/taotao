@@ -174,18 +174,6 @@ public class HomeTopPost extends BaseModel<HomeTopPost> {
 	public void setForumName(String forumName) {
 		set(column_forumName, forumName);
 	}
-//	public Integer getDateline() {
-//		return get(column_dateline);
-//	}
-//	public void setDateline(Integer dateline) {
-//		set(column_dateline, dateline);
-//	}
-//	public Integer getViews() {
-//		return get(column_views);
-//	}
-//	public void setViews(Integer views) {
-//		set(column_views, views);
-//	}
 	public Long getViews() {
 		return get(column_views);
 	}
@@ -197,6 +185,15 @@ public class HomeTopPost extends BaseModel<HomeTopPost> {
 	}
 	public void setDateline(Long dateline) {
 		set(column_dateline, dateline);
+	}
+	
+	@Override
+	public String toString() {
+		return "HomeTopPost [tid=" + tid + ", subject=" + subject
+				+ ", content=" + content + ", image_url=" + image_url
+				+ ", author_name=" + author_name + ", author_id=" + author_id
+				+ ", replies=" + replies + ", forumName=" + forumName
+				+ ", views=" + views + ", dateline=" + dateline + "]";
 	}
 	
 		

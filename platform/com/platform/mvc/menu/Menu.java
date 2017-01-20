@@ -247,4 +247,17 @@ public class Menu extends BaseModel<Menu> {
 		return null;
 	}
 	
+	@Override
+	public String toString() {
+		return "Menu [ids=" + ids + ", version=" + version + ", images="
+				+ images + ", levels=" + levels + ", names_zhcn=" + names_zhcn
+				+ ", orderids=" + orderids + ", operatorids=" + operatorids
+				+ ", parentmenuids=" + parentmenuids + ", systemsids="
+				+ systemsids + ", isparent=" + isparent + ", names_zhtw="
+				+ names_zhtw + ", names_zhhk=" + names_zhhk + ", names_ja="
+				+ names_ja + ", names_enus=" + names_enus + "]";
+	}
+	
+	
+	
 }

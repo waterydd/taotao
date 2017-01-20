@@ -176,7 +176,7 @@ INSERT INTO `pt_menu` VALUES ('f353e484ce074b86b0210f66346d9a80', '1', '9.png', 
 -- ----------------------------
 -- Table structure for `pt_module`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_module`; -- 模块 组件 表
+DROP TABLE IF EXISTS `pt_module`;
 CREATE TABLE `pt_module` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
@@ -227,7 +227,7 @@ INSERT INTO `pt_module` VALUES ('e86e5bc9ae5d44e78a48543cf348ca82', '0', null, '
 -- ----------------------------
 -- Table structure for `pt_operator`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_operator`; --经营者；操作员 表
+DROP TABLE IF EXISTS `pt_operator`;
 CREATE TABLE `pt_operator` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
@@ -405,7 +405,7 @@ INSERT INTO `pt_operator` VALUES ('fe0be0443cba4a5993b6d5f91eae8e89', '0', null,
 -- ----------------------------
 -- Table structure for `pt_param`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_param`; -- 参数表
+DROP TABLE IF EXISTS `pt_param`;
 CREATE TABLE `pt_param` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
@@ -468,7 +468,7 @@ CREATE TABLE `pt_resources` (
 -- ----------------------------
 -- Table structure for `pt_role`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_role`; -- 角色表
+DROP TABLE IF EXISTS `pt_role`;
 CREATE TABLE `pt_role` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
@@ -488,7 +488,7 @@ INSERT INTO `pt_role` VALUES ('8a40c0353fa828a6013fa898d4ac0023', '2', 'SuperAdm
 -- ----------------------------
 -- Table structure for `pt_station`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_station`; -- （地位；身份）站 表
+DROP TABLE IF EXISTS `pt_station`;
 CREATE TABLE `pt_station` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL,
@@ -519,7 +519,7 @@ INSERT INTO `pt_station` VALUES ('8a40c0353fa828a6013fa898d4ac0028', '0', '应�
 -- ----------------------------
 -- Table structure for `pt_syslog`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_syslog`; -- 输出日志表
+DROP TABLE IF EXISTS `pt_syslog`;
 CREATE TABLE `pt_syslog` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL COMMENT '版本',
@@ -530,28 +530,28 @@ CREATE TABLE `pt_syslog` (
   `actionstarttime` bigint(20) DEFAULT NULL COMMENT '控制器开始时间',
   `cause` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '原因',
   `cookie` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
-  `description` text COLLATE utf8_bin, -- 描述
-  `enddate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',-- 结束日期
-  `endtime` bigint(20) DEFAULT NULL, -- 结束时间
-  `haoshi` bigint(20) DEFAULT NULL, -- 耗时
-  `ips` varchar(128) COLLATE utf8_bin DEFAULT NULL, -- ip
-  `method` varchar(4) COLLATE utf8_bin DEFAULT NULL, -- 方法
-  `referer` varchar(500) COLLATE utf8_bin DEFAULT NULL, --参照页，引用页；推荐人
-  `requestpath` text COLLATE utf8_bin, --  请求路径
-  `startdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00', -- 开始日期
-  `starttime` bigint(20) DEFAULT NULL, -- 开始时间
-  `status` char(1) COLLATE utf8_bin DEFAULT NULL, -- 状态
-  `useragent` varchar(1000) COLLATE utf8_bin DEFAULT NULL, -- 用户代理人
-  `viewhaoshi` bigint(20) DEFAULT NULL, -- 视图耗时
-  `operatorids` varchar(32) COLLATE utf8_bin DEFAULT NULL, -- 操作员IDS
-  `accept` varchar(200) COLLATE utf8_bin DEFAULT NULL, --接受
-  `acceptencoding` varchar(200) COLLATE utf8_bin DEFAULT NULL, -- 接收编码 
-  `acceptlanguage` varchar(200) COLLATE utf8_bin DEFAULT NULL, -- 接受语言
-  `connection` varchar(200) COLLATE utf8_bin DEFAULT NULL, --  连接
-  `host` varchar(200) COLLATE utf8_bin DEFAULT NULL, -- 本机
+  `description` text COLLATE utf8_bin,
+  `enddate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `endtime` bigint(20) DEFAULT NULL,
+  `haoshi` bigint(20) DEFAULT NULL,
+  `ips` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+  `method` varchar(4) COLLATE utf8_bin DEFAULT NULL,
+  `referer` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `requestpath` text COLLATE utf8_bin,
+  `startdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `starttime` bigint(20) DEFAULT NULL,
+  `status` char(1) COLLATE utf8_bin DEFAULT NULL,
+  `useragent` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
+  `viewhaoshi` bigint(20) DEFAULT NULL,
+  `operatorids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `accept` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `acceptencoding` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `acceptlanguage` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `connection` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `host` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `xrequestedwith` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `pvids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-  `userids` varchar(32) COLLATE utf8_bin DEFAULT NULL, -- 用户ids
+  `userids` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -562,7 +562,7 @@ CREATE TABLE `pt_syslog` (
 -- ----------------------------
 -- Table structure for `pt_systems`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_systems`; -- 系统
+DROP TABLE IF EXISTS `pt_systems`;
 CREATE TABLE `pt_systems` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL COMMENT '版本',
@@ -583,7 +583,7 @@ INSERT INTO `pt_systems` VALUES ('d3a5c976c4c24751b6b00ec775692683', '0', null, 
 -- ----------------------------
 -- Table structure for `pt_upload`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_upload`; -- 上传表
+DROP TABLE IF EXISTS `pt_upload`;
 CREATE TABLE `pt_upload` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL COMMENT '版本',
@@ -609,14 +609,14 @@ INSERT INTO `pt_upload` VALUES ('ebf38b8979fd4116a66176a1ba8a9acd', '0', 'file',
 -- ----------------------------
 -- Table structure for `pt_user`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_user`; -- 用户表
+DROP TABLE IF EXISTS `pt_user`;
 CREATE TABLE `pt_user` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `version` bigint(20) DEFAULT NULL COMMENT '版本',
   `errorcount` bigint(20) DEFAULT NULL COMMENT '错误计数',
   `orderids` bigint(20) DEFAULT NULL COMMENT '顺序ID',
-  `password` blob,-- 密码
-  `salt` blob, -- 盐
+  `password` blob,
+  `salt` blob,
   `status` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '地位，身份',
   `stopdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '停用日期',
   `username` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '用户名字',
@@ -643,7 +643,7 @@ INSERT INTO `pt_user` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '0', '0',
 -- ----------------------------
 -- Table structure for `pt_userinfo`
 -- ----------------------------
-DROP TABLE IF EXISTS `pt_userinfo`; -- 用户信息表
+DROP TABLE IF EXISTS `pt_userinfo`;
 CREATE TABLE `pt_userinfo` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL COMMENT 'ID',
   `version` bigint(20) DEFAULT NULL COMMENT '版本',
@@ -675,7 +675,7 @@ CREATE TABLE `pt_userinfo` (
   `speciality` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '专业',
   `stature` varchar(5) COLLATE utf8_bin DEFAULT NULL COMMENT '身高',
   `telephone` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '电话号码',
-  PRIMARY KEY (`ids`),--'主键'
+  PRIMARY KEY (`ids`),
   KEY `bloodgroupindex` (`bloodgroup`) USING BTREE,
   KEY `emailindex` (`email`) USING BTREE,
   KEY `msnindex` (`msn`) USING BTREE,
@@ -693,7 +693,7 @@ INSERT INTO `pt_userinfo` VALUES ('03a44ba0aa4e4905bea726d4da976ba5', '6', '湖�
 -- ----------------------------
 -- Table structure for `test_blog`
 -- ----------------------------
-DROP TABLE IF EXISTS `test_blog`; -- 测试博客表
+DROP TABLE IF EXISTS `test_blog`;
 CREATE TABLE `test_blog` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL COMMENT '主键',
   `title` varchar(200) COLLATE utf8_bin DEFAULT NULL COMMENT '标题',
@@ -709,7 +709,7 @@ CREATE TABLE `test_blog` (
 -- ----------------------------
 -- Table structure for `wx_article`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_article`; -- 文章表
+DROP TABLE IF EXISTS `wx_article`;
 CREATE TABLE `wx_article` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `messageids` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '消息ID',
@@ -727,7 +727,7 @@ CREATE TABLE `wx_article` (
 -- ----------------------------
 -- Table structure for `wx_file`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_file`; -- 文件表
+DROP TABLE IF EXISTS `wx_file`;
 CREATE TABLE `wx_file` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`ids`)
@@ -740,7 +740,7 @@ CREATE TABLE `wx_file` (
 -- ----------------------------
 -- Table structure for `wx_group`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_group`; --wx_组表
+DROP TABLE IF EXISTS `wx_group`;
 CREATE TABLE `wx_group` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `id` varchar(50) COLLATE utf8_bin DEFAULT NULL,
@@ -756,7 +756,7 @@ CREATE TABLE `wx_group` (
 -- ----------------------------
 -- Table structure for `wx_keyword`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_keyword`; -- wx 关键字表
+DROP TABLE IF EXISTS `wx_keyword`;
 CREATE TABLE `wx_keyword` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `question` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '问题',
@@ -951,15 +951,15 @@ INSERT INTO `wx_keyword` VALUES ('ffbec8790b254055a6ca7d1cdc59d4e3', '你喜欢�
 -- ----------------------------
 -- Table structure for `wx_location`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_location`; -- wx_位置表
+DROP TABLE IF EXISTS `wx_location`;
 CREATE TABLE `wx_location` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
-  `open_id` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '开放ID',
+  `open_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `lng` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `lat` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `bd09_lng` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `bd09_lat` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 创建日期
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ids`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -971,7 +971,7 @@ INSERT INTO `wx_location` VALUES ('efb2705cf2954705bc852530a3153374', 'fromUser'
 -- ----------------------------
 -- Table structure for `wx_message`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_message`; -- wx_消息表
+DROP TABLE IF EXISTS `wx_message`;
 CREATE TABLE `wx_message` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `inouts` char(1) COLLATE utf8_bin DEFAULT NULL COMMENT '0接收，1发出',
@@ -1037,7 +1037,7 @@ INSERT INTO `wx_message` VALUES ('f69902983f9a4f158699a00b08618bdd', '0', '0', 0
 -- ----------------------------
 -- Table structure for `wx_role`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_role`; -- wx_角色表
+DROP TABLE IF EXISTS `wx_role`;
 CREATE TABLE `wx_role` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`ids`)
@@ -1050,7 +1050,7 @@ CREATE TABLE `wx_role` (
 -- ----------------------------
 -- Table structure for `wx_user`
 -- ----------------------------
-DROP TABLE IF EXISTS `wx_user`; --wx_用户表
+DROP TABLE IF EXISTS `wx_user`;
 CREATE TABLE `wx_user` (
   `ids` varchar(32) COLLATE utf8_bin NOT NULL,
   `openId` varchar(50) COLLATE utf8_bin DEFAULT NULL COMMENT '用户的标识',

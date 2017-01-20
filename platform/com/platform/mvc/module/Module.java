@@ -163,4 +163,15 @@ public class Module extends BaseModel<Module> {
 		return get(column_systemsids);
 	}
 	
+	@Override
+	public String toString() {
+		return "Module [ids=" + ids + ", version=" + version + ", description="
+				+ description + ", images=" + images + ", isparent=" + isparent
+				+ ", names=" + names + ", orderids=" + orderids
+				+ ", parentmoduleids=" + parentmoduleids + ", systemsids="
+				+ systemsids + "]";
+	}
+	
+	
+	
 }

@@ -218,4 +218,18 @@ public class Resources extends BaseModel<Resources> {
 	public Timestamp getCreatedate() {
 		return get(column_createdate);
 	}
+	
+	@Override
+	public String toString() {
+		return "Resources [ids=" + ids + ", version=" + version + ", osname="
+				+ osname + ", ips=" + ips + ", hostname=" + hostname
+				+ ", cpunumber=" + cpunumber + ", cpuratio=" + cpuratio
+				+ ", phymemory=" + phymemory + ", phyfreememory="
+				+ phyfreememory + ", jvmtotalmemory=" + jvmtotalmemory
+				+ ", jvmfreememory=" + jvmfreememory + ", jvmmaxmemory="
+				+ jvmmaxmemory + ", gccount=" + gccount + ", createdate="
+				+ createdate + "]";
+	}
+	
+	
 }

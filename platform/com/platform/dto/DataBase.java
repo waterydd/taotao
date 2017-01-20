@@ -2,6 +2,8 @@ package com.platform.dto;
 
 import java.io.Serializable;
 
+import com.jfinal.kit.PropKit;
+
 public class DataBase implements Serializable {
 	
 	private static final long serialVersionUID = 7980276824979813474L;
@@ -40,6 +42,16 @@ public class DataBase implements Serializable {
 	 * 数据库连接参数：数据库名称
 	 */
 	public String dbName;
+	
+	public String getPublicKey() {
+		return publicKey;
+	}
+
+	public void setPublicKey(String publicKey) {
+		this.publicKey = publicKey;
+	}
+
+	private String publicKey;
 
 	public String getDriverClass() {
 		return driverClass;

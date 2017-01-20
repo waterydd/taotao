@@ -1,0 +1,273 @@
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/payinfoconfig');">支付信息配置列表</a></li>
+			<li class="active">支付信息配置更新</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">支付信息配置更新</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/payinfoconfig/update" method="POST" role="form" class="form-horizontal">
+			
+					<input type="hidden" id="id" name="payInfoConfig.id" value="${escapeXml(payInfoConfig.id!)}">
+			
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名字</label>
+						<div class="col-sm-5">
+							<input type="text" id="channel_name" name="payInfoConfig.channel_name" value="${escapeXml(payInfoConfig.channel_name!)}" 
+								class="form-control" maxlength="50" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入名字 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商户号</label>
+						<div class="col-sm-5">
+							<input type="text" id="merchant_id" name="payInfoConfig.merchant_id" value="${escapeXml(payInfoConfig.merchant_id!)}" 
+								class="form-control" maxlength="60" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入商户号 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">秘钥</label>
+						<div class="col-sm-5">
+							<input type="text" id="secret_key" name="payInfoConfig.secret_key" value="${escapeXml(payInfoConfig.secret_key!)}" 
+								class="form-control" maxlength="65000" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入秘钥 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">公钥地址</label>
+						<div class="col-sm-5">
+							<input type="text" id="public_key_path" name="payInfoConfig.public_key_path" value="${escapeXml(payInfoConfig.public_key_path!)}" 
+								class="form-control" maxlength="200" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入公钥地址 </span>
+					</div>
+								
+					<div class="form-group">
+						<label class="col-sm-2 control-label">私钥地址</label>
+						<div class="col-sm-5">
+							<input type="text" id="secret_key_path" name="payInfoConfig.secret_key_path" value="${escapeXml(payInfoConfig.secret_key_path!)}" 
+								class="form-control" maxlength="200" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入私钥地址 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">后台回调地址</label>
+						<div class="col-sm-5">
+							<input type="text" id="back_callback_url" name="payInfoConfig.back_callback_url" value="${escapeXml(payInfoConfig.back_callback_url!)}" 
+								class="form-control" maxlength="200">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入后台回调地址</span>
+					</div>
+								
+					<div class="form-group">
+						<label class="col-sm-2 control-label">前台回调地址</label>
+						<div class="col-sm-5">
+							<input type="text" id="front_callback_url" name="payInfoConfig.front_callback_url" value="${escapeXml(payInfoConfig.front_callback_url!)}" 
+								class="form-control" maxlength="200">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入前台回调地址</span>
+					</div>
+									
+					<div class="form-group">
+						<label class="col-sm-2 control-label">加密类型</label>
+						<div class="col-sm-5">
+							<% if(payInfoConfig["encrypt_type"] == "1"){%>
+								<select name="payInfoConfig.encrypt_type" class="combox">
+									<option value="1" >MD5带秘钥[FQL]</option>
+									<option value="2" >RSA[FQL]</option>
+								</select>
+							<% } else if(payInfoConfig["encrypt_type"] == "2"){%>
+								<select name="payInfoConfig.encrypt_type" class="combox">
+									<option value="2" >RSA[FQL]</option>
+									<option value="1" >MD5带秘钥[FQL]</option>
+								</select>
+							<% } %>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入加密类型</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-5">
+							<% if(payInfoConfig["status"] == "0"){%>
+								<select name="payInfoConfig.status" class="combox">
+									<option value="0" >禁用</option>
+									<option value="1" >启用</option>
+								</select>
+							<% } else if(payInfoConfig["status"] == "1"){%>
+								<select name="payInfoConfig.status" class="combox">
+									<option value="1" >启用</option>
+									<option value="0" >禁用</option>
+								</select>
+							<% } %>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择状态</span>
+					</div>
+									
+					<div class="form-group">
+						<label class="col-sm-2 control-label">流水号长度</label>
+						<div class="col-sm-5">
+							<input type="text" id="flowno_length" name="payInfoConfig.flowno_length" value="${escapeXml(payInfoConfig.flowno_length!)}" 
+								class="form-control" maxlength="3" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入流水号长度</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">公钥</label>
+						<div class="col-sm-5">
+							<input type="text" id="public_key" name="payInfoConfig.public_key" value="${escapeXml(payInfoConfig.public_key!)}" 
+								class="form-control" maxlength="65000" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入公钥</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">md5加密KEY</label>
+						<div class="col-sm-5">
+							<input type="text" id="md5_key" name="payInfoConfig.md5_key" value="${escapeXml(payInfoConfig.md5_key!)}" 
+								class="form-control" maxlength="65000" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入md5加密KEY</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ios APPID</label>
+						<div class="col-sm-5">
+							<input type="text" id="ios_app_id" name="payInfoConfig.ios_app_id" value="${escapeXml(payInfoConfig.ios_app_id!)}" 
+								class="form-control" maxlength="60" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入 ios APPID</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Android APPID</label>
+						<div class="col-sm-5">
+							<input type="text" id="android_app_id" name="payInfoConfig.android_app_id" value="${escapeXml(payInfoConfig.android_app_id!)}" 
+								class="form-control" maxlength="60" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入 Android APPID</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名KEY</label>
+						<div class="col-sm-5">
+							<input type="text" id="sign_key" name="payInfoConfig.sign_key" value="${escapeXml(payInfoConfig.sign_key!)}" 
+								class="form-control" maxlength="60" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入签名KEY</span>
+					</div>
+							
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">签名类型</label>
+						<div class="col-sm-5">
+							<input type="text" id="sign_type" name="payInfoConfig.sign_type" value="${escapeXml(payInfoConfig.sign_type!)}" 
+								class="form-control" maxlength="12" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入签名KEY</span>
+					</div> -->
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名类型</label>
+						<div class="col-sm-5">
+							<% if(payInfoConfig["sign_type"] == "md5"){%>
+								<select name="payInfoConfig.sign_type" class="combox">
+									<option value="md5" >MD5</option>
+									<option value="rsa" >RSA</option>
+								</select>
+							<% } else if(payInfoConfig["sign_type"] == "rsa"){%>
+								<select name="payInfoConfig.sign_type" class="combox">
+									<option value="md5" >MD5</option>
+									<option value="rsa" >RSA</option>
+								</select>
+							<% } %>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择签名类型</span>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名公钥</label>
+						<div class="col-sm-5">
+							<input type="text" id="sign_public_key" name="payInfoConfig.sign_public_key" value="${escapeXml(payInfoConfig.sign_public_key!)}" 
+								class="form-control" maxlength="65000">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入签名公钥</span>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名私钥</label>
+						<div class="col-sm-5">
+							<input type="text" id="sign_secret_key" name="payInfoConfig.sign_secret_key" value="${escapeXml(payInfoConfig.sign_secret_key!)}" 
+								class="form-control" maxlength="65000">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入签名私钥</span>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名MD5 KEY</label>
+						<div class="col-sm-5">
+							<input type="text" id="sign_md5_key" name="payInfoConfig.sign_md5_key" value="${escapeXml(payInfoConfig.sign_md5_key!)}" 
+								class="form-control" maxlength="65000">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入签名MD5 KEY</span>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付方式名字</label>
+						<div class="col-sm-5">
+							<input type="text" id="pay_manner_name" name="payInfoConfig.pay_manner_name" value="${escapeXml(payInfoConfig.pay_manner_name!)}" 
+								class="form-control" maxlength="60">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入签名KEY</span>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">扩展</label>
+						<div class="col-sm-5">
+							<input type="text" id="sign_key" name="payInfoConfig.sign_key" value="${escapeXml(payInfoConfig.sign_key!)}" 
+								class="form-control" maxlength="65000">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入支付方式名字</span>
+					</div>
+	<!-- *******************我是一条分割线****************** -->
+					
+					
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/payinfoconfig/form.js"></script>	
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+					</script>
+					
+					<div class="form-actions">
+						<% if(authUrl("/jf/platform/payinfoconfig/update")){ %>
+							<button type="button" class="btn btn-red" onclick="platform_payinfoconfig_form.submitValiFunc(this.form, false);">
+								${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						<% } %>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

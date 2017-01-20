@@ -1,6 +1,7 @@
 package com.platform.mvc.user;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
@@ -25,6 +26,7 @@ public class User extends BaseModelCache<User> {
 	
 	public static final User dao = new User();
 
+	
 	/**
 	 * 字段描述：主键 
 	 * 字段类型：character varying  长度：32
@@ -402,6 +404,21 @@ public class User extends BaseModelCache<User> {
 			cacheAdd(ids);
 		}
 		return user;
+	}
+
+	@Override
+	public String toString() {
+		return "User [ids=" + ids + ", version=" + version + ", errorcount="
+				+ errorcount + ", orderids=" + orderids + ", password="
+				+ Arrays.toString(password) + ", salt=" + Arrays.toString(salt)
+				+ ", status=" + status + ", stopdate=" + stopdate
+				+ ", username=" + username + ", departmentids=" + departmentids
+				+ ", userinfoids=" + userinfoids + ", stationids=" + stationids
+				+ ", deptids=" + deptids + ", userids=" + userids
+				+ ", groupids=" + groupids + ", departmentnames="
+				+ departmentnames + ", stationnames=" + stationnames
+				+ ", deptnames=" + deptnames + ", usernames=" + usernames
+				+ ", groupnames=" + groupnames + "]";
 	}
 	
 }

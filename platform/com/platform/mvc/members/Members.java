@@ -360,4 +360,24 @@ public class Members extends BaseModel<Members> {
 		return get(column_map_uid);
 	}
 	
+	@Override
+	public String toString() {
+		return "Members [uid=" + uid + ", email=" + email + ", username="
+				+ username + ", password=" + password + ", status=" + status
+				+ ", mobilestatus=" + mobilestatus + ", emailstatus="
+				+ emailstatus + ", avatarstatus=" + avatarstatus
+				+ ", videophotostatus=" + videophotostatus + ", adminid="
+				+ adminid + ", groupid=" + groupid + ", groupexpiry="
+				+ groupexpiry + ", extgroupids=" + extgroupids + ", regdate="
+				+ regdate + ", credits=" + credits + ", notifysound="
+				+ notifysound + ", timeoffset=" + timeoffset + ", newpm="
+				+ newpm + ", newprompt=" + newprompt + ", accessmasks="
+				+ accessmasks + ", allowadmincp=" + allowadmincp
+				+ ", onlyacceptfriendpm=" + onlyacceptfriendpm + ", conisbind="
+				+ conisbind + ", freeze=" + freeze + ", map_uid=" + map_uid
+				+ "]";
+	}
+	
+	
+	
 }

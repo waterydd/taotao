@@ -2,6 +2,7 @@ package com.platform.run;
 
 import org.apache.log4j.Logger;
 
+import com.alibaba.druid.filter.config.ConfigTools;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
@@ -59,6 +60,17 @@ public class ConfigCore {
 		String jdbcUrl = db.getJdbcUrl();
 		String username = db.getUserName();
 		String password = db.getPassWord();
+		String publicKey=db.getPublicKey();
+
+
+		try {
+			password=ConfigTools.decrypt(publicKey, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			log.error("数据库密码解密异常",e);
+			password=null;
+		}
 		DruidPlugin druidPlugin = new DruidPlugin(jdbcUrl, username, password, driverClass);
 
 		log.info("configPlugin 配置Druid数据库连接池大小");

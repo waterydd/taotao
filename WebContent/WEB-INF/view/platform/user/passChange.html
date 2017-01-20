@@ -1,23 +1,6 @@
 <script type="text/javascript">
 	
-	function passChange(form){
-		//var oldPass = $("#oldPass").val();
-		
-		var newPass1 = $("#newPass1").val();
-		var newPass2 = $("#newPass2").val();
-		if(newPass1 != newPass2){
-			toastr.warning("两次输入密码不一致，请从新输入！");
-	 		return false;
-		}
-		
-		var errorCount = platform_verify.formVali(document.getElementById("passChangeForm"));
-		if(errorCount != 0){
-			toastr.warning("有" + errorCount + "处错误，请修正！");
-	 		return false;
-		}
-		
-		common_ajax.ajaxForm("passChangeForm");
-	}
+	
 	
 </script>
 
@@ -28,7 +11,7 @@
 
 	<div class="modal-body">
 		<form id="passChangeForm" action="${cxt!}/jf/platform/user/passChange" method="POST" role="form" class="form-horizontal">
-			<input type="hidden" name="userName" value="${cookieMap.userName.value!}">
+			<input type="hidden" id="userName" name="userName" value="${cookieMap.userName.value!}">
 	
 			<div class="form-group">
 				<label class="col-sm-2 control-label">${i18nMap["admin.user.passChange.oldPass"]}</label>
@@ -63,6 +46,71 @@
 	
 	<div class="modal-footer">
 		<button type="button" data-dismiss="modal" class="btn">${i18nMap["admin.common.close"]}</button>
-		<button type="button" data-dismiss="modal" class="btn btn-primary" onclick="passChange();">${i18nMap["admin.common.determine"]}</button>
+		<button type="button" data-dismiss="modal" class="btn btn-primary" id="submit-sure" disabled>${i18nMap["admin.common.determine"]}</button>
 	</div>	
+	<script>
+		var result=0;
+		var oldTure=false,
+			newTure=false;
+	   $('#oldPass').blur(function(){
+		    var oldPass = $("#oldPass").val();
+		    var userName = $("#userName").val();
+			var param = {"passWord" : oldPass,"userName" : userName};
+			result = common_ajax.ajaxFunc("/jf/platform/user/valiPassWord", param);
+			if(result=='false'){
+					alert('旧密码不正确，请重新输入！');
+					oldTure=false;
+					$('#submit-sure').attr('disabled','disabled');
+					
+			}else{
+				oldTure=true;
+				if(oldTure&&newTure){
+					   $('#submit-sure').removeAttr('disabled').bind('click',passChange);
+				   }else{
+					   $('#submit-sure').attr('disabled','disabled').unbind('click',passChange);
+				   }
+			}
+	   });
+	   function newPass(){
+		   var newPass1 = $("#newPass1").val();
+		   var newPass2 = $("#newPass2").val();
+		  
+		  /*  if(newPass2){ */
+			   var errorCount = platform_verify.formVali(document.getElementById("passChangeForm"));
+				if(errorCount != 0){
+					newTure=false;
+					$('#submit-sure').attr('disabled','disabled');
+					toastr.warning("有" + errorCount + "处错误，请修正！");
+				}else{
+					 if(newPass1 != newPass2 && newPass2){
+							alert("两次输入密码不一致，请从新输入！");
+							$('#submit-sure').attr('disabled','disabled');
+							return false;
+						}
+					newTure=true;
+					if(oldTure&&newTure){
+						   $('#submit-sure').removeAttr('disabled').bind('click',passChange);
+					   }else{
+						   $('#submit-sure').attr('disabled','disabled').unbind('click',passChange);
+					   }
+				}
+		   /* } */
+	   }
+	   $("#newPass2").blur(newPass);
+	   $("#newPass1").blur(newPass);
+	   
+	   function passChange(){
+		   
 	
+			
+			common_ajax.ajaxForm("passChangeForm");
+		}
+		console.log(oldTure + ' '+newTure)
+	   
+	   
+		var x = "${result!}";
+		
+		if (x != '') {
+			alert(x);
+		}
+	</script>

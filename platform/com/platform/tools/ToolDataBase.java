@@ -28,7 +28,7 @@ public abstract class ToolDataBase {
 		String ip = null;
 		String port = null;
 		String dbName = null;
-		
+		String publicKey=null;
 		// 判断数据库类型
 		String db_type = PropKit.get(ConstantInit.db_type_key);
 		if(db_type.equals(ConstantInit.db_type_postgresql)){ // pg 数据库连接信息
@@ -36,7 +36,7 @@ public abstract class ToolDataBase {
 			jdbcUrl = PropKit.get(ConstantInit.db_connection_postgresql_jdbcUrl);
 			userName = PropKit.get(ConstantInit.db_connection_postgresql_userName);
 			passWord = PropKit.get(ConstantInit.db_connection_postgresql_passWord);
-			
+			publicKey = PropKit.get("mysql.publicKey");
 			// 解析数据库连接URL，获取数据库名称
 			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			dbName = dbName.substring(dbName.indexOf("/") + 1);
@@ -54,25 +54,27 @@ public abstract class ToolDataBase {
 			jdbcUrl = PropKit.get(ConstantInit.db_connection_mysql_jdbcUrl);
 			userName = PropKit.get(ConstantInit.db_connection_mysql_userName);
 			passWord = PropKit.get(ConstantInit.db_connection_mysql_passWord);
-			
+			publicKey = PropKit.get("mysql.publicKey");
 			// 解析数据库连接URL，获取数据库名称
 			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			dbName = dbName.substring(dbName.indexOf("/") + 1, dbName.indexOf("?"));
 
 			// 解析数据库连接URL，获取数据库地址IP
-			ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-			ip = ip.substring(0, ip.indexOf(":"));
+//			ip = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+//			ip = ip.substring(0, ip.indexOf(":"));
+			ip = "127.0.0.1";
 
 			// 解析数据库连接URL，获取数据库地址端口
-			port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
-			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+//			port = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
+//			port = port.substring(port.indexOf(":") + 1, port.indexOf("/"));
+			port = "9999";
 			
 		}else if(db_type.equals(ConstantInit.db_type_oracle)){ // oracle 数据库连接信息
 			driverClass = PropKit.get(ConstantInit.db_connection_oracle_driverClass);
 			jdbcUrl = PropKit.get(ConstantInit.db_connection_oracle_jdbcUrl);
 			userName = PropKit.get(ConstantInit.db_connection_oracle_userName);
 			passWord = PropKit.get(ConstantInit.db_connection_oracle_passWord);
-			
+			publicKey = PropKit.get("mysql.publicKey");
 			// 解析数据库连接URL，获取数据库名称
 			String[] prop = jdbcUrl.substring(jdbcUrl.indexOf("@") + 1).split(":");
 			dbName = prop[2];
@@ -88,7 +90,7 @@ public abstract class ToolDataBase {
 			jdbcUrl = PropKit.get(ConstantInit.db_connection_sqlserver_jdbcUrl);
 			userName = PropKit.get(ConstantInit.db_connection_sqlserver_userName);
 			passWord = PropKit.get(ConstantInit.db_connection_sqlserver_passWord);
-			
+			publicKey = PropKit.get("mysql.publicKey");
 			// 解析数据库连接URL，获取数据库名称
 			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			dbName = dbName.substring(dbName.indexOf("/") + 1);
@@ -106,7 +108,7 @@ public abstract class ToolDataBase {
 			jdbcUrl = PropKit.get(ConstantInit.db_connection_db2_jdbcUrl);
 			userName = PropKit.get(ConstantInit.db_connection_db2_userName);
 			passWord = PropKit.get(ConstantInit.db_connection_db2_passWord);
-			
+			publicKey = PropKit.get("mysql.publicKey");
 			// 解析数据库连接URL，获取数据库名称
 			dbName = jdbcUrl.substring(jdbcUrl.indexOf("//") + 2);
 			dbName = dbName.substring(dbName.indexOf("/") + 1);
@@ -130,6 +132,7 @@ public abstract class ToolDataBase {
 		db.setIp(ip);
 		db.setPort(port);
 		db.setDbName(dbName);
+		db.setPublicKey(publicKey);
 		
 		return db;
 	}

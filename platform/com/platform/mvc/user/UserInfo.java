@@ -454,5 +454,25 @@ public class UserInfo extends BaseModel<UserInfo> {
 		}
 		return userInfo;
 	}
+	@Override
+	public String toString() {
+		return "UserInfo [ids=" + ids + ", version=" + version + ", address="
+				+ address + ", addressinfo=" + addressinfo + ", avoirdupois="
+				+ avoirdupois + ", birthday=" + birthday + ", bloodgroup="
+				+ bloodgroup + ", clientlevelend=" + clientlevelend
+				+ ", clientlevelstart=" + clientlevelstart + ", culture="
+				+ culture + ", description=" + description + ", email=" + email
+				+ ", finishschooldate=" + finishschooldate + ", folk=" + folk
+				+ ", government=" + government + ", homepage=" + homepage
+				+ ", householder=" + householder + ", idcard=" + idcard
+				+ ", marriage=" + marriage + ", mobile=" + mobile + ", msn="
+				+ msn + ", names=" + names + ", nativityaddress="
+				+ nativityaddress + ", postboy=" + postboy + ", qq=" + qq
+				+ ", schoolname=" + schoolname + ", sex=" + sex
+				+ ", speciality=" + speciality + ", stature=" + stature
+				+ ", telephone=" + telephone + "]";
+	}
+	
+	
 	
 }

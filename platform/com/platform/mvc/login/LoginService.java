@@ -27,7 +27,6 @@ import com.platform.tools.security.ToolPbkdf2;
 @Service(name = LoginService.serviceName)
 public class LoginService extends BaseService {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(LoginService.class);
 
 	public static final String serviceName = "loginService";
@@ -137,6 +136,13 @@ public class LoginService extends BaseService {
 	public int login(HttpServletRequest request, HttpServletResponse response, String userName, String passWord, boolean autoLogin) {
 		// 1.取用户
 		User user = null;
+		//**********华丽丽的分割线**********
+		User user2 = User.dao.findFirst("Select * from pt_user where userName = ?", userName);
+		if (user2 == null) {
+			
+			return ConstantLogin.login_info_0;
+		}
+		//**********华丽丽的分割线**********
 		Object userObj = User.dao.cacheGet(userName);
 		if (null != userObj) {
 			user = (User) userObj;
@@ -181,8 +187,10 @@ public class LoginService extends BaseService {
 		try {
 			bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
 		} catch (NoSuchAlgorithmException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
+			log.error(e);
 			e.printStackTrace();
 		}
 		if (bool) {
@@ -254,8 +262,10 @@ public class LoginService extends BaseService {
 		try {
 			bool = ToolPbkdf2.authenticate(passWord, encryptedPassword, salt);
 		} catch (NoSuchAlgorithmException e) {
+			log.error(e);
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
+			log.error(e);
 			e.printStackTrace();
 		}
 		if (bool) {

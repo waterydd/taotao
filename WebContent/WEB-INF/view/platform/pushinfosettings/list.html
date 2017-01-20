@@ -1,0 +1,76 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">校验信息列表</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" action="${cxt!}/jf/platform/validatecode/listInfo" method="POST" role="form" class="form-horizontal">
+
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">校验信息列表</span>
+					</h4>
+					
+				</div>
+				
+				<div class="panel-body">
+				
+					<table class="table table-bordered table-hover" id="dataTable" >
+						<thead>
+							<tr align="center">
+								<th style="text-align:center;" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									校验号
+								</th>
+								<th style="text-align:center;" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									类型
+								</th>
+								<th align="center" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									内容
+								</th>
+								<th style="text-align:center;" class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									版本号
+								</th>
+							</tr>
+						</thead>
+						
+						<!-- 循环显示数据的地方 -->
+						<tbody>
+							<% for(validatecode in splitPage.list){ %>
+								<tr>
+									<td align="center">${escapeXml(validatecode["validate_code"]!)}</td> <!-- validate_code -->
+									<td align="center">${escapeXml(validatecode["type"]!)}</td> <!-- type -->
+									<td align="left">${escapeXml(validatecode["comment"]!)}</td> <!-- comment -->
+									<td align="center">${escapeXml(validatecode["reserved1"]!)}</td> <!-- reserved1 -->
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

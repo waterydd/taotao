@@ -47,7 +47,12 @@
 		<!-- start: common js -->
 		<script type="text/javascript">
 			var cxt = "${cxt!}";
-		</script>	
+			var x = "${result!}";
+			if (x == 'fail') {
+				alert(' 用户名或密码有误，请检查！');
+			}	
+				
+		</script>		
 		<!-- end: common js -->
 	</head>
 	<!-- end: HEAD -->

@@ -136,7 +136,8 @@ public class LoginController extends BaseController {
 			}
 		}
 		
-		redirect("/jf/platform/login");
+		//redirect("/jf/platform/login");
+		setAttr("result", "fail").render("/platform/login/login.html");
 	}
 
 	/**

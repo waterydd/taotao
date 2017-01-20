@@ -1,0 +1,406 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">首页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/order');">订单流水列表</a></li>
+			<li class="active">查看订单流水信息</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">查看订单流水信息</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">订单号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.order_no!)}">
+						</div>
+					</div>
+					
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">卖家 ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.uid!)}">
+						</div>
+					</div> -->
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">买家名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(members.username!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">版本</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.version!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">交易类型</label>
+						<div class="col-sm-7">
+							<% if(order["trade_type"] == "CZ"){%>
+								<input type="text" class="form-control" readonly="readonly" value="充值">
+							<% } else if(order["trade_type"] == "TK"){%>
+								<input type="text" class="form-control" readonly="readonly" value="退款">
+							<% } else if(order["trade_type"] == "ZF"){%>
+								<input type="text" class="form-control" readonly="readonly" value="支付">
+							<% } else if(order["trade_type"] == "DS"){%>
+								<input type="text" class="form-control" readonly="readonly" value="打赏">
+							<% } %>
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">创建时间</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.create_datetime!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">请求时间</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.req_datetime!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品信息</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.goods_msg!)}">
+						</div>
+					</div>
+										
+										
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">商品名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(goods.name!)}">
+						</div>
+					</div> -->
+										
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">卖家名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(members2.username!)}">
+						</div>
+					</div>
+					
+					<!-- *******************************我是一条分割线********************************** -->		
+												
+					<div class="form-group">
+						<label class="col-sm-2 control-label">单价</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.price!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">数量</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.num!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">总价</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.total_amount!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">币种</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.currency!)}">
+						</div>
+					</div>
+																	
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">币种</label>
+						<div class="col-sm-7">
+							<% if(order["currency"] == "CNY"){%>
+								<input type="text" class="form-control" readonly="readonly" value="人民币">
+							<% } else if(order["currency"] == "待定"){%>
+								<input type="text" class="form-control" readonly="readonly" value="待定">
+							<% } %>
+						</div>
+					</div> -->
+							
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">付费通道</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.pay_channel!)}">
+						</div>
+					</div>
+					
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">付费通道</label>
+						<div class="col-sm-7">
+							<% if(order["pay_channel"] == "WX"){%>
+								<input type="text" class="form-control" readonly="readonly" value="微信">
+							<% } else if(order["pay_channel"] == "待定"){%>
+								<input type="text" class="form-control" readonly="readonly" value="待定">
+							<% } %>
+						</div>
+					</div> -->
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付银行</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.pay_bank!)}">
+						</div>
+					</div>
+					
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">支付银行</label>
+						<div class="col-sm-7">
+							<% if(order["pay_bank"] == "WX"){%>
+								<input type="text" class="form-control" readonly="readonly" value="微信">
+							<% } else if(order["pay_bank"] == "待定"){%>
+								<input type="text" class="form-control" readonly="readonly" value="待定">
+							<% } %>
+						</div>
+					</div> -->
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">前台回调地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.front_callback_url!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">后台回调地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.back_callback_url!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-7">
+							<% if(order["status"] == "WAIT"){%>
+								<input type="text" class="form-control" readonly="readonly" value="初始状态">
+							<% } else if(order["status"] == "PENDING_SEND"){%>
+								<input type="text" class="form-control" readonly="readonly" value="待发货(支付完成)">
+							<% } else if(order["status"] == "SELLER_SENT"){%>
+								<input type="text" class="form-control" readonly="readonly" value="卖家已发货">
+							<% } else if(order["status"] == "TRADE_SUCCESS"){%>
+								<input type="text" class="form-control" readonly="readonly" value="交易成功（结束状态）">
+							<% } else if(order["status"] == "PAY_FAILURE"){%>
+								<input type="text" class="form-control" readonly="readonly" value="支付失败">
+							<% } else if(order["status"] == "PAY_TIME_OUT"){%>
+								<input type="text" class="form-control" readonly="readonly" value="支付超时(24小时没支付)">
+							<% } else if(order["status"] == "CLOSED"){%>
+								<input type="text" class="form-control" readonly="readonly" value="交易关闭">
+							<% } else if(order["status"] == "REFUND"){%>
+								<input type="text" class="form-control" readonly="readonly" value="退款中">
+							<% } else if(order["status"] == "SUCCESS"){%>
+								<input type="text" class="form-control" readonly="readonly" value="支付成功">
+							<% } %>
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">成功时间</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.success_datetime!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">备注</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.remark!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">请求ip</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.req_ip!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">手机序列号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.mobileNo!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">交易流水号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.trade_flowno!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递单号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.receive_no!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递公司名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.logistics_msg!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付成功流水</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.success_pay_flowno!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">原订单号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.origin_order_no!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">主要订单号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.main_order_no!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">结算状态</label>
+						<div class="col-sm-7">
+							<% if(order["settle_status"] == "0"){%>
+								<input type="text" class="form-control" readonly="readonly" value="未结算">
+							<% } else if(order["settle_status"] == "1"){%>
+								<input type="text" class="form-control" readonly="readonly" value="已结算">
+							<% } %>
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">结算批次编号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.settle_batch!)}">
+						</div>
+					</div>
+						
+					<!-- 这个需要将数字日期转为日期时间 -->																
+					<div class="form-group">
+						<label class="col-sm-2 control-label">到期时间</label>
+						<div class="col-sm-7">
+							<input type="text" id="datatime" name="limit_datetime" class="form-control" readonly="readonly" value="${escapeXml(order.limit_datetime!)}">
+						</div>
+					</div>
+					
+					<!-- **************新增加显示字段*********** -->
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否退款</label>
+						<div class="col-sm-7">
+							<% if(order["is_refund"] == "0"){%>
+								<input type="text" class="form-control" readonly="readonly" value="没有">
+							<% } else if(order["is_refund"] == "1"){%>
+								<input type="text" class="form-control" readonly="readonly" value="有">
+							<% } %>
+						</div>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">退款总额</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.refund_amount!)}">
+						</div>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">退款次数</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.refund_times!)}">
+						</div>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">收货信息</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.receive_info!)}">
+						</div>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">买家手机</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.buyer_mobile!)}">
+						</div>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品名称</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.goods_name!)}">
+						</div>
+					</div>
+							
+					<div class="form-group">
+						<label class="col-sm-2 control-label">买家电话</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(order.buyer_telephone!)}">
+						</div>
+					</div>
+					
+					<!-- **************新增加显示字段*********** -->
+
+				</form>
+			</div>
+			
+			<!-- ************** -->
+				<script type="text/javascript">
+					jQuery(document).ready(function() {
+						common_form.init();
+					});
+					function toTwo(n){      //单数改成双数
+						return n<10? '0'+n : ''+n;
+					}
+					
+						var time=new Date($('#datatime').val()*1000);
+						var year = time.getFullYear();
+						var month = toTwo(time.getMonth()+1);
+						var day = toTwo(time.getDate());
+						var hours = toTwo(time.getHours());
+						var minutes=toTwo(time.getMinutes());
+						var seconds=toTwo(time.getSeconds());
+						$('#datatime').val(year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds);
+					
+				</script>
+			<!-- ************* -->
+		
+		</div>
+	</div>
+</div>	
+
+					
+				

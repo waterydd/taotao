@@ -11,8 +11,8 @@ import com.jfinal.plugin.activerecord.tx.Tx;
 import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseService;
-import com.platform.mvc.partner.Partner;
 import com.platform.mvc.partner.PartnerService;
+import com.platform.util.StringUtil;
 
 /**
  * 论坛帖子管理 HomeTopPostService 
@@ -62,27 +62,35 @@ public class HomeTopPostService extends BaseService {
 	 * @return
 	 */
 	public HomeTopPost saveme(HomeTopPost homeTopPost,String imgpath) {
-		
-		ForumThread forumThread = valiSubjectInfo(homeTopPost.getSubject());//调用Service的验证标题是否存在方法
-
-		homeTopPost.setTid(forumThread.getTid());// 取tid 并存到homeTopPost里
-		homeTopPost.setAuthor_name(forumThread.getAuthor()); // 作者 并存到homeTopPost里
-		homeTopPost.setAuthor_id(forumThread.getAuthorid()); //作者 id 并存到homeTopPost里
-		homeTopPost.setDateline(forumThread.getDateline()); //发稿日期 并存到homeTopPost里
-		homeTopPost.setViews(forumThread.getViews()); //查看数 并存到homeTopPost里
-		homeTopPost.setReplies(forumThread.getReplies()); //回复数 并存到homeTopPost里
-		homeTopPost.setImage_url(imgpath);//添加图片地址
-		
+		String forumname = homeTopPost.getForumName();//去界面取到的板块名字
 		
 		String sql="select name from pre_forum_forum  where  fid =?";// 查询的sql语句   sqlId_splitFind
 		log.info("查询的sql:"+sql);// 日志打印查询的sql语句
-		Integer fid = forumThread.getFid();
-		System.out.println("找到的fid是： "+fid);
-		ForumForum name = ForumForum.dao.findFirst(sql,fid );//forumThread.getFid() 取到的fid值
-		homeTopPost.setForumName(name.getName());
+		
+		
+		String advertisement = "AD";//广告
+		if (advertisement.equals(forumname)) {
+			homeTopPost.setForumName(advertisement);
+			homeTopPost.setTid(StringUtil.getStringRandom(7));
+		}else {
+			ForumThread forumThread = valiSubjectInfo(homeTopPost.getSubject());//调用Service的验证标题是否存在方法
+			Integer fid = forumThread.getFid();
+			
+			ForumForum name = ForumForum.dao.findFirst(sql,fid );//forumThread.getFid() 取到的fid值
+			homeTopPost.setForumName(name.getName());
+			
+			homeTopPost.setTid(forumThread.getTid());// 取tid 并存到homeTopPost里
+			homeTopPost.setAuthor_name(forumThread.getAuthor()); // 作者 并存到homeTopPost里
+			homeTopPost.setAuthor_id(forumThread.getAuthorid()); //作者 id 并存到homeTopPost里
+			homeTopPost.setDateline(forumThread.getDateline()); //发稿日期 并存到homeTopPost里
+			homeTopPost.setViews(forumThread.getViews()); //查看数 并存到homeTopPost里
+			homeTopPost.setReplies(forumThread.getReplies()); //回复数 并存到homeTopPost里
+		}
+		
+		homeTopPost.setImage_url(imgpath);//添加图片地址
+		
 		return homeTopPost;
 	}
-	
 	
 	/**
 	 * 删除用户信息

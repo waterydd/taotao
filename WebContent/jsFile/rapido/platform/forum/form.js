@@ -37,21 +37,28 @@ var platform_forum_form = function() {
 	var dataVali = function (form, isAdd){
 		var subject = $("#subject").val();// 获取输入的文章标题
 		var tid = $("#tid").val();// 获取输入的文章标题
+		var forumName = $("#forumName").val();// 获取输入的是否是廣告
 		
 
 		if(isAdd){ // 添加  true    subject =="" &&             ture         true
-			if (subject == '' || subject == null) {
-				alert("标题不能为空！");
-				return false;
+			if (forumName != "AD") {
+				if (subject == '' || subject == null) {
+					alert("标题不能为空！");
+					return false;
+				}
+				if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
+					toastr.warning("此文章的标题 不存在！");
+			 		return false;
+				}
+				if(valiHTPubjectInfo(subject) == "true"){ 
+					toastr.warning("此文章的标题 已存在！");
+			 		return false;
+				}
+
 			}
-			if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
-				toastr.warning("此文章的标题 不存在！");
-		 		return false;
-			}
-			if(valiHTPubjectInfo(subject) == "true"){ 
-				toastr.warning("此文章的标题 已存在！");
-		 		return false;
-			}
+
+
+
 			
 			 var path = document.getElementById("image_url").value;//获取上传文件名
 			 var fileExtension = path.substring(path.lastIndexOf('.') + 1); // 截取文件的后缀
@@ -73,18 +80,20 @@ var platform_forum_form = function() {
 			if(isalter(subject,tid) == "false"){  //isalter(subject,tid) 为true 没改过，为false 改动过
 				if(valiHTPubjectInfo(subject) == "true"){ 
 					toastr.warning("此文章的标题 已存在！");
-			 		return true;
+			 		return false;
 				}
 			}
 			
-			 var path = document.getElementById("image_url").value;//获取上传文件名
-			  
-			 var fileExtension = path.substring(path.lastIndexOf('.') + 1); // 截取文件的后缀
-			 if (fileExtension!="gif" && fileExtension!="png" && fileExtension!="jpeg" && fileExtension!="bmp" && fileExtension!="jpg") {
-				 toastr.warning("上传文件不是所需图片类型！");
-			 	 return false;
-			} 
-		
+			 var path = document.getElementById("image_url2").value;//获取上传文件名
+			 if (path != "") {
+				 var fileExtension = path.substring(path.lastIndexOf('.') + 1); // 截取文件的后缀
+				 if (fileExtension!="gif" && fileExtension!="png" && fileExtension!="jpeg" && fileExtension!="bmp" && fileExtension!="jpg") {
+					 toastr.warning("上传文件不是所需图片类型！");
+				 	 return false;
+				} 
+			}
+			
+			
 		}
 		
 		var errorCount = platform_verify.formVali(form);

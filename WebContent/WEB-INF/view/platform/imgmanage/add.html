@@ -65,11 +65,11 @@
 										
 					<div class="form-group">
 						<div class="col-sm-2 col-sm-offset-3">
-							         
-									<button type="button" class="btn btn-red" onclick="platform_imgmanage_form.submitValiFunc(this.form,true);"> <!-- 【需要修改】 -->
+							<% if(authUrl("/jf/platform/validatecode/save")){ %>   
+								<button type="button" class="btn btn-red" onclick="platform_imgmanage_form.submitValiFunc(this.form,true);"> <!-- 【需要修改】 -->
 									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
 								</button>
-							
+							<% } %>	
 						</div>
 					</div>
 				</form>

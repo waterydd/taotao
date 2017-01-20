@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.order"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from pre_eb_order
+       	
+		where 1=1 
+			<% if(!isEmpty(trade_flowno)){ %>
+					and trade_flowno like #'%''$trade_flowno$''%'#
+			<% } %>
+			<% if(!isEmpty(order_no)){ %>
+					and order_no like #'%''$order_no$''%'#
+			<% } %>
+			<% if(!isEmpty(goods_name)){ %>
+					and goods_name like #'%''$goods_name$''%'#
+			<% } %>
+			<% if(!isEmpty(create_datetime) && !isEmpty(create_datetime2)){ %>
+					and unix_timestamp(create_datetime) >= unix_timestamp(#'$create_datetime$'#) and unix_timestamp(create_datetime) < unix_timestamp(#'$create_datetime2$'#)
+			<% } %>
+			<% if(!isEmpty(status)){ %>
+					and status like #'%''$status$''%'#
+			<% } %>
+			 order by create_datetime desc 
+      		 
+    
+    	]]>
+	</sql>
+	
+	
+	<!-- 数据备份
+	where 1=1 
+		
+			<% if(!isEmpty(pay_flowno2)){ %>
+					and trade_flowno = #'$pay_flowno2$'#
+			<% } %>
+	
+	 -->
+<!-- 	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		
+      		(select * from pre_eb_order where 1=1 
+      		  	<% if(!isEmpty(pay_flowno)){ %>	
+					and trade_flowno = (select ow.trade_flowno from pre_eb_pay_flow ow where ow.pay_flowno = #'$pay_flowno$'# )
+      		 												 
+				<% } %>
+      		 ) as t	
+      		
+			
+		where 1=1 
+			<% if(!isEmpty(trade_flowno)){ %>
+					and t.trade_flowno like #'%''$trade_flowno$''%'#
+			<% } %>
+			<% if(!isEmpty(order_no)){ %>
+					and t.order_no like #'%''$order_no$''%'#
+			<% } %>
+			<% if(!isEmpty(status)){ %>
+					and t.status like #'%''$status$''%'#
+			<% } %>
+			
+			
+    	]]>
+	</sql> -->
+</sql-statement>

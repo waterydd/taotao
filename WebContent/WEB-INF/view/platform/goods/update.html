@@ -1,0 +1,249 @@
+<style type="text/css">  
+	 #preview, .img, .imgg {  width:375px; height:268px;}  
+	 #preview { border:1px solid #000; }  
+ </style>
+ 
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/goods');">商品列表</a></li>
+			<li class="active">商品信息更新</li>
+		</ol>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">商品信息更新</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/goods/update" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+			
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品ID</label>
+						<div class="col-sm-5">
+							<input type="text" id="id" name="goods.id" value="${escapeXml(goods.id!)}" 
+								class="form-control" maxlength="30" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入商品或帖子编号</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品名字</label>
+						<div class="col-sm-5">
+							<input type="text" id="name" name="goods.name" value="${escapeXml(goods.name!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入商品名 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品原价格</label>
+						<div class="col-sm-5">
+							<input type="text" id="original_price" name="goods.original_price" value="${escapeXml(goods.original_price!)}" 
+								class="form-control" maxlength="20" vMin="1" vType="floatZ" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入商品原价格 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品售卖价格</label>
+						<div class="col-sm-5">
+							<input type="text" id="now_price" name="goods.now_price" value="${escapeXml(goods.now_price!)}" 
+								class="form-control" maxlength="20" vMin="1" vType="floatZ" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入商品销卖价格 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">库存</label>
+						<div class="col-sm-5">
+							<input type="text" id="inventory" name="goods.inventory" value="${escapeXml(goods.inventory!)}" 
+								class="form-control" maxlength="10" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入库存 </span>
+					</div>
+					
+				<!-- 	<div class="form-group">
+						<label class="col-sm-2 control-label">类型ID</label>
+						<div class="col-sm-5">
+							<input type="text" id="type_id" name="goods.type_id" value="${escapeXml(goods.type_id!)}" 
+								class="form-control" maxlength="10" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入类型ID </span>
+					</div> -->
+					
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">属性ID</label>
+						<div class="col-sm-5">
+							<input type="text" id="attribute_id" name="goods.attribute_id" value="${escapeXml(goods.attribute_id!)}" 
+								class="form-control" maxlength="10" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入属性ID </span>
+					</div> -->
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品的帖子地址</label>
+						<div class="col-sm-5">
+							<input type="text" id="thread_url" name="goods.thread_url" value="${escapeXml(goods.thread_url!)}" 
+								class="form-control" maxlength="200">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入商品的帖子地址 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">图片地址</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(goods.pic_path!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">发布者编号</label>
+						<div class="col-sm-5">
+							<input type="text" id="publisher_id" name="goods.publisher_id" value="${escapeXml(goods.publisher_id!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入发布者编号 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">发布者名称</label>
+						<div class="col-sm-5">
+							<input type="text" id="publisher_name" name="goods.publisher_name" value="${escapeXml(goods.publisher_name!)}" 
+								class="form-control" maxlength="50" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入发布者名称 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">发布者logo</label>
+						<div class="col-sm-5">
+							<input type="text" id="publisher_logo" name="goods.publisher_logo" value="${escapeXml(goods.publisher_logo!)}" 
+								class="form-control" maxlength="200">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入发布者logo </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">说明(备注)</label>
+						<div class="col-sm-5">
+							<input type="text" id="summary" name="goods.summary" value="${escapeXml(goods.summary!)}" 
+								class="form-control" maxlength="255">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入发布者名称 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付通道类型</label>
+						<div class="col-sm-5">
+							<input type="text" id="pay_channel_manner" name="goods.pay_channel_manner" value="${escapeXml(goods.pay_channel_manner!)}" 
+								class="form-control" maxlength="65000">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入支付方式对应的支付通道类型  </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品显示顺序</label>
+						<div class="col-sm-5">
+							<input type="text" id="display_order" name="goods.display_order" value="${escapeXml(goods.display_order!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-4"> <i class="fa fa-info-circle"></i>请输入显示顺序，数字小的显示在前 大的在后</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状   态</label>
+						<div class="col-sm-5">
+							<% if(goods["status"] == "1"){%>
+								<select name="goods.status" class="combox">
+									<option value="1" >正常销售</option>
+									<option value="-1" >已下架</option>
+								</select>
+							<% } else if(goods["status"] == "-1"){%>
+								<select name="goods.status" class="combox">
+									<option value="-1" >已下架</option>
+									<option value="1" >正常销售</option>
+									
+								</select>
+							<% } %>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择状态</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否需要物流</label>
+						<div class="col-sm-5">
+							<% if(goods["need_logistics"] == "0"){%>
+								<select name="goods.need_logistics" class="combox">
+									<option value="0" >不需要</option>
+									<option value="1" >需要</option>
+								</select>
+							<% } else if(goods["need_logistics"] == "1"){%>
+								<select name="goods.need_logistics" class="combox">
+									<option value="1" >需要</option>
+									<option value="0" >不需要</option>
+								</select>
+							<% } %>
+							
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择是否需要物流 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">上传商品图片</label>
+						<div class="col-sm-3">
+							<input type="file" id="image_url2" name="image_url2" onchange="preview(this)" />  
+						</div>
+						 <i class="fa fa-info-circle"></i>类型为 gif,jpg,jpeg,bmp,png </span>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">图片预览</label>
+						 <div class="col-sm-4">
+							<div id="preview"></div>
+						</div>
+					</div>
+					
+
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/goods/form.js"></script>	
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+						/* ************************************ */
+						function preview(file) {  
+						 var prevDiv = document.getElementById('preview');  
+						 if (file.files && file.files[0]) {  
+							 var reader = new FileReader();  
+							 reader.onload = function(evt){  
+							 	prevDiv.innerHTML = '<img class="imgg" src="' + evt.target.result + '" />';  
+							}    
+							 reader.readAsDataURL(file.files[0]);
+						  } else {  
+							 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+							 }  
+						 } 
+						/* *************************************** */
+					</script>
+					
+					<div class="form-actions">
+						<% if(authUrl("/jf/platform/goods/update")){ %>
+							<button type="button" class="btn btn-red" onclick="platform_goods_form.submitValiFunc(this.form, false);">
+								${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						<% } %>
+					
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

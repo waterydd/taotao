@@ -51,7 +51,7 @@
 								<input type="text" id="phone" name="partner.phone" readonly="readonly" value="${escapeXml(partner.phone!)}"
 								class="form-control" maxlength="20" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
 							<% } else if(escapeXml(partner.authstate!) == "0"){%>
-								<input type="text" id="phone" name="partner.phone" value="${escapeXml(partner.phone!)}" 
+								<input type="text" id="phone" name="partner.phone" readonly="readonly" value="${escapeXml(partner.phone!)}" 
 									class="form-control" maxlength="20" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
 							<% } %>
 						</div>

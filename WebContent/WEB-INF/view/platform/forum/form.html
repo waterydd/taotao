@@ -2,23 +2,43 @@
 	 #preview, .img, .imgg {  width:375px; height:268px;}  
 	 #preview { border:1px solid #000; }  
  </style>
+ 
+<!--  <div class="form-group">
+	<label class="col-sm-2 control-label">板块名称</label>
+	<div class="col-sm-7">
+		<input type="text" id="subject" name="homeTopPost.forumName" value="${escapeXml(homeTopPost.forumName!)}" 
+			class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入板块名称 </span>
+</div> -->
+<div class="form-group">
+	<label class="col-sm-2 control-label">板块是否为广告</label>
+	<div class="col-sm-6">
+		<select id="forumName" name="homeTopPost.forumName" class="combox">
+			<option value="AD" >广告</option>
+			<option value="1" >非广告</option>
+		</select>
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择板块是否为广告</span>
+</div>
  	
 <div class="form-group">
 	<label class="col-sm-2 control-label">标题</label>
-	<div class="col-sm-7">
+	<div class="col-sm-6">
 		<input type="text" id="subject" name="homeTopPost.subject" value="${escapeXml(homeTopPost.subject!)}" 
-			class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			class="form-control" maxlength="80" >
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入文章标题 </span>
 </div>
 
-<!-- <div class="form-group">
-	<label class="col-sm-2 control-label">上传图片</label>
-	<div class="col-sm-7">
-		<input type="file" id="image_url" name="image_url"/>
+<div class="form-group">
+	<label class="col-sm-2 control-label">內容</label>
+	<div class="col-sm-6">
+		<input type="text" id="subject" name="homeTopPost.content" value="${escapeXml(homeTopPost.content!)}" 
+			class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 	</div>
-	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请上传文章轮播图片 </span>
-</div> -->
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入內容 </span>
+</div>
 
 <div class="form-group">
 	<label class="col-sm-2 control-label">上传图片</label>

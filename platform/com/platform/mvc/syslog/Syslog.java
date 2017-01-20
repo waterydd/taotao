@@ -451,5 +451,25 @@ public class Syslog extends BaseModel<Syslog> {
 		return get(column_userids);
 	}
 	
+	@Override
+	public String toString() {
+		return "Syslog [ids=" + ids + ", version=" + version
+				+ ", actionenddate=" + actionenddate + ", actionendtime="
+				+ actionendtime + ", actionhaoshi=" + actionhaoshi
+				+ ", actionstartdate=" + actionstartdate + ", actionstarttime="
+				+ actionstarttime + ", cause=" + cause + ", cookie=" + cookie
+				+ ", description=" + description + ", enddate=" + enddate
+				+ ", endtime=" + endtime + ", haoshi=" + haoshi + ", ips="
+				+ ips + ", method=" + method + ", referer=" + referer
+				+ ", requestpath=" + requestpath + ", startdate=" + startdate
+				+ ", starttime=" + starttime + ", status=" + status
+				+ ", useragent=" + useragent + ", viewhaoshi=" + viewhaoshi
+				+ ", operatorids=" + operatorids + ", accept=" + accept
+				+ ", acceptencoding=" + acceptencoding + ", acceptlanguage="
+				+ acceptlanguage + ", connection=" + connection + ", host="
+				+ host + ", xrequestedwith=" + xrequestedwith + ", pvids="
+				+ pvids + ", userids=" + userids + "]";
+	}
+	
 	
 }

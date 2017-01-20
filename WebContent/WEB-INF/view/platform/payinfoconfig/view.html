@@ -1,0 +1,197 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">首页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/payinfoconfig');">支付信息配置列表</a></li>
+			<li class="active">查看支付信息配置信息</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">查看支付信息配置信息</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.id!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.channel_name!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商户号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.merchant_id!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">秘钥</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.secret_key!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">公钥地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.public_key_path!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">私钥地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.secret_key_path!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">后台回调地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.back_callback_url!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">前台回调地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.front_callback_url!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">加密类型</label>
+						<div class="col-sm-7">
+							<% if(payInfoConfig["encrypt_type"] == "1"){%>
+								<input type="text" class="form-control" readonly="readonly" value="MD5带秘钥[FQL]">
+							<% } else if(payInfoConfig["encrypt_type"] == "2"){%>
+								<input type="text" class="form-control" readonly="readonly" value="RSA[FQL]">
+							<% } %>
+						</div>
+					</div>
+					<!-- *******************************我是一条分割线********************************** -->		
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-7">
+							<% if(payInfoConfig["status"] == "0"){%>
+								<input type="text" class="form-control" readonly="readonly" value="禁用">
+							<% } else if(payInfoConfig["status"] == "1"){%>
+								<input type="text" class="form-control" readonly="readonly" value="启用">
+							<% } %>
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">流水号长度</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.flowno_length!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">公钥</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.public_key!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">MD5加密KEY</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.md5_key!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ios AppID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.ios_app_id!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">android APPID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.android_app_id!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名KEY</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.sign_key!)}">
+						</div>
+					</div>
+																				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名类型</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.sign_type!)}">
+						</div>
+					</div>
+																				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名公钥</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.sign_public_key!)}">
+						</div>
+					</div>
+																				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名私钥</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.sign_secret_key!)}">
+						</div>
+					</div>
+																				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">签名 MD5 KEY</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.sign_md5_key!)}">
+						</div>
+					</div>
+																				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付方式名字</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.pay_manner_name!)}">
+						</div>
+					</div>
+																				
+					<div class="form-group">
+						<label class="col-sm-2 control-label">扩展</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payInfoConfig.ext_param!)}">
+						</div>
+					</div>
+																	
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	
+
+					
+				

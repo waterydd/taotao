@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.imgmanage"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom"><!-- [就等查询界面传参数了 名为subject] -->
+		<![CDATA[ 
+        	from 
+        		pre_common_validatecode
+			
+			where 1=1 
+				
+    	]]>
+	</sql>
+	
+</sql-statement>

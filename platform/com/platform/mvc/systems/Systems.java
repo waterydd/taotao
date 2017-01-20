@@ -112,4 +112,13 @@ public class Systems extends BaseModel<Systems> {
 		return get(column_orderids);
 	}
 	
+	@Override
+	public String toString() {
+		return "Systems [ids=" + ids + ", version=" + version
+				+ ", description=" + description + ", names=" + names
+				+ ", numbers=" + numbers + ", orderids=" + orderids + "]";
+	}
+	
+	
+	
 }

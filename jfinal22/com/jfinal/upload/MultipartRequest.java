@@ -63,6 +63,16 @@ public class MultipartRequest extends HttpServletRequestWrapper {
 		wrapMultipartRequest(request, getFinalPath(uploadPath), maxPostSize, encoding);
 	}
 	
+	/**
+	 * 自己写的方法
+	 * @param request
+	 * @param uploadPath
+	 */
+	public MultipartRequest(HttpServletRequest request, String uploadPath, String temp) {
+		super(request);
+		wrapMultipartRequest(request, uploadPath, maxPostSize, encoding);
+	}
+	
 	public MultipartRequest(HttpServletRequest request) {
 		super(request);
 		wrapMultipartRequest(request, baseUploadPath, maxPostSize, encoding);

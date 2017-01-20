@@ -1,0 +1,123 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/tradeLog');">交易记录列表</a></li>
+			<li class="active">确认发货</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">确认发货</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/tradeLog/update" method="POST" role="form" class="form-horizontal">
+					<!-- <input type="text" name="orderid" id="orderid"  maxlength="32" class="form-control"  value="${escapeXml(tradeLog.orderid!)}"/> -->
+					
+					<!-- 订单号 -->									
+					<div class="form-group">
+						<label class="col-sm-2 control-label">订单号</label>
+						<div class="col-sm-4">
+							<input type="text" name="orderid" id="orderid" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.orderid!)}">
+						</div>
+					</div>
+						
+						<!-- 商品名 -->									
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品名</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.subject!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">收货人名字</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.buyername!)}">
+						</div>
+					</div>
+																											
+					<div class="form-group">
+						<label class="col-sm-2 control-label">收货人手机号</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.buyermobile!)}">
+						</div>
+					</div>
+																						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">收货地址</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.buyercontact!)}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递公司</label>
+						<div class="col-sm-4">
+							<select name="express" class="combox">
+									<option value="中通" >中通</option>
+									<option value="顺丰" >顺丰</option>
+									<option value="申通" >申通</option>
+									<option value="圆通速递" >圆通速递</option>
+									<option value="韵达快运" >韵达快运</option>
+									<option value="德邦物流" >德邦物流</option>
+									<option value="ems快递" >ems快递</option>
+									<option value="快捷速递" >快捷速递</option>
+									<option value="天天快递" >天天快递</option>
+									<option value="如风达" >如风达</option>
+									<option value="安捷快递" >安捷快递</option>
+									<option value="国通快递" >国通快递</option>
+									<option value="宅急送" >宅急送</option>
+									<option value="安信达快递" >安信达快递</option>
+									<option value="中邮物流" >中邮物流</option>
+									<option value="联邦快递（国内）" >联邦快递（国内）</option>
+							</select>
+							<!-- <input type="text" id="express" name="express" value="${escapeXml(tradeLog.express!)}" 
+								class="form-control" maxlength="50" vMin="2" vType="text" onblur="platform_verify.onblurVali(this);"> -->
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入发货快递公司名 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递单号</label>
+						<div class="col-sm-4">
+							<input type="text" id="expressNumber" name="expressNumber" value="${escapeXml(tradeLog.expressNumber!)}" 
+								class="form-control" maxlength="50"  vMin="5" vType="number"  onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入快递单号 </span>
+						
+					</div>
+					
+					
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/tradeLog/form.js"></script>	
+					
+					
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+					</script>
+					
+					<div class="form-actions">
+						<% if(authUrl("/jf/platform/tradeLog/update")){ %>
+							<button type="button" class="btn btn-red" onclick="platform_tradeLog_form.submitValiFunc(this.form, false);">
+								${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						<% } %>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

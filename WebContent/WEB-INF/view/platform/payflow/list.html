@@ -1,0 +1,185 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">支付流水列表</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" action="${cxt!}/jf/platform/payFlow" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">支付流水列表</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<div class="panel-body">			
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">支付流水号</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.pay_flowno" value='${escapeXml(paramMap["_query.pay_flowno"])}' maxlength="35" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">交易流水号</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.trade_flowno" value='${escapeXml(paramMap["_query.trade_flowno"])}' maxlength="35" >
+						</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">状态</label>
+						<div class="col-sm-4">
+								<select name="_query.status" class="combox">
+								<option value="">全部</option>
+								<option value= "CLOSED" ${paramMap["_query.status"]! == "CLOSED" ? "selected='selected'":"" }>关闭</option>
+								<option value= "REFUND" ${paramMap["_query.status"]! == "REFUND" ? "selected='selected'":"" }>退款中</option>
+								<option value= "WAIT" ${paramMap["_query.status"]! == "WAIT" ? "selected='selected'":"" }>初始状态</option>
+								<option value= "PAY_SUCCESS" ${paramMap["_query.status"]! == "PAY_SUCCESS" ? "selected='selected'":"" }>支付成功</option>
+								<option value= "PAY_FAILURE" ${paramMap["_query.status"]! == "PAY_FAILURE" ? "selected='selected'":"" }>支付失败(出异常的交易)</option>
+								<option value= "PAY_TIME_OUT" ${paramMap["_query.status"]! == "PAY_TIME_OUT" ? "selected='selected'":"" }>订单关闭，未支付(超时24小时未支付)</option>
+								<option value= "SUCCESS_REPEAT_TRADE" ${paramMap["_query.status"]! == "SUCCESS_REPEAT_TRADE" ? "selected='selected'":"" }>支付成功(再次支付)新的流水</option>
+								<option value= "CLOSE_SUCCESS" ${paramMap["_query.status"]! == "CLOSE_SUCCESS" ? "selected='selected'":"" }>订单 关闭/超时 之后支付流水成功</option>
+							</select>
+						</div>
+				  	</div>
+				  	
+					<div class="form-group">
+						<div class="col-sm-5 col-sm-offset-5">
+							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>查询</button>
+							<button type="reset" class="btn">重置</button>
+						</div>
+				  	</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">支付流水列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var view = authUrl("/jf/platform/payFlow/view");
+					
+				%>
+				
+				<div class="panel-body" style="height:400px;overflow:auto;">	
+					<table class="table table-bordered table-hover" id="dataTable" >
+						<thead>
+							<tr align="center">
+								<th style="text-align:center;"  class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									支付流水
+								</th>
+								<th style="text-align:center;"  class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									 交易流水
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									总额
+								</th>
+								<th style="text-align:center;"  class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'create_datetime')">
+									创建时间
+									${orderBy("create_datetime")}
+								</th>
+								<th style="text-align:center;"  class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'req_datetime')">
+									请求时间
+									${orderBy("req_datetime")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									状态
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', 'bank_ret_success_time')">
+									银行返回成功时间
+									${orderBy("bank_ret_success_time")}
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									银行返回流水号
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									寄送 银行流水号
+								</th>
+								<th class="hidden-xs">${i18nMap["admin.common.operation"]}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(payFlow in splitPage.list){ %>
+								<tr>
+									<td align="center">${escapeXml(payFlow["pay_flowno"]!)}</td>
+									<td align="center">${escapeXml(payFlow["trade_flowno"]!)}</td>
+									<td align="center">${escapeXml(payFlow["amount"]!)}</td>
+									<td align="center">${escapeXml(payFlow["create_datetime"]!)}</td>
+									<td align="center">${escapeXml(payFlow["req_datetime"]!)}</td>
+									<td align="center">
+										<% if(payFlow["status"] == "WAIT"){%>
+											<span class="label label-success">初始状态</span>
+										<% } else if(payFlow["status"] == "PAY_SUCCESS") {%>
+											<span class="label label-success">支付成功</span>
+										<% } else if(payFlow["status"] == "PAY_FAILURE") {%>
+											<span class="label label-success">支付失败(出异常的交易)</span>
+										<% } else if(payFlow["status"] == "CLOSED") {%>
+											<span class="label label-warning">关闭</span>
+										<% } else if(payFlow["status"] == "PAY_TIME_OUT") {%>
+											<span class="label label-success">订单关闭，未支付(超时24小时未支付)</span>
+										<% } else if(payFlow["status"] == "SUCCESS_REPEAT_TRADE") {%>
+											<span class="label label-success">支付成功(再次支付)新的流水</span>
+										<% } else if(payFlow["status"] == "REFUND") {%>
+											<span class="label label-success">退款中</span>
+										<% } else if(payFlow["status"] == "CLOSE_SUCCESS") {%>
+											<span class="label label-success">订单 关闭/超时 之后支付流水成功</span>
+										<% } %>
+									</td>
+									<td align="center">${escapeXml(payFlow["bank_ret_success_time"]!)}</td>
+									<td align="center">${escapeXml(payFlow["bank_ret_flowno"]!)}</td>
+									<td align="center">${escapeXml(payFlow["send_bank_flowno"]!)}</td>
+									
+									<td class="hidden-xs">
+										<% if(view == true){ %>
+											<button type="button" class="btn btn-dark-yellow add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/payFlow/view/${escapeXml(payFlow['pay_flowno']!)}');">
+												${i18nMap["admin.common.see"]} <i class="fa fa-eye"></i>
+											</button>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

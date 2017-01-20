@@ -9,7 +9,9 @@ public interface ConstantInit {
 	/**
 	 * 上传图片文件的路径
 	 */
-	public static final String config_Upload_path = "F:\\jxsqAdm_img_file";
+//	public static final String config_Upload_path = "F:\\jxsqAdm_img_file";
+	public static final String config_Upload_path = "/data/wwwroot/jx.jn1535.com/tempImg/startImg/";
+	
 
 	/**
 	 * 扫描的包

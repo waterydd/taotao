@@ -26,32 +26,32 @@ public class TimerResources extends Timer {
 	 * 启动任务
 	 */
 	public static synchronized void start() {
-		log.info("开始启动任务");
-		
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				try {
-					log.info("定时记录系统资源负载开始");
-					timer.resources();
-					log.info("定时记录系统资源负载结束");
-				} catch (Exception e) {
-					log.error("定时记录系统资源负载失败：" + e.getMessage());
-					e.printStackTrace();
-				}
-			}
-		}, 1000, 1000 * 60 * 2);// 启动项目一秒后执行，然后每次间隔2分钟
-		
-		log.info("启动任务完成");
+//		log.info("开始启动任务");
+//		
+//		timer.schedule(new TimerTask() {
+//			@Override
+//			public void run() {
+//				try {
+//					log.info("定时记录系统资源负载开始");
+//					timer.resources();
+//					log.info("定时记录系统资源负载结束");
+//				} catch (Exception e) {
+//					log.error("定时记录系统资源负载失败：" + e.getMessage());
+//					e.printStackTrace();
+//				}
+//			}
+//		}, 1000, 1000 * 60 * 2);// 启动项目一秒后执行，然后每次间隔2分钟
+//		
+//		log.info("启动任务完成");
 	}
 	
 	/**
 	 * 停止任务
 	 */
 	public static synchronized void stop(){
-		log.info("任务退出开始");
-		timer.cancel();
-		log.info("任务退出成功");
+//		log.info("任务退出开始");
+//		timer.cancel();
+//		log.info("任务退出成功");
 	}
 	
 	/**

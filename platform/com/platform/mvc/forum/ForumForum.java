@@ -683,6 +683,38 @@ public class ForumForum extends BaseModel<ForumForum> {
 		set(column_allow_post, allow_post);
 	}
 	
+	@Override
+	public String toString() {
+		return "ForumForum [fid=" + fid + ", fup=" + fup + ", type=" + type
+				+ ", name=" + name + ", status=" + status + ", displayorder="
+				+ displayorder + ", styleid=" + styleid + ", threads="
+				+ threads + ", posts=" + posts + ", todayposts=" + todayposts
+				+ ", yesterdayposts=" + yesterdayposts + ", rank=" + rank
+				+ ", oldrank=" + oldrank + ", lastpost=" + lastpost
+				+ ", domain=" + domain + ", allowsmilies=" + allowsmilies
+				+ ", allowhtml=" + allowhtml + ", allowbbcode=" + allowbbcode
+				+ ", allowimgcode=" + allowimgcode + ", allowmediacode="
+				+ allowmediacode + ", allowanonymous=" + allowanonymous
+				+ ", allowpostspecial=" + allowpostspecial
+				+ ", allowspecialonly=" + allowspecialonly + ", allowappend="
+				+ allowappend + ", alloweditrules=" + alloweditrules
+				+ ", allowfeed=" + allowfeed + ", allowside=" + allowside
+				+ ", recyclebin=" + recyclebin + ", modnewposts=" + modnewposts
+				+ ", jammer=" + jammer + ", disablewatermark="
+				+ disablewatermark + ", inheritedmod=" + inheritedmod
+				+ ", autoclose=" + autoclose + ", forumcolumns=" + forumcolumns
+				+ ", catforumcolumns=" + catforumcolumns + ", threadcaches="
+				+ threadcaches + ", alloweditpost=" + alloweditpost
+				+ ", simple=" + simple + ", modworks=" + modworks
+				+ ", allowglobalstick=" + allowglobalstick + ", level=" + level
+				+ ", commoncredits=" + commoncredits + ", archive=" + archive
+				+ ", recommend=" + recommend + ", favtimes=" + favtimes
+				+ ", sharetimes=" + sharetimes + ", disablethumb="
+				+ disablethumb + ", disablecollect=" + disablecollect
+				+ ", mobile_display=" + mobile_display + ", allow_post="
+				+ allow_post + "]";
+	}
+	
 	
 
 

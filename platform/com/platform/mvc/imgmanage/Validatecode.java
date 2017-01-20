@@ -44,6 +44,12 @@ public class Validatecode extends BaseModel<Validatecode> {
 	 * 字段类型：varchar(256)  长度：256
 	 */
 	public static final String column_reserved1 = "reserved1";
+	
+	/**
+	 * sqlId : platform.imgmanage.splitPageFrom
+	 * 描述：分页from 【首页显示所有的】
+	 */
+	public static final String sqlId_splitPageFrom = "platform.imgmanage.splitPageFrom";
 
 
 	private String type;
@@ -74,6 +80,13 @@ public class Validatecode extends BaseModel<Validatecode> {
 	}
 	public void setReserved1(String reserved1) {
 		set(column_reserved1, reserved1);
+	}
+	
+	@Override
+	public String toString() {
+		return "Validatecode [type=" + type + ", validate_code="
+				+ validate_code + ", comment=" + comment + ", reserved1="
+				+ reserved1 + "]";
 	}
 	
 	

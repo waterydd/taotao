@@ -9,4 +9,10 @@
     	]]>
 	</sql>
 	
+	<sql id="findTidInfo">
+		<![CDATA[ 
+        	select * from pre_forum_thread  where  tid =?	
+    	]]>
+	</sql>
+	
 </sql-statement>

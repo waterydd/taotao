@@ -209,4 +209,17 @@ public class Department extends BaseModel<Department> {
 		return get(column_principaluserids);
 	}
 	
+	@Override
+	public String toString() {
+		return "Department [ids=" + ids + ", version=" + version
+				+ ", allchildnodeids=" + allchildnodeids + ", departmentlevel="
+				+ departmentlevel + ", depttype=" + depttype + ", description="
+				+ description + ", images=" + images + ", isparent=" + isparent
+				+ ", names=" + names + ", orderids=" + orderids + ", url="
+				+ url + ", parentdepartmentids=" + parentdepartmentids
+				+ ", principaluserids=" + principaluserids + "]";
+	}
+	
+	
+	
 }

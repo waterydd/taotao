@@ -1,0 +1,217 @@
+<style type="text/css">  
+	 #preview, .img, .imgg {  width:375px; height:268px;}  
+	 #preview { border:1px solid #000; }  
+ </style>
+ 
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/partnerTrade');">股东商品列表</a></li>
+			<li class="active">股东商品录入</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">股东商品录入</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form id="editForm" action="${cxt!}/jf/platform/partnerTrade/save" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+					
+					
+					
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">商品ID</label>
+						<div class="col-sm-5">
+							<input type="text" id="id" name="partnerTrade.id" value="${escapeXml(partnerTrade.id!)}" 
+								class="form-control" maxlength="32" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入商品或帖子编号</span>
+					</div> -->
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品名字</label>
+						<div class="col-sm-5">
+							<input type="text" id="name" name="partnerTrade.name" value="${escapeXml(partnerTrade.name!)}" 
+								class="form-control" maxlength="60" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入商品名</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品价格</label>
+						<div class="col-sm-5">
+							<input type="text" id="price" name="partnerTrade.price" value="${escapeXml(partnerTrade.price!)}" 
+								class="form-control" maxlength="20" vMin="1" vType="floatZ" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入商品价格 </span>
+					</div>
+					
+				<!-- 	<div class="form-group">
+						<label class="col-sm-2 control-label">商品详细分类</label>
+						<div class="col-sm-5">
+							<select name="partnerTrade.classify" class="combox">
+								<option value="1" >简餐</option>
+								<option value="2" >套餐</option>
+								<option value="3" >小吃</option>
+								<option value="4" >茶饮</option>
+							</select>
+							<input type="text" id="classify" name="partnerTrade.classify" value="${escapeXml(partnerTrade.classify!)}" 
+								class="form-control" maxlength="20" vMin="1" vType="floatZ" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请选择商品详细分类 </span>
+					</div> -->
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品分类</label>
+						<div class="col-sm-5">
+							<select name="partnerTrade.goods_type" class="combox selectBox1">
+								<option value="1" >美食</option>
+								<option value="2" >好书</option>
+							</select>
+						
+							<select name="partnerTrade.classify" class="combox selectBox">
+								<option value="1" >简餐</option>
+								<option value="2" >套餐</option>
+								<option value="3" >小吃</option>
+								<option value="4" >茶饮</option>
+							</select>
+							<select name="partnerTrade.classify" class="combox selectBox" style="display:none;">
+								<option value="" ></option>
+							</select>
+							</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请选择商品分类</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">库存</label>
+						<div class="col-sm-5">
+							<input type="text" id="inventory" name="partnerTrade.inventory" value="${escapeXml(partnerTrade.inventory!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入库存 必须大于或等于0 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">卖家ID</label>
+						<div class="col-sm-5">
+							<input type="text" id="seller_id" name="partnerTrade.seller_id" value="${escapeXml(partnerTrade.seller_id!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入卖家编号 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">卖家名字</label>
+						<div class="col-sm-5">
+							<input type="text" id="seller_name" name="partnerTrade.seller_name" value="${escapeXml(partnerTrade.seller_name!)}" 
+								class="form-control" maxlength="40" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入卖家名字 </span>
+					</div>
+						
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">商品显示顺序</label>
+						<div class="col-sm-5">
+							<input type="text" id="display_order" name="partnerTrade.display_order" value="${escapeXml(partnerTrade.display_order!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-3"> <i class="fa fa-info-circle"></i> 请输入显示顺序，数字小的显示在前 大的在后 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状   态</label>
+						<div class="col-sm-5">
+							<select name="partnerTrade.status" class="combox">
+								<option value="1" >正在售卖</option>
+								<option value="-1" >已下架</option>
+							</select>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择状态</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否需要物流</label>
+						<div class="col-sm-5">
+							<select name="partnerTrade.need_logistics" class="combox">
+								<option value="0" >不需要</option>
+								<option value="1" >需要</option>
+							</select>
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择是否需要物流 </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">上传商品图片</label>
+						<div class="col-sm-3">
+							<input type="file" id="image_url" name="image_url" onchange="preview(this)" />  
+						</div>
+						 <i class="fa fa-info-circle"></i>类型为 gif,jpg,jpeg,bmp,png </span>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">图片预览</label>
+						 <div class="col-sm-4">
+							<div id="preview"></div>
+						</div>
+					</div>
+					
+					<!-- ***************我是一条分割线********************* -->
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/partnertrade/form.js"></script>	
+
+
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+						/* ************************************ */
+						function preview(file) {  
+						 var prevDiv = document.getElementById('preview');  
+						 if (file.files && file.files[0]) {  
+							 var reader = new FileReader();  
+							 reader.onload = function(evt){  
+							 	prevDiv.innerHTML = '<img class="imgg" src="' + evt.target.result + '" />';  
+							}    
+							 reader.readAsDataURL(file.files[0]);
+						  } else {  
+							 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+							 }  
+						 }
+						var $select=$('.selectBox');
+						$('.selectBox1').on('change',function(){
+							if($(this).val()=='1'){
+								$select.eq(0).show();
+								$select.eq(1).hide();
+							}else if($(this).val()=='2'){
+								$select.eq(0).hide();
+								$select.eq(1).show();
+							}
+						})
+					</script>
+					
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/platform/partnerTrade/save")){ %>
+									<button type="button" class="btn btn-red" onclick="platform_partnertrade_form.submitValiFunc(this.form,true);">
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+								
+							<% } %>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

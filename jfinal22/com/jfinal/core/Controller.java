@@ -756,9 +756,31 @@ public abstract class Controller {
 			request = new MultipartRequest(request, uploadPath);
 		return ((MultipartRequest)request).getFiles();
 	}
+	/**
+	 * 自己新增方法
+	 * @param uploadPath
+	 * @return
+	 */
+	public List<UploadFile> getFileByConfigPath(String uploadPath) {
+		if (request instanceof MultipartRequest == false)
+			request = new MultipartRequest(request, uploadPath,"");
+		return ((MultipartRequest)request).getFiles();
+	}
 	
 	public UploadFile getFile(String parameterName, String uploadPath) {
 		getFiles(uploadPath);
+		return getFile(parameterName);
+	}
+	/**
+	 * getFileByConfigPath(String parameterName, String uploadPath)
+	 * 自己新增方法
+	 * @param parameterName
+	 * @param uploadPath
+	 * @return
+	 */
+
+	public UploadFile getFileByConfigPath(String parameterName, String uploadPath) {
+		getFileByConfigPath(uploadPath);
 		return getFile(parameterName);
 	}
 	

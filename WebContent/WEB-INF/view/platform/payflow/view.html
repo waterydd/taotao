@@ -1,0 +1,263 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">首页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/payFlow');">支付流水列表</a></li>
+			<li class="active">查看支付流水信息</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">查看支付流水信息</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付流水号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.pay_flowno!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">交易流水号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.trade_flowno!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">组合流水号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.combined_flowno!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">总数</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.amount!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">货币</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.currency!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">创建时间 </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.create_datetime!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">请求时间 </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.req_datetime!)}">
+						</div>
+					</div>
+																					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付通道</label>
+						<div class="col-sm-7">
+							<% if(payFlow["pay_channel"] == "WX"){%>
+								<input type="text" class="form-control" readonly="readonly" value="微信">
+							<% } else if(payFlow["pay_channel"] == "ZFB") {%>
+								<input type="text" class="form-control" readonly="readonly" value="支付宝">
+							<% } else if(payFlow["pay_channel"] == "FQL") {%>
+								<input type="text" class="form-control" readonly="readonly" value="付钱拉">
+							<% } %>
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">支付方式</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.pay_bank!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">状态</label>
+						<div class="col-sm-7">
+							<% if(payFlow["status"] == "WAIT"){%>
+								<input type="text" class="form-control" readonly="readonly" value="初始状态">
+							<% } else if(payFlow["status"] == "PAY_SUCCESS") {%>
+								<input type="text" class="form-control" readonly="readonly" value="支付成功">
+							<% } else if(payFlow["status"] == "PAY_FAILURE") {%>
+								<input type="text" class="form-control" readonly="readonly" value="支付失败(出异常的交易)">
+							<% } else if(payFlow["status"] == "CLOSED") {%>
+								<input type="text" class="form-control" readonly="readonly" value="关闭">
+							<% } else if(payFlow["status"] == "PAY_TIME_OUT") {%>
+								<input type="text" class="form-control" readonly="readonly" value="订单关闭，未支付(超时24小时未支付)">
+							<% } else if(payFlow["status"] == "SUCCESS_REPEAT_TRADE") {%>
+								<input type="text" class="form-control" readonly="readonly" value="支付成功(再次支付)新的流水">
+							<% } else if(payFlow["status"] == "REFUND") {%>
+								<input type="text" class="form-control" readonly="readonly" value="退款中">
+							<% } else if(payFlow["status"] == "CLOSE_SUCCESS") {%>
+								<input type="text" class="form-control" readonly="readonly" value="订单 关闭/超时 之后支付流水成功">
+							<% } %>
+						</div>
+					</div>
+											
+					<div class="form-group">
+						<label class="col-sm-2 control-label">银行返回流水号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.bank_ret_flowno!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">银行返回信息</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.bank_ret_msg!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">银行返回码</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.bank_ret_code!)}">
+						</div>
+					</div>
+									
+					<div class="form-group">
+						<label class="col-sm-2 control-label">银行返回成功时间</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.bank_ret_success_time!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">成功时间</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.success_time!)}">
+						</div>
+					</div>
+					
+					<!-- *******************************我是一条分割线********************************** -->		
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">买家 ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.buyerid!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">卖家ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.sellerid!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">真实支付数量</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.real_pay_amount!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">寄 送 银行流水号 </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.send_bank_flowno!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">银行退款流水</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.bank_refund_flowno!)}">
+						</div>
+					</div>
+																	
+					<div class="form-group">
+						<label class="col-sm-2 control-label">接口返回的支付银行</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.ret_pay_bank!)}">
+						</div>
+					</div>
+						
+						<!-- 需要将数字转化为日期 -->											
+					<div class="form-group">
+						<label class="col-sm-2 control-label">到期时间</label>
+						<div class="col-sm-7">
+							<input type="text" id="datatime" class="form-control" readonly="readonly" value="${escapeXml(payFlow.limit_datetime!)}">
+						</div>
+					</div>
+					
+					<!-- 新增加显示字段 -->
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否退款</label>
+						<div class="col-sm-7">
+							<% if(payFlow["is_refund"] == "0"){%>
+								<input type="text" class="form-control" readonly="readonly" value="不是">
+							<% } else if(payFlow["is_refund"] == "1"){%>
+								<input type="text" class="form-control" readonly="readonly" value="是">
+							<% } %>
+						</div>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">前台回调地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.front_callback_url!)}">
+						</div>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">后台回调地址</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(payFlow.back_callback_url!)}">
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<!-- ************** -->
+				<script type="text/javascript">
+					jQuery(document).ready(function() {
+						common_form.init();
+					});
+					function toTwo(n){      //单数改成双数
+						return n<10? '0'+n : ''+n;
+					}
+					
+						var time=new Date($('#datatime').val()*1000);
+						var year = time.getFullYear();
+						var month = toTwo(time.getMonth()+1);
+						var day = toTwo(time.getDate());
+						var hours = toTwo(time.getHours());
+						var minutes=toTwo(time.getMinutes());
+						var seconds=toTwo(time.getSeconds());
+						$('#datatime').val(year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds);
+						
+					
+					
+				</script>
+			<!-- ************* -->
+		
+		</div>
+	</div>
+</div>	
+
+					
+				

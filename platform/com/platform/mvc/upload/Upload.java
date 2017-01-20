@@ -119,4 +119,14 @@ public class Upload extends BaseModel<Upload> {
 		return get(column_path);
 	}
 	
+	@Override
+	public String toString() {
+		return "Upload [ids=" + ids + ", version=" + version
+				+ ", parametername=" + parametername + ", filename=" + filename
+				+ ", contenttype=" + contenttype + ", originalfilename="
+				+ originalfilename + ", path=" + path + "]";
+	}
+	
+	
+	
 }

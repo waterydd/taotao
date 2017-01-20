@@ -45,7 +45,7 @@ public class PushInfoSettingsService extends BaseService {
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		
-		String urlTotal = SERVER + url; // url 地址
+		String urlTotal = PropertyUtil.getReqHttpsUrl() + url; // url 地址
 		
 		HttpPost httpPost = new HttpPost(urlTotal);
 		if (params != null) {

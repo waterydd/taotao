@@ -38,15 +38,11 @@ public class TradeLogService extends BaseService {
 	
 	public static final String serviceName = "tradeLogService";
 	
-	public static final String SERVER = "http://jx.jn1535.com/";
-	public static final String SERVER_HTTPS = "https://apptest.juxiuclub.com/";
-	public static final String LOCAL = "http://localhost:8989/jxsq-app/";
-	
 	public static String doPost(String url, List<NameValuePair> params) throws Exception {
 		
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		
-		String urlTotal = SERVER + url; // url 地址
+		String urlTotal = PropertyUtil.getReqHttpsUrl() + url; // url 地址
 		
 		HttpPost httpPost = new HttpPost(urlTotal);
 		if (params != null) {

@@ -21,6 +21,10 @@ public class PropertyUtil {
 	 * APP配置
 	 */
 	private static Prop propApp = PropKit.use("app.properties");
+	/**
+	 * 系统配置
+	 */
+	private static Prop propSys = PropKit.use("sys.properties");
 	
 
 	
@@ -68,5 +72,14 @@ public class PropertyUtil {
 	public static String getDesKey()
 	{
 		return propApp.get("desKey");
+	}
+	
+	/**
+	 * 【后台】接口的HTTPS地址
+	 * @return
+	 */
+	public static String getReqHttpsUrl()
+	{
+		return propSys.get("https.url");
 	}
 }

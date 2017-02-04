@@ -15,7 +15,7 @@
 					and publisher_name like #'%''$publisher_name$''%'#
 			<% } %>
 			<% if(!isEmpty(status)){ %>
-					and status like #'%''$status$''%'#
+					and status = #'$status$'#
 			<% } %>
 	
 				

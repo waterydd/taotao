@@ -12,7 +12,9 @@ import java.util.Random;
 import java.util.UUID;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -20,6 +22,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
@@ -28,6 +31,7 @@ import com.platform.mvc.base.BaseService;
 import com.platform.util.Base64EncryptManner;
 import com.platform.util.EncDecUtil;
 import com.platform.util.HmacHanlder;
+import com.platform.util.HttpClientUtil;
 import com.platform.util.PropertyUtil;
 
 @Service(name = PushInfoSettingsService.serviceName)
@@ -43,7 +47,7 @@ public class PushInfoSettingsService extends BaseService {
 	
 	public static String doPost(String url, List<NameValuePair> params) throws Exception {
 		
-		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpClient httpclient = HttpClientUtil.getHttpClient();
 		
 		String urlTotal = PropertyUtil.getReqHttpsUrl() + url; // url 地址
 		
@@ -51,7 +55,7 @@ public class PushInfoSettingsService extends BaseService {
 		if (params != null) {
 			httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 		}
-		CloseableHttpResponse response = httpclient.execute(httpPost);
+		HttpResponse response = httpclient.execute(httpPost);
 		HttpEntity entity = response.getEntity();
 		if (entity != null) {
 
@@ -69,8 +73,10 @@ public class PushInfoSettingsService extends BaseService {
 //			System.out.println(new Base64EncryptManner().decode(str.substring(str.indexOf(rightStr) + 41, str.indexOf("&signature="))));
 //			String a = new Base64EncryptManner().decode(str.substring(str.indexOf(rightStr) + 41, str.indexOf("&signature=")));
 			instream.close();
-			response.close();
-			httpclient.close();
+			if (response != null)
+				EntityUtils.consume(response.getEntity());
+			if (httpPost != null)
+				httpPost.abort();
 			return str.toString();
 		} else
 			System.out.println("Error");

@@ -11,6 +11,9 @@
 			<% if(!isEmpty(id)){ %>
 					and id like #'%''$id$''%'#
 			<% } %>
+			<% if(!isEmpty(merchant_id)){ %>
+					and merchant_id like #'%''$merchant_id$''%'#
+			<% } %>
 	
 				
     	]]>

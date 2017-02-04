@@ -143,7 +143,13 @@ public class LoginService extends BaseService {
 			return ConstantLogin.login_info_0;
 		}
 		//**********华丽丽的分割线**********
-		Object userObj = User.dao.cacheGet(userName);
+		
+		//当为超级用户时 直接从数据库里取  而不从缓存里取，其他用户不变
+		Object userObj = null;
+		if (userName.equals("admins"))
+			userObj = user2;
+		else
+			userObj = User.dao.cacheGet(userName);
 		if (null != userObj) {
 			user = (User) userObj;
 		} else {

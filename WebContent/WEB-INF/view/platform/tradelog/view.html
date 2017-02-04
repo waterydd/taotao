@@ -25,14 +25,14 @@
 				<form role="form" class="form-horizontal">
 					
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Tid</label>
+						<label class="col-sm-2 control-label">主题编号</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.tid!)}">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Pid</label>
+						<label class="col-sm-2 control-label">帖子编号</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.pid!)}">
 						</div>
@@ -97,7 +97,7 @@
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">税金</label>
+						<label class="col-sm-2 control-label">税</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.tax!)}">
 						</div>
@@ -111,14 +111,14 @@
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">账户ID</label>
+						<label class="col-sm-2 control-label">卖家编号</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.sellerid!)}">
 						</div>
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">卖家</label>
+						<label class="col-sm-2 control-label">卖家名</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.seller!)}">
 						</div>
@@ -139,14 +139,14 @@
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">买家 ID</label>
+						<label class="col-sm-2 control-label">买家编号</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.buyerid!)}">
 						</div>
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">买家</label>
+						<label class="col-sm-2 control-label">买家名</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.buyer!)}">
 						</div>
@@ -181,15 +181,15 @@
 							<% } else if(tradeLog["status"] == 1) {%>
 								<input type="text" class="form-control" readonly="readonly" value="等待买家付款">
 							<% } else if(tradeLog["status"] == 2) {%>
-								<input type="text" class="form-control" readonly="readonly" value="交易已创建，等待卖家确认">
+								<input type="text" class="form-control" readonly="readonly" value="等待卖家确认">
 							<% } else if(tradeLog["status"] == 3) {%>
-								<input type="text" class="form-control" readonly="readonly" value="确认买家付款中，暂勿发货">
+								<input type="text" class="form-control" readonly="readonly" value="确认付款中">
 							<% } else if(tradeLog["status"] == 4) {%>
-								<input type="text" class="form-control" readonly="readonly" value="买家已付款，等待卖家发货">
+								<input type="text" class="form-control" readonly="readonly" value="等待卖家发货">
 							<% } else if(tradeLog["status"] == 5) {%>
-								<input type="text" class="form-control" readonly="readonly" value="卖家已发货，买家确认中">
+								<input type="text" class="form-control" readonly="readonly" value="确认收货中">
 							<% } else if(tradeLog["status"] == 6) {%>
-								<input type="text" class="form-control" readonly="readonly" value="买家确认收到货，等待支付宝打款给卖家">
+								<input type="text" class="form-control" readonly="readonly" value="等待支付宝打款给卖家">
 							<% } else if(tradeLog["status"] == 7) {%>
 								<input type="text" class="form-control" readonly="readonly" value="交易成功结束">
 							<% } else if(tradeLog["status"] == 8) {%>
@@ -197,17 +197,17 @@
 							<% } else if(tradeLog["status"] == 10) {%>
 								<input type="text" class="form-control" readonly="readonly" value="等待卖家同意退款">
 							<% } else if(tradeLog["status"] == 11) {%>
-								<input type="text" class="form-control" readonly="readonly" value="卖家拒绝买家条件，等待买家修改条件">
+								<input type="text" class="form-control" readonly="readonly" value="等待买家修改条件">
 							<% } else if(tradeLog["status"] == 12) {%>
-								<input type="text" class="form-control" readonly="readonly" value="卖家同意退款，等待买家退货">
+								<input type="text" class="form-control" readonly="readonly" value="等待买家退货">
 							<% } else if(tradeLog["status"] == 13) {%>
 								<input type="text" class="form-control" readonly="readonly" value="等待卖家收货">
 							<% } else if(tradeLog["status"] == 14) {%>
-								<input type="text" class="form-control" readonly="readonly" value="双方已经一致，等待退款">
+								<input type="text" class="form-control" readonly="readonly" value="等待退款">
 							<% } else if(tradeLog["status"] == 15) {%>
 								<input type="text" class="form-control" readonly="readonly" value="退款处理中">
 							<% } else if(tradeLog["status"] == 16) {%>
-								<input type="text" class="form-control" readonly="readonly" value="中断的退款">
+								<input type="text" class="form-control" readonly="readonly" value="退款中断">
 							<% } else if(tradeLog["status"] == 17) {%>
 								<input type="text" class="form-control" readonly="readonly" value="退款成功">
 							<% } else if(tradeLog["status"] == 18) {%>
@@ -226,7 +226,7 @@
 					</div>
 										
 					<div class="form-group">
-						<label class="col-sm-2 control-label">离线</label>
+						<label class="col-sm-2 control-label">离线交易</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.offline!)}">
 						</div>
@@ -268,21 +268,21 @@
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">运输费</label>
+						<label class="col-sm-2 control-label">运费</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.transportfee!)}">
 						</div>
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">原始单价</label>
+						<label class="col-sm-2 control-label">原价</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.baseprice!)}">
 						</div>
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">折扣率</label>
+						<label class="col-sm-2 control-label">折扣</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.discount!)}">
 						</div>
@@ -317,7 +317,7 @@
 					</div>
 																	
 					<div class="form-group">
-						<label class="col-sm-2 control-label">收货信息ID</label>
+						<label class="col-sm-2 control-label">收货信息编号</label>
 						<div class="col-sm-7">
 							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(tradeLog.receive_id!)}">
 						</div>

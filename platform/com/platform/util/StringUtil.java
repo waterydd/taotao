@@ -27,6 +27,10 @@ public class StringUtil {
 		return Integer.parseInt(val);
 	}
 	
+	public static String getValue(String value) {
+		return value == null ? "" : value;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(getStringRandom(8));
 	}

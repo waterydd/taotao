@@ -55,8 +55,8 @@ public class PartnerTradeController extends BaseController {
 	public void save() {
 		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getGoodsImgPath()); // 读取上传的图片文件
 		String imgpath = uf.getFileName();
-		//取出member_rand_no 表的rand_num字段的最大值 并且在is_use = 0时 【0代表未用】
-		String sql ="select * from member_rand_no where is_use = 0 ORDER BY rand_num LIMIT 0,1 for update";
+		//取出pt_trade_no 表的rand_num字段的最大值 并且在is_use = 0时 【0代表未用】
+		String sql ="select * from pt_trade_no where is_use = 0 ORDER BY rand_num LIMIT 0,1 for update";
 		Randno randno = Randno.dao.findFirst(sql);
 		randno.setIs_use(true);
 		boolean updateResult = randno.update();
@@ -101,7 +101,6 @@ public class PartnerTradeController extends BaseController {
 			String imgpath = uf.getFileName();
 			partnerTrade.setImg_url(imgpath);
 		}
-		
 		partnerTrade.update();
 		
 	    redirect("/jf/platform/partnerTrade");

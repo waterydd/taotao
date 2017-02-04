@@ -184,11 +184,11 @@
 										<% } else if(order["status"] == "SELLER_SENT"){%>
 											<span class="label label-warning">卖家已发货</span>
 										<% } else if(order["status"] == "TRADE_SUCCESS"){%>
-											<span class="label label-warning">交易成功（结束状态）</span>
+											<span class="label label-warning">交易成功</span>
 										<% } else if(order["status"] == "PAY_FAILURE"){%>
 											<span class="label label-warning">支付失败</span>
 										<% } else if(order["status"] == "PAY_TIME_OUT"){%>
-											<span class="label label-warning">支付超时(24小时没支付)</span>
+											<span class="label label-warning">支付超时</span>
 										<% } else if(order["status"] == "CLOSED"){%>
 											<span class="label label-warning">交易关闭</span>
 										<% } else if(order["status"] == "REFUND"){%>
@@ -210,7 +210,7 @@
 										<% if(order["status"] == "PENDING_SEND") {%>
 											<% if(edit == true){ %>
 												<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/order/edit/${escapeXml(order['order_no']!)}');"> 
-													确认发货 <i class="fa fa-edit"></i>
+													发货 <i class="fa fa-edit"></i>
 												</button>
 											<% } %>
 										<% } %>

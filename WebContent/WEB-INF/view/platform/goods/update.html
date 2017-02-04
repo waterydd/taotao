@@ -29,7 +29,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">商品ID</label>
 						<div class="col-sm-5">
-							<input type="text" id="id" name="goods.id" value="${escapeXml(goods.id!)}" 
+							<input type="text" id="id" name="goods.id" readonly="readonly" value="${escapeXml(goods.id!)}" 
 								class="form-control" maxlength="30" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
 						</div>
 						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入商品或帖子编号</span>

@@ -232,19 +232,19 @@ public class PayInfoConfig extends BaseModel<PayInfoConfig> {
 	}
 
 	public String getPay_manner_name() {
-		return get(column_channel_name);
+		return get(column_pay_manner_name);
 	}
 
 	public void setPay_manner_name(String pay_manner_name) {
-		set(column_channel_name, channel_name);
+		set(column_pay_manner_name, pay_manner_name);
 	}
 
 	public String getExt_param() {
-		return get(column_channel_name);
+		return get(column_ext_param);
 	}
 
 	public void setExt_param(String ext_param) {
-		set(column_channel_name, channel_name);
+		set(column_ext_param, ext_param);
 	}
 
 	public String getChannel_name() {

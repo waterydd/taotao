@@ -30,6 +30,13 @@
 						</div>
 				  	</div>
 				  	
+				  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="focusedInput">商户号</label>
+						<div class="col-sm-4">
+					  		<input class="form-control focused" type="text" name="_query.merchant_id" value='${escapeXml(paramMap["_query.merchant_id"])}' maxlength="50" >
+						</div>
+				  	</div>
+				  	
 					<div class="form-group">
 						<div class="col-sm-5 col-sm-offset-5">
 							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>查询</button>

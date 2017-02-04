@@ -23,7 +23,7 @@ var platform_pushinfosettings_form = function() {
 		var re=/^\d+$/;
 		var re2=/^https{0,1}:\/\//;
 		if(isAdd){ // 添加  true 
-			if (body == '' || body == null) {
+			if (body == '' || body == null || body.trim() == null || body.trim() == '') {
 				toastr.warning("内容不能为空！");
 				return false;
 			}

@@ -14,6 +14,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
 
 /**
  * XXX 管理 描述：
@@ -31,7 +32,6 @@ import com.jfinal.aop.Before;
 @Controller(controllerKey = "/jf/platform/partner")
 public class PartnerController extends BaseController {
 
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(PartnerController.class);// log日志
 
 	private PartnerService partnerService;
@@ -116,7 +116,9 @@ public class PartnerController extends BaseController {
 	 * 删除 
 	 */
 	public void delete() {
-		partnerService.delete("pre_jn_partner", getPara() == null ? ids : getPara());//调用partnerService 的删除方法
+		int deleteResult = Db.update("delete from pre_jn_partner where phone = ?", getPara());
+		log.info("【删除(江南币)商品】影响结果：" + deleteResult);
+		//partnerService.delete("pre_jn_partner", getPara() == null ? ids : getPara());//调用partnerService 的删除方法
 		redirect("/jf/platform/partner");// 跳转到当前Controller的index方法上
 	}
 	

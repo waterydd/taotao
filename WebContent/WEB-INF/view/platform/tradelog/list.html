@@ -179,15 +179,15 @@
 										<% } else if(tradeLog["status"] == 1) {%>
 											<span class="label label-success">等待买家付款</span>
 										<% } else if(tradeLog["status"] == 2) {%>
-											<span class="label label-success">交易已创建，等待卖家确认</span>
+											<span class="label label-success">等待卖家确认</span>
 										<% } else if(tradeLog["status"] == 3) {%>
-											<span class="label label-warning">确认买家付款中，暂勿发货</span>
+											<span class="label label-warning">确认付款中</span>
 										<% } else if(tradeLog["status"] == 4) {%>
-											<span class="label label-success">买家已付款，等待卖家发货</span>
+											<span class="label label-success">等待卖家发货</span>
 										<% } else if(tradeLog["status"] == 5) {%>
-											<span class="label label-success">卖家已发货，买家确认中</span>
+											<span class="label label-success">确认收货中</span>
 										<% } else if(tradeLog["status"] == 6) {%>
-											<span class="label label-success">买家确认收到货，等待支付宝打款给卖家</span>
+											<span class="label label-success">等待支付宝打款给卖家</span>
 										<% } else if(tradeLog["status"] == 7) {%>
 											<span class="label label-success">交易成功结束</span>
 										<% } else if(tradeLog["status"] == 8) {%>
@@ -195,17 +195,17 @@
 										<% } else if(tradeLog["status"] == 10) {%>
 											<span class="label label-success">等待卖家同意退款</span>
 										<% } else if(tradeLog["status"] == 11) {%>
-											<span class="label label-success">卖家拒绝买家条件，等待买家修改条件</span>
+											<span class="label label-success">等待买家修改条件</span>
 										<% } else if(tradeLog["status"] == 12) {%>
-											<span class="label label-warning">卖家同意退款，等待买家退货</span>
+											<span class="label label-warning">等待买家退货</span>
 										<% } else if(tradeLog["status"] == 13) {%>
 											<span class="label label-success">等待卖家收货</span>
 										<% } else if(tradeLog["status"] == 14) {%>
-											<span class="label label-success">双方已经一致，等待退款</span>
+											<span class="label label-success">等待退款</span>
 										<% } else if(tradeLog["status"] == 15) {%>
 											<span class="label label-success">退款处理中</span>
 										<% } else if(tradeLog["status"] == 16) {%>
-											<span class="label label-success">中断的退款</span>
+											<span class="label label-success">退款中断</span>
 										<% } else if(tradeLog["status"] == 17) {%>
 											<span class="label label-success">退款成功</span>
 										<% } else if(tradeLog["status"] == 18) {%>
@@ -224,7 +224,7 @@
 										<% if(tradeLog["status"] == 4) {%>
 											<% if(edit == true){ %>
 												<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/tradeLog/edit/${escapeXml(tradeLog['orderid']!)}');"> 
-													确认发货 <i class="fa fa-edit"></i>
+													发货 <i class="fa fa-edit"></i>
 												</button>
 											<% } %>
 										<% } %>

@@ -1,5 +1,6 @@
 package com.platform.mvc.forum;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +73,7 @@ public class HomeTopPostService extends BaseService {
 		if (advertisement.equals(forumname)) {
 			homeTopPost.setForumName(advertisement);
 			homeTopPost.setTid(StringUtil.getStringRandom(7));
+			homeTopPost.setDateline(new Date().getTime() / 1000);
 		}else {
 			ForumThread forumThread = valiSubjectInfo(homeTopPost.getSubject());//调用Service的验证标题是否存在方法
 			Integer fid = forumThread.getFid();

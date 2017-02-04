@@ -32,6 +32,12 @@ var platform_partnertrade_form = function() {
 			toastr.warning("卖家ID必须是非零正整数！");
 			return false;
 		}
+		var display_order = $("#display_order").val();
+		if (display_order == '' || Number(display_order) <= 0 || Number(display_order) >= 8388607)
+		{
+			toastr.warning("显示顺序错误或超出上限！");
+			return false;
+		}
 		
 		if(isAdd){ // 添加  true    
 //			console.log(re2.test(id))

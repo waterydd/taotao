@@ -8,12 +8,11 @@ var platform_order_form = function() {
 	
 	var dataVali = function (form, isAdd){
 		var expressNumber = $("#expressNumber").val();//快递单号
-
+		
 		if(isAdd){ // 添加
 
 		
 		}else{ // 更新
-			
 		}
 		
 		var errorCount = platform_verify.formVali(form);

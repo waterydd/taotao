@@ -11,6 +11,9 @@
 			<% if(!isEmpty(name)){ %>
 					and name like #'%''$name$''%'#
 			<% } %>
+			<% if(!isEmpty(seller_name)){ %>
+					and seller_name like #'%''$seller_name$''%'#
+			<% } %>
 			<% if(!isEmpty(status)){ %>
 					and status = #'$status$'#
 			<% } %>

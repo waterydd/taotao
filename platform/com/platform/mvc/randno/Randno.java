@@ -20,7 +20,7 @@ public class Randno extends BaseModel<Randno> {
 	/**
 	 * 表名
 	 */
-	public static final String table_name = "member_rand_no";
+	public static final String table_name = "pt_trade_no";
 	
 	/**
 	 * 字段描述：ID

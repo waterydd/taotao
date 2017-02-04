@@ -18,7 +18,29 @@ var platform_goods_form = function() {
 	var dataVali = function (form, isAdd){
 		
 		var id = $("#id").val();
-		
+		var re8 = /^[0-9a-zA-z_]+$/g;
+		if(!re8.test(id)){
+			toastr.warning("商品ID 只能是数字和字母！");
+		 	 return false;
+		}
+
+		var inventory = $("#inventory").val();
+		if (Number(inventory) >8388607 || Number(inventory) <0) {
+			 toastr.warning("库存必须为非零正数或长度过长！");
+		 	 return false;
+		}
+		var publisher_id = $("#publisher_id").val();
+		if (publisher_id == '' || Number(publisher_id) <= 0 || Number(publisher_id) >= 8388607)
+		{
+			toastr.warning("发布人编号错误或超出上限！");
+			return false;
+		}
+		var display_order = $("#display_order").val();
+		if (display_order == '' || Number(display_order) <= 0 || Number(display_order) >= 8388607)
+		{
+			toastr.warning("显示顺序错误或超出上限！");
+			return false;
+		}
 		if(isAdd){ // 添加  true    subject =="" &&             ture         true
 			if (id == '' || id == null) {
 				toastr.warning("ID不能为空！");
@@ -37,6 +59,8 @@ var platform_goods_form = function() {
 				 toastr.warning("上传文件不是所需图片类型！");
 			 	 return false;
 			} 
+			 
+		 
 			
 		}else{ // 更新
 			

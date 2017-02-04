@@ -34,7 +34,8 @@ public class GenerateCode {
 	 */
 	public static String[][] tableArr = {
 //		{"ConstantInit.db_dataSource_main", "test_blog", "ids", "TestBlog"}
-		{null, "pre_common_member", "uid", "Members"}
+		{null, "test_blog", "ids", "TestBlog"}
+//		{null, "pre_common_member", "uid", "Members"}
 
 //		{null, "pt_department", null, "Department"},
 //		{null, "pt_dict", null, "Dict"},

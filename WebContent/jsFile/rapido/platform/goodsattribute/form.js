@@ -1,6 +1,6 @@
 /**
  * 商品操作信息验证
- */
+ */platform_goodsattribute_form
 var platform_goodsattribute_form = function() {
 	"use strict";
 	
@@ -9,10 +9,7 @@ var platform_goodsattribute_form = function() {
 	var dataVali = function (form, isAdd){
 
 
-		
-		if(isAdd){ 
-
-			if(isAdd){ // 添加  true    subject =="" &&             ture         true
+		if(isAdd){ // 添加  true    subject =="" &&             ture         true
 
 		} else {
 	

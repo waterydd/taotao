@@ -78,9 +78,9 @@ public class OrderController extends BaseController {
 			Boolean text = order.update();
 			
 			if (text) {
-				msg = "确认发货成功";
+				msg = "发货成功";
 			}else {
-				msg = "确认发货失败！";
+				msg = "发货失败！";
 			}
 		}
 

@@ -202,15 +202,15 @@
 							<% if(order["status"] == "WAIT"){%>
 								<input type="text" class="form-control" readonly="readonly" value="初始状态">
 							<% } else if(order["status"] == "PENDING_SEND"){%>
-								<input type="text" class="form-control" readonly="readonly" value="待发货(支付完成)">
+								<input type="text" class="form-control" readonly="readonly" value="待发货">
 							<% } else if(order["status"] == "SELLER_SENT"){%>
 								<input type="text" class="form-control" readonly="readonly" value="卖家已发货">
 							<% } else if(order["status"] == "TRADE_SUCCESS"){%>
-								<input type="text" class="form-control" readonly="readonly" value="交易成功（结束状态）">
+								<input type="text" class="form-control" readonly="readonly" value="交易成功">
 							<% } else if(order["status"] == "PAY_FAILURE"){%>
 								<input type="text" class="form-control" readonly="readonly" value="支付失败">
 							<% } else if(order["status"] == "PAY_TIME_OUT"){%>
-								<input type="text" class="form-control" readonly="readonly" value="支付超时(24小时没支付)">
+								<input type="text" class="form-control" readonly="readonly" value="支付超时">
 							<% } else if(order["status"] == "CLOSED"){%>
 								<input type="text" class="form-control" readonly="readonly" value="交易关闭">
 							<% } else if(order["status"] == "REFUND"){%>

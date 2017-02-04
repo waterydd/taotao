@@ -48,7 +48,7 @@ public class TradeLogController extends BaseController {
 	}
 	
 	/**
-	 * 确认发货
+	 * 发货
 	 */
 	public void update() {
 		String msg = "";
@@ -68,9 +68,9 @@ public class TradeLogController extends BaseController {
 			Boolean text = tradeLog.update();
 			
 			if (text) {
-				msg = "确认发货成功";
+				msg = "发货成功";
 			}else {
-				msg = "确认发货失败！";
+				msg = "发货失败！";
 			}
 			
 		}

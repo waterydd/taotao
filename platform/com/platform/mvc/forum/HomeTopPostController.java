@@ -12,6 +12,7 @@ import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.imgmanage.Validatecode;
 import com.platform.util.PropertyUtil;
+import com.platform.util.StringUtil;
 
 /**
  * 轮播图帖子管理
@@ -24,7 +25,6 @@ import com.platform.util.PropertyUtil;
 @Controller(controllerKey = "/jf/platform/homeTopPost")
 public class HomeTopPostController extends BaseController {
 	
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(HomeTopPostController.class);
 	
 	private HomeTopPostService homeTopPostService;
@@ -129,31 +129,25 @@ public class HomeTopPostController extends BaseController {
 		}
 		renderText(mark);
 	}
+	
 	/**
 	 * 更新
 	 */
 	public void update() {
-		//UploadFile uf = getFile("image_url2");
 		UploadFile uf = getFileByConfigPath("image_url2", PropertyUtil.getCarouselImgPath());
 		HomeTopPost homeTopPost2 = getModel(HomeTopPost.class);//获取界面穿的参数
 		String tidc = homeTopPost2.getTid().toString();//获取tid
 		// 根据tid 获取原始标题 和新标题对比
 		HomeTopPost homeTopPostOld = HomeTopPost.dao.findById(tidc);
-		String subjectOld= homeTopPostOld.getSubject();
-		String subjectNew= homeTopPost2.getSubject();
+		String subjectOld= StringUtil.getValue(homeTopPostOld.getSubject());
+		String subjectNew= StringUtil.getValue(homeTopPost2.getSubject());
 		
 		// 判断标题是否改动过
 		if (subjectOld.equals(subjectNew)) { // true 为没改动
 			// 走 修改信息
 			String ForumNameNew = homeTopPost2.getForumName();
-			String ForumNameOld = homeTopPostOld.getForumName(); // 获取原始板块名字
-			System.out.println(ForumNameNew.equals(ForumNameOld));
 			// 如果新板块名为空 或者新版块名与老板块名 不一致，就用新板块名
-			if ( ForumNameOld == null || !ForumNameNew.equals(ForumNameOld) ) { 
-				homeTopPost2.setForumName("AD");
-			} else{
-				homeTopPost2.setForumName(ForumNameOld);
-			}
+			homeTopPost2.setForumName(ForumNameNew);
 			
 			if (uf != null) { //当上传的文件不为空
 				String imgpath = uf.getFileName();
@@ -163,43 +157,53 @@ public class HomeTopPostController extends BaseController {
 			homeTopPost2.update();
 			// 每次变动修改pre_common_validatecode 表validate_code字段的值
 			Validatecode validatecode = Validatecode.dao.findById(3);
-			validatecode.setValidate_code(System.currentTimeMillis()+homeTopPost2.getTid()+validatecode.getType());
+			validatecode.setValidate_code(System.currentTimeMillis()+StringUtil.getStringRandom(3)+validatecode.getType());
 			validatecode.update();
 			redirect("/jf/platform/homeTopPost");
 			return;
 		}
-		
-//		*****************************
-		// 走增加新的信息
-		String ForumNameNew = homeTopPost2.getForumName();
-		HomeTopPost HomeTop = homeTopPostService.saveme(homeTopPost2, homeTopPost2.getImage_url());
-		
-		
-		String ForumNameOld = HomeTop.getForumName(); // 获取原始板块名字
-		// 如果新板块名为空 或者新版块名与老板块名 不一致，就用新板块名
-		if ( ForumNameOld == null || !ForumNameNew.equals(ForumNameOld) ) { 
-			HomeTop.setForumName(ForumNameNew);
-		} 
-		
-		if (uf != null) { //当上传的文件不为空
-			HomeTop.setImage_url(uf.getFileName());
+		else
+		{
+			String forumname = homeTopPost2.getForumName();//去界面取到的板块名字
+			String advertisement = "AD";//广告
+			if (advertisement.equals(forumname)) {
+				homeTopPost2.setForumName(advertisement);
+				homeTopPost2.update();
+			}else {
+				ForumThread forumThread = homeTopPostService.valiSubjectInfo(subjectNew);//调用Service的验证标题是否存在方法
+				Integer fid = forumThread.getFid();
+				String sql="select name from pre_forum_forum  where  fid =?";// 查询的sql语句   sqlId_splitFind
+				log.info("查询的sql:"+sql);// 日志打印查询的sql语句
+				ForumForum forum = ForumForum.dao.findFirst(sql,fid);//forumThread.getFid() 取到的fid值
+				HomeTopPost oldhomeHomeTopPost = HomeTopPost.dao.findFirst("select * from pre_common_home_top_post where tid = ?", tidc);
+				String imgUrl = oldhomeHomeTopPost.getImage_url();
+				oldhomeHomeTopPost.delete();
+				HomeTopPost newHomeTopPost = new HomeTopPost();
+				newHomeTopPost.setForumName(forum.getName());
+				newHomeTopPost.setContent(homeTopPost2.getContent());
+				newHomeTopPost.setSubject(forumThread.getSubject());
+				newHomeTopPost.setTid(forumThread.getTid());
+				newHomeTopPost.setAuthor_name(forumThread.getAuthor());
+				newHomeTopPost.setAuthor_id(forumThread.getAuthorid());
+				newHomeTopPost.setDateline(forumThread.getDateline());
+				newHomeTopPost.setViews(forumThread.getViews());
+				newHomeTopPost.setReplies(forumThread.getReplies());
+				if (uf != null) 
+					newHomeTopPost.setImage_url(uf.getFileName());
+				else
+					newHomeTopPost.setImage_url(imgUrl);
+				Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
+				newHomeTopPost.save(pkMap);
+				
+				// 每次变动修改pre_common_validatecode 表validate_code字段的值
+				Validatecode validatecode = Validatecode.dao.findById(3);
+				validatecode.setValidate_code(System.currentTimeMillis()+StringUtil.getStringRandom(3)+validatecode.getType());
+				validatecode.update();
+			}
 		}
-		
-		Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
-		//设置保存主键为空
-		HomeTop.save(pkMap);
-		homeTopPostService.delete("pre_common_home_top_post", tidc);//调用homeTopPostService 的删除方法
-	
-		// 每次变动修改pre_common_validatecode 表validate_code字段的值
-		Validatecode validatecode = Validatecode.dao.findById(3);
-		validatecode.setValidate_code(System.currentTimeMillis()+HomeTop.getTid()+validatecode.getType());
-		validatecode.update();
-		
 	    redirect("/jf/platform/homeTopPost");
-
-
 	}
-
+	
 	/**
 	 * 查看
 	 * 
@@ -220,11 +224,13 @@ public class HomeTopPostController extends BaseController {
 		String ids = getPara();
 		homeTopPostService.delete("pre_common_home_top_post", getPara() == null ? ids : getPara());//调用homeTopPostService 的删除方法
 		Validatecode validatecode = Validatecode.dao.findById(3);
-		validatecode.setValidate_code(System.currentTimeMillis()+ids+validatecode.getType());
+		validatecode.setValidate_code(System.currentTimeMillis()+StringUtil.getStringRandom(3)+validatecode.getType());
 		validatecode.update();
 		
 		redirect("/jf/platform/homeTopPost");// 跳转到当前Controller的index方法上
 		
 	}
-
+	public static void main(String[] args) {
+		System.out.println(System.currentTimeMillis());
+	}
 }

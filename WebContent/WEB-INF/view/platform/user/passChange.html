@@ -4,12 +4,14 @@
 	
 </script>
 
-<div class="modal-header">
+<div class="modal-header" >
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h3>${i18nMap["admin.user.passChange"]}</h3>
+	
 </div>
 
-	<div class="modal-body">
+	<div class="modal-body" style="position:relative;padding-bottom:30px;">
+		<div class="tips" style="width:90%;height:50px;position:absolute;bottom:0;text-align:center;line-height:50px;font-size:14px;color:red;"></div>
 		<form id="passChangeForm" action="${cxt!}/jf/platform/user/passChange" method="POST" role="form" class="form-horizontal">
 			<input type="hidden" id="userName" name="userName" value="${cookieMap.userName.value!}">
 	
@@ -58,12 +60,13 @@
 			var param = {"passWord" : oldPass,"userName" : userName};
 			result = common_ajax.ajaxFunc("/jf/platform/user/valiPassWord", param);
 			if(result=='false'){
-					alert('旧密码不正确，请重新输入！');
+				$('.tips').html('旧密码不正确，请重新输入！');
 					oldTure=false;
 					$('#submit-sure').attr('disabled','disabled');
 					
 			}else{
 				oldTure=true;
+				$('.tips').html('');
 				if(oldTure&&newTure){
 					   $('#submit-sure').removeAttr('disabled').bind('click',passChange);
 				   }else{
@@ -83,10 +86,11 @@
 					toastr.warning("有" + errorCount + "处错误，请修正！");
 				}else{
 					 if(newPass1 != newPass2 && newPass2){
-							alert("两次输入密码不一致，请从新输入！");
+						 $('.tips').html("两次输入密码不一致，请从新输入！");
 							$('#submit-sure').attr('disabled','disabled');
 							return false;
 						}
+					 $('.tips').html("");
 					newTure=true;
 					if(oldTure&&newTure){
 						   $('#submit-sure').removeAttr('disabled').bind('click',passChange);
@@ -96,8 +100,8 @@
 				}
 		   /* } */
 	   }
-	   $("#newPass2").blur(newPass);
-	   $("#newPass1").blur(newPass);
+	   $("#newPass2").off().blur(newPass);
+	   $("#newPass1").off().blur(newPass);
 	   
 	   function passChange(){
 		   
@@ -105,7 +109,7 @@
 			
 			common_ajax.ajaxForm("passChangeForm");
 		}
-		console.log(oldTure + ' '+newTure)
+		
 	   
 	   
 		var x = "${result!}";

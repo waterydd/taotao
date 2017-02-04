@@ -43,7 +43,7 @@ var platform_forum_form = function() {
 		if(isAdd){ // 添加  true    subject =="" &&             ture         true
 			if (forumName != "AD") {
 				if (subject == '' || subject == null) {
-					alert("标题不能为空！");
+					toastr.warning("标题不能为空！");
 					return false;
 				}
 				if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
@@ -68,12 +68,26 @@ var platform_forum_form = function() {
 			} 
 			
 		}else{ // 更新
-			if (subject == '' || subject == null) {
-				alert("标题不能为空！");
-				return false;
+			if (forumName != "AD") {
+				if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
+					toastr.warning("此文章的标题 不存在！");
+			 		return false;
+				}
+				if (subject == null || subject == '') {
+					toastr.warning("标题不能为空！");
+					return false;
+				}
+				
 			}
-			if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
+			
+			/*if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
 				toastr.warning("此文章的标题 不存在！");
+		 		return false;
+			}*/
+			var content = $("#content").val();
+			if (forumName == 'AD' && content == '')
+			{
+				toastr.warning("板块名为AD时，内容不能为空！");
 		 		return false;
 			}
 			// 这里就是 判断为增加 还是修改的分界线

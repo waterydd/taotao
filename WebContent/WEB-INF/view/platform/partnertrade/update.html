@@ -69,7 +69,7 @@
 						</div>
 						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请选择商品详细分类 </span>
 					</div> -->
-					
+					<input type="hidden" id="pro-value" value="${escapeXml(partnerTrade.classify!)}"/>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">商品分类</label>
 						<div class="col-sm-5">
@@ -78,32 +78,20 @@
 								<option value="2" >好书</option>
 							</select>
 						
-							<select name="partnerTrade.classify" class="combox selectBox">
+							<select name="partnerTrade.classify" class="combox selectBox" id="selectBox">
+							
 								<option value="1" >简餐</option>
 								<option value="2" >套餐</option>
 								<option value="3" >小吃</option>
 								<option value="4" >茶饮</option>
 							</select>
 							<select name="partnerTrade.classify" class="combox selectBox" style="display:none;">
-								<option value="" >全部</option>
+								<option value="" ></option>
 							</select>
 							</div>
 						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请重新选择商品分类</span>
 					</div>
 										
-					<!-- <div class="form-group">
-						<label class="col-sm-2 control-label">商品大分类</label>
-						<div class="col-sm-5">
-							<select name="partnerTrade.goods_type" class="combox">
-								<option value="1" >美食</option>
-								<option value="2" >好书</option>
-							</select>
-							<input type="text" id="goods_type" name="partnerTrade.goods_type" value="${escapeXml(partnerTrade.goods_type!)}" 
-								class="form-control" maxlength="20" vMin="1" vType="floatZ" onblur="platform_verify.onblurVali(this);">
-						</div>
-						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请选择商品大分类</span>
-					</div> -->
-					
 					<div class="form-group">
 						<label class="col-sm-2 control-label">库存</label>
 						<div class="col-sm-5">
@@ -182,7 +170,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">商品图片地址</label>
 						<div class="col-sm-5">
-							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(partnerTrade.img_url!)}">
+							<input type="text" class="form-control" id="img-url" readonly="readonly" value="${escapeXml(partnerTrade.img_url!)}">
 						</div>
 					</div>
 					
@@ -229,7 +217,11 @@
 								$select.eq(0).hide();
 								$select.eq(1).show();
 							}
-						})
+						});
+						 $('#selectBox').val($('#pro-value').val());
+						 /*var proImgUrl=$('#img-url').val();
+						$('#preview').append('<img src="../../../../f:\temp\startimg\goodsImg\'+ proImgUrl +'" />'); */
+						
 					</script>
 					
 					<div class="form-actions">

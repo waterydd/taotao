@@ -116,6 +116,7 @@ public class LoginController extends BaseController {
 		// 如果是httpclient登陆就不处理验证码，不用担心密码暴力破解，因为init文件有密码错误次数限制
 		if(null != returnJson && !returnJson.isEmpty()){
 			int result = loginService.login(getRequest(), getResponse(), username, password, false);
+			log.info("【登录执行结果】" + result);
 			if(result == ConstantLogin.login_info_3){ // 登陆验证成功
 				renderText("success");
 				return;

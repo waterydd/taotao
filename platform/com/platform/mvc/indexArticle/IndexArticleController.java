@@ -42,7 +42,7 @@ public class IndexArticleController extends BaseController {
 			if (totalRow % pageSize != 0) 
 				totalPage++;
 			splitPage.setTotalPage(totalPage);
-			splitPage.setList(transfer2ListVo(IndexArticle.dao.find("SELECT id, forum_id, `subject`, type, article_id, article_create_datetime FROM pre_index_article WHERE forum_id = ? LIMIT ?,?", id, splitPage.getPageNumber(), splitPage.getPageSize())));
+			splitPage.setList(transfer2ListVo(IndexArticle.dao.find("SELECT id, forum_id, `subject`, type, article_id, article_create_datetime FROM pre_index_article WHERE forum_id = ? LIMIT ?,?", id, (splitPage.getPageNumber() - 1) * splitPage.getPageSize() , splitPage.getPageSize())));
 			splitPage.compute();
 			indexForum = IndexForum.dao.findById(id);
 		} catch (Exception e) {

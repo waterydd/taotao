@@ -223,6 +223,16 @@ public class PropertyUtil {
 	}
 	
 	/**
+	 * 广告图片获取远程地址
+	 * @return
+	 * 2017年2月23日 下午3:12:02
+	 */
+	public static String getAdImgGetRemoteUrl()
+	{
+		return oss.get("ad.img.get.remoteUrl");
+	}
+	
+	/**
 	 * 音频图片本地路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02

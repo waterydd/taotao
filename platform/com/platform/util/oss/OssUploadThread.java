@@ -3,6 +3,8 @@
  */
 package com.platform.util.oss;
 
+import java.io.File;
+
 
 /**
  * 【上传图片】线程
@@ -28,6 +30,10 @@ public class OssUploadThread implements Runnable {
 	@Override
 	public void run() {
 		OssUtil.uploadLocalFile(localFilePath, remoteFilePath + remoteFileName);
+		//用完后删除
+		File file = new File(localFilePath);
+		if (file.exists())
+			file.delete();
 	}
 		
 }

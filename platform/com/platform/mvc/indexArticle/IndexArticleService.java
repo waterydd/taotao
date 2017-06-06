@@ -11,6 +11,7 @@ import com.platform.mvc.fm.Fm;
 import com.platform.mvc.forum.ForumThread;
 import com.platform.mvc.question.Question;
 import com.platform.util.DateUtil;
+import com.platform.util.PropertyUtil;
 import com.platform.util.StringUtil;
 
 /**
@@ -104,7 +105,7 @@ public class IndexArticleService {
 		indexArticle.setType(IndexArticleConstant.AD);
 		String now = DateUtil.getTodayStrUseFormat(DateUtil.TOTAL_DATE_TIME_SSS);
 		indexArticle.setCreateDatetime(now);
-		indexArticle.setImgUrl(imgUrl);
+		indexArticle.setImgUrl(PropertyUtil.getAdImgGetRemoteUrl() + imgUrl);
 		indexArticle.setUpdateDatetime(now);
 		indexArticle.setDisplayOrder(reqIndexArticle.getDisplayOrder());
 		indexArticle.setArticleId("-1");//-1标识不存在

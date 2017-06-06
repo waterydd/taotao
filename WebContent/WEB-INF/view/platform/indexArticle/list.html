@@ -1,0 +1,107 @@
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">板块详细内容列表</li>
+		</ol>
+	</div>
+</div>
+						
+<form id="splitPage" action="${cxt!}/jf/platform/indexArticle" method="POST" role="form" class="form-horizontal">
+	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">【${forumName}】板块详细内容列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var delete = authUrl("/jf/platform/indexArticle/delete");
+				%>
+				
+				<div class="panel-body" style="height:400px;overflow:auto;">	
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(authUrl("/jf/platform/indexArticle/addSkip")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/indexArticle/addSkip/${result!}');">
+									增加内容 <i class="fa fa-plus"></i>
+								</button>
+							<% } %>	
+						</div>
+						
+					</div>
+					<table class="table table-bordered table-hover" id="dataTable" >
+						<thead>
+							<tr align="center">
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									 编号
+								</th>
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									标题
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									类型
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									文章内容编号
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									创建日期
+								</th>
+								<th class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(article in splitPage.list){ %>
+								<tr>
+									<td align="center">${escapeXml(article["id"]!)}</td>
+									<td align="center">${escapeXml(article["subject"]!)}</td>
+									<td align="center">
+									<% if(article["type"] == "question"){%>问答
+										<% } else if(article["type"] == "INVESTMENT"){%>投资
+										<% } else if(article["type"] == "fm"){%>音频
+										<% } else if(article["type"] == "post"){%>帖子
+										<% } else if(article["type"] == "investment"){%>投资
+										<% } else if(article["type"] == "ad"){%>广告
+										<% } %>
+									<td align="center">${escapeXml(article["articleId"]!)}</td>
+									<td align="center">${escapeXml(article["createDatetime"]!)}</td>
+									<td align="center">
+										<button type="button" class="btn btn-red delete-row" data-bb="deleteOne" data-url="/jf/platform/indexArticle/delete/${escapeXml(article['forumId']!)}-${escapeXml(article['id']!)}"> 
+											${i18nMap["admin.common.delete"]} <i class="fa fa-trash-o"></i>
+										</button>
+									</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>			
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

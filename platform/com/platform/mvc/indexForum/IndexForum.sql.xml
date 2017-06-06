@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.indexForum"> <!-- OK！ -->
+
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_index_forum
+		where 1=1 
+			<% if(!isEmpty(name)){ %>
+					and name like #'%''$name$''%'#
+			<% } %>
+			<% if(!isEmpty(fid)){ %>
+					and fid like #'%''$fid$''%'#
+			<% } %>
+			<% if(!isEmpty(type)){ %>
+					and type = #'$type$'#
+			<% } %>
+			order by display_order asc
+		]]>
+	</sql>
+
+</sql-statement>

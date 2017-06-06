@@ -1,11 +1,13 @@
 package com.platform.mvc.tradelog;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
 
 import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
+import com.platform.mvc.Express.Express;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 
@@ -41,10 +43,27 @@ public class TradeLogController extends BaseController {
 	 * 准备更新
 	 */
 	public void edit() {
+		String sql = "select name from pre_kuaidi order by display_order asc";
 		TradeLog tradeLog = TradeLog.dao.findById(getPara());//根据ID查询信息
-		setAttr("tradeLog", tradeLog);//将查询到的信息给界面
 		
+		ArrayList<Express> expressList = (ArrayList<Express>) Express.dao.find(sql);
+		
+		setAttr("expressList", expressList);
+		
+		setAttr("tradeLog", tradeLog);//将查询到的信息给界面
 		render("/platform/tradelog/update.html");// 返回一个界面修改界面
+	}
+	
+	/**
+	 * 动态取数据库里快递名字
+	 * /jf/platform/tradeLog/dynamicName
+	 * 
+	 */
+	public void dynamicName() {
+		String sql = "select name from pre_kuaidi order by display_order asc";
+		
+		ArrayList<Express> expressList = (ArrayList<Express>) Express.dao.find(sql);
+		renderJson(expressList);
 	}
 	
 	/**

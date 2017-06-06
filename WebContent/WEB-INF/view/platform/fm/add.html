@@ -1,0 +1,116 @@
+<style type="text/css">  
+	 #preview, .img, .imgg {  width:375px; height:268px;}  
+	 #preview { border:1px solid #000; }  
+ </style>
+ 
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/fm');">音频列表</a></li>
+			<li class="active">音频录入</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">音频录入</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form id="editForm" action="${cxt!}/jf/platform/fm/save" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+					
+					<input type="hidden" value="" id="source_file_name" name="fm.source_file_name">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">音频标题</label>
+						<div class="col-sm-5">
+							<input type="text" id="subject" name="fm.subject" value="${escapeXml(fm.subject!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入音频标题</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">音频类型</label>
+						<div class="col-sm-5">
+							<input type="text" id="type" name="fm.type" value="${escapeXml(fm.type!)}" 
+								class="form-control" maxlength="20" vMin="1" vType="floatZ" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入音频类型描述(汉字) </span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">上传音频图片</label>
+						<div class="col-sm-3">
+							<input type="file" id="image_url" name="image_url" onchange="preview(this)" />  
+						</div>
+						 <i class="fa fa-info-circle"></i>类型为 gif,jpg,jpeg,bmp,png </span>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">图片预览</label>
+						 <div class="col-sm-4">
+							<div id="preview"></div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">上传音频文件</label>
+						<div class="col-sm-3">
+							<input type="file" id="record_url" name="record_url"  />  
+						</div>
+						 <i class="fa fa-info-circle"></i>类型为：mp3、mp4 </span>
+					</div>
+
+
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/fm/fm.js"></script>	
+
+
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+						/* ************************************ */
+						function preview(file) {  
+						 var prevDiv = document.getElementById('preview');  
+						 if (file.files && file.files[0]) {  
+							 var reader = new FileReader();  
+							 reader.onload = function(evt){  
+							 	prevDiv.innerHTML = '<img class="imgg" src="' + evt.target.result + '" />';  
+							}    
+							 reader.readAsDataURL(file.files[0]);
+						  } else {  
+							 	prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';  
+							 }  
+						 } 
+						/* *************************************** */
+					
+						
+					  /* ***************************************************** */
+					</script>
+					
+					
+					
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/platform/fm/save")){ %>
+									<button type="button" class="btn btn-red" onclick="platform_fm.submitValiFunc(this.form,true);">
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+								
+							<% } %>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

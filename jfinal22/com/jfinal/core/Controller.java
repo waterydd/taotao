@@ -767,6 +767,17 @@ public abstract class Controller {
 		return ((MultipartRequest)request).getFiles();
 	}
 	
+	/**
+	 * 自己新增方法
+	 * @param uploadPath
+	 * @return
+	 */
+	public List<UploadFile> getFileByConfigPath(String uploadPath, int maxPostSize) {
+		if (request instanceof MultipartRequest == false)
+			request = new MultipartRequest(request, uploadPath,maxPostSize);
+		return ((MultipartRequest)request).getFiles();
+	}
+	
 	public UploadFile getFile(String parameterName, String uploadPath) {
 		getFiles(uploadPath);
 		return getFile(parameterName);
@@ -781,6 +792,11 @@ public abstract class Controller {
 
 	public UploadFile getFileByConfigPath(String parameterName, String uploadPath) {
 		getFileByConfigPath(uploadPath);
+		return getFile(parameterName);
+	}
+	
+	public UploadFile getFileByConfigPathByMaxPostSize(String parameterName, String uploadPath) {
+		getFileByConfigPath(uploadPath, 104857600);
 		return getFile(parameterName);
 	}
 	

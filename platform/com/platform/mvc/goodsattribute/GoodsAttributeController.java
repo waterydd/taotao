@@ -64,7 +64,7 @@ public class GoodsAttributeController extends BaseController {
 		
 		redirect("/jf/platform/goodsattribute");
 	}
-	
+
 	
 	/**
 	 * /jf/platform/goodsattribute/edit

@@ -1,9 +1,5 @@
 package com.platform.mvc.partnertrade;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 
 import com.jfinal.aop.Before;
@@ -14,15 +10,12 @@ import com.platform.annotation.Controller;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
-import com.platform.mvc.randno.Randno;
 import com.platform.util.PropertyUtil;
 
 @Controller(controllerKey = "/jf/platform/partnerTrade")
 public class PartnerTradeController extends BaseController {
 	
-	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(PartnerTradeController.class);
-	
 	private PartnerTradeService partnerTradeService;
 	
 	/**
@@ -55,24 +48,18 @@ public class PartnerTradeController extends BaseController {
 	public void save() {
 		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getGoodsImgPath()); // 读取上传的图片文件
 		String imgpath = uf.getFileName();
-		//取出pt_trade_no 表的rand_num字段的最大值 并且在is_use = 0时 【0代表未用】
-		String sql ="select * from pt_trade_no where is_use = 0 ORDER BY rand_num LIMIT 0,1 for update";
-		Randno randno = Randno.dao.findFirst(sql);
-		randno.setIs_use(true);
-		boolean updateResult = randno.update();
-		log.info("【更新randNum为不可用】执行结果" + updateResult);
-		PartnerTrade partnerTrade = getModel(PartnerTrade.class);
-
-		partnerTrade.setId("-"+randno.getRand_num());
-		if ("2".equals(partnerTrade.getGoods_type())) {
-			partnerTrade.setClassify("");
-		}
-
-		partnerTrade.setImg_url(imgpath);//存入商品图片地址
-		Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
+		final String IS_TRUE = "增加成功！";
 		
-		partnerTrade.save(pkMap);//设置保存主键为空
-		redirect("/jf/platform/partnerTrade");
+		PartnerTrade partnerTrade = getModel(PartnerTrade.class);
+		String info = partnerTradeService.saveServer(imgpath, partnerTrade);
+		
+		if (IS_TRUE.equals(info)) { //成功就跳转
+			redirect("/jf/platform/partnerTrade");
+			return;
+		}
+		setAttr("partnerTrade", partnerTrade);
+		setAttr("result", info).render("/platform/partnertrade/add.html");
+		
 	}
 	
 	
@@ -94,16 +81,16 @@ public class PartnerTradeController extends BaseController {
 	public void update() {
 		UploadFile uf = getFileByConfigPath("image_url2", PropertyUtil.getGoodsImgPath()); // 读取上传的图片文件
 		PartnerTrade partnerTrade = getModel(PartnerTrade.class);//获取界面穿的参数
-		if ("2".equals(partnerTrade.getGoods_type())) {
-			partnerTrade.setClassify("");
-		}
-		if (uf != null) { //当上传的文件不为空
-			String imgpath = uf.getFileName();
-			partnerTrade.setImg_url(imgpath);
-		}
-		partnerTrade.update();
 		
-	    redirect("/jf/platform/partnerTrade");
+		final String IS_TRUE = "修改成功！";
+		String info = partnerTradeService.updateServer(uf, partnerTrade);
+		
+		if (IS_TRUE.equals(info)) { //成功就跳转
+			redirect("/jf/platform/partnerTrade");
+			return;
+		}
+		setAttr("partnerTrade", partnerTrade);
+		setAttr("result", info).render("/platform/partnertrade/update.html");
 	}
 	
 	/**

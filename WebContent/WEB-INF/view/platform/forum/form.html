@@ -14,12 +14,22 @@
 <div class="form-group">
 	<label class="col-sm-2 control-label">板块是否为广告</label>
 	<div class="col-sm-6">
-		<select id="forumName" name="homeTopPost.forumName" class="combox">
+		<select id="forumName" name="homeTopPost.forumName" class="combox" >
+			<option value="QUESTION" >问答</option>
 			<option value="AD" >广告</option>
 			<option value="1" >非广告</option>
 		</select>
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请选择板块是否为广告</span>
+</div>
+
+<div class="form-group">
+	<label class="col-sm-2 control-label">问题编号</label>
+	<div class="col-sm-6">
+		<input type="text" id="tid" name="homeTopPost.tid" value="${escapeXml(homeTopPost.tid!)}" 
+			class="form-control" maxlength="35" >
+	</div>
+	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入问题编号 </span>
 </div>
  	
 <div class="form-group">
@@ -35,7 +45,8 @@
 	<label class="col-sm-2 control-label">內容</label>
 	<div class="col-sm-6">
 		<input type="text" id="subject" name="homeTopPost.content" value="${escapeXml(homeTopPost.content!)}" 
-			class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			class="form-control" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+			<!-- class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);"> -->
 	</div>
 	<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请输入內容 </span>
 </div>
@@ -60,6 +71,20 @@
 
 
 <script type="text/javascript">
+
+	$('#forumName').on('change', function(){
+		var forumName = $(this).val();
+		if (forumName != 'QUESTION')
+		{
+			$('#tid').attr('disabled', 'disabled');
+		}
+		else
+		{
+			$('#tid').attr('disabled', false);
+		}
+	});
+
+
 	jQuery(document).ready(function() {
 		common_form.init();
 	});

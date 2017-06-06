@@ -1,5 +1,6 @@
 package com.platform.mvc.forum;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.imgmanage.Validatecode;
 import com.platform.util.PropertyUtil;
 import com.platform.util.StringUtil;
+import com.platform.util.oss.OssUploadThread;
 
 /**
  * 轮播图帖子管理
@@ -41,27 +43,34 @@ public class HomeTopPostController extends BaseController {
 
 	/**
 	 * 保存
-	 * 
 	 */
 	public void save() {
-		
-		//UploadFile uf = getFile("image_url");// 读取上传的图片文件
-		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getCarouselImgPath());
-		String imgpath = uf.getFileName();
-		HomeTopPost homeTopPost = getModel(HomeTopPost.class);
-		if (homeTopPost.getContent() == null || "".equals(homeTopPost.getContent())) {
-			return;
+		try {
+			//UploadFile uf = getFile("image_url");// 读取上传的图片文件
+			UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getCarouselImgPath());
+			String imgpath = uf.getFileName();
+//			new Thread(new OssUploadThread(imgpath, imgTotalPath, PropertyUtil.getAdImgUploadRemotePath())).start();
 			
+			
+			
+			HomeTopPost homeTopPost = getModel(HomeTopPost.class);
+			
+			if (homeTopPost.getContent() == null || "".equals(homeTopPost.getContent())) {
+				return;
+			}
+			HomeTopPost HomeTop = homeTopPostService.saveme(homeTopPost, imgpath);
+			Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
+			//设置保存主键为空
+			HomeTop.save(pkMap);
+			
+			// 每次变动修改pre_common_validatecode 表validate_code字段的值
+			Validatecode validatecode = Validatecode.dao.findById(3);
+			validatecode.setValidate_code(System.currentTimeMillis()+validatecode.getType());
+			validatecode.update();
+		} catch (Exception e) {
+			log.error("【保存】homeTopPost，出现异常",e);
+			e.printStackTrace();
 		}
-		HomeTopPost HomeTop = homeTopPostService.saveme(homeTopPost, imgpath);
-		Map<String,Object> pkMap=new HashMap<String,Object>();// 创建一个 HashMap的容器
-		//设置保存主键为空
-		HomeTop.save(pkMap);
-		
-		// 每次变动修改pre_common_validatecode 表validate_code字段的值
-		Validatecode validatecode = Validatecode.dao.findById(3);
-		validatecode.setValidate_code(System.currentTimeMillis()+validatecode.getType());
-		validatecode.update();
 		
 	    redirect("/jf/platform/homeTopPost");
 
@@ -167,6 +176,15 @@ public class HomeTopPostController extends BaseController {
 			String forumname = homeTopPost2.getForumName();//去界面取到的板块名字
 			String advertisement = "AD";//广告
 			if (advertisement.equals(forumname)) {
+				
+				//新增时 如果forumName 为AD 则加入那四个的默认值
+				homeTopPost2.setAuthor_name("社区小编001");//作者名字
+				homeTopPost2.setAuthor_id(22309);// 作者 ID
+				homeTopPost2.setReplies(0);
+				homeTopPost2.setViews((long) 0);
+				
+				
+			
 				homeTopPost2.setForumName(advertisement);
 				homeTopPost2.update();
 			}else {
@@ -182,7 +200,7 @@ public class HomeTopPostController extends BaseController {
 				newHomeTopPost.setForumName(forum.getName());
 				newHomeTopPost.setContent(homeTopPost2.getContent());
 				newHomeTopPost.setSubject(forumThread.getSubject());
-				newHomeTopPost.setTid(forumThread.getTid());
+				newHomeTopPost.setTid(forumThread.getTid() + "");
 				newHomeTopPost.setAuthor_name(forumThread.getAuthor());
 				newHomeTopPost.setAuthor_id(forumThread.getAuthorid());
 				newHomeTopPost.setDateline(forumThread.getDateline());
@@ -230,7 +248,10 @@ public class HomeTopPostController extends BaseController {
 		redirect("/jf/platform/homeTopPost");// 跳转到当前Controller的index方法上
 		
 	}
+	
 	public static void main(String[] args) {
-		System.out.println(System.currentTimeMillis());
+//		System.out.println(System.currentTimeMillis());
+		System.out.println(new Date());
 	}
+	
 }

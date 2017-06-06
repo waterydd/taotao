@@ -1,9 +1,7 @@
 package com.platform.mvc.base;
 
 import java.lang.reflect.Field;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +15,6 @@ import com.jfinal.plugin.activerecord.TableMapping;
 import com.platform.constant.ConstantRender;
 import com.platform.tools.ToolRandoms;
 import com.platform.tools.ToolSqlXml;
-
-import oracle.sql.TIMESTAMP;
 
 /**
  * Model基础类
@@ -298,32 +294,4 @@ public abstract class BaseModel<M extends Model<M>> extends Model<M> {
 		return super.update();
 	}
 
-	/**
-	 * 针对Oracle做特殊处理
-	 * @param attr
-	 * @return
-	 */
-	@Override
-	public Date getDate(String attr) {
-		Object obj = this.get(attr);
-		if(null == obj){
-			return null;
-		}
-		
-		if (TIMESTAMP.class.isAssignableFrom(obj.getClass())){
-			TIMESTAMP ts = (TIMESTAMP) obj;
-			
-			Date date = null;
-			try {
-				date = ts.timestampValue();
-			} catch (SQLException e) {
-				return null;
-			}
-			
-			return date;
-		}
-		
-		return (Date) obj;
-	}
-	
 }

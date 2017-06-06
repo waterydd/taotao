@@ -41,7 +41,7 @@ var platform_forum_form = function() {
 		
 
 		if(isAdd){ // 添加  true    subject =="" &&             ture         true
-			if (forumName != "AD") {
+			if (forumName != "AD" && forumName != 'QUESTION') {
 				if (subject == '' || subject == null) {
 					toastr.warning("标题不能为空！");
 					return false;
@@ -54,7 +54,6 @@ var platform_forum_form = function() {
 					toastr.warning("此文章的标题 已存在！");
 			 		return false;
 				}
-
 			}
 
 
@@ -68,7 +67,7 @@ var platform_forum_form = function() {
 			} 
 			
 		}else{ // 更新
-			if (forumName != "AD") {
+			if (forumName != "AD" && forumName != 'QUESTION') {
 				if(valiSubjectInfo(subject) == "false"){  //  真||假  一真为真  &&   一假为假
 					toastr.warning("此文章的标题 不存在！");
 			 		return false;
@@ -106,8 +105,6 @@ var platform_forum_form = function() {
 				 	 return false;
 				} 
 			}
-			
-			
 		}
 		
 		var errorCount = platform_verify.formVali(form);

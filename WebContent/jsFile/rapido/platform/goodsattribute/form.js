@@ -1,6 +1,6 @@
 /**
  * 商品操作信息验证
- */platform_goodsattribute_form
+ */
 var platform_goodsattribute_form = function() {
 	"use strict";
 	

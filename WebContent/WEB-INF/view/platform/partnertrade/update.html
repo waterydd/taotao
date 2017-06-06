@@ -1,3 +1,10 @@
+<script type="text/javascript">
+			var cxt = "${cxt!}";
+			var x = "${result!}";
+			if (x != null && x != '') { 
+				toastr.warning(x);
+			}
+</script>
 <style type="text/css">  
 	 #preview, .img, .imgg {  width:375px; height:268px;}  
 	 #preview { border:1px solid #000; }  
@@ -69,17 +76,17 @@
 						</div>
 						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i> 请选择商品详细分类 </span>
 					</div> -->
-					<input type="hidden" id="pro-value" value="${escapeXml(partnerTrade.classify!)}"/>
+					<input type="hidden" id="pro-value2" value="${escapeXml(partnerTrade.classify!)}"/>
+					<input type="hidden" id="pro-value1" value="${escapeXml(partnerTrade.goods_type!)}"/>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">商品分类</label>
 						<div class="col-sm-5">
-							<select name="partnerTrade.goods_type" class="combox selectBox1">
+							<select name="partnerTrade.goods_type" class="combox selectBox1" id="selectBox1">
 								<option value="1" >美食</option>
 								<option value="2" >好书</option>
 							</select>
 						
-							<select name="partnerTrade.classify" class="combox selectBox" id="selectBox">
-							
+							<select name="partnerTrade.classify" class="combox selectBox" id="selectBox2">
 								<option value="1" >简餐</option>
 								<option value="2" >套餐</option>
 								<option value="3" >小吃</option>
@@ -211,14 +218,19 @@
 						var $select=$('.selectBox');
 						$('.selectBox1').on('change',function(){
 							if($(this).val()=='1'){
-								$select.eq(0).show();
+								$select.eq(0).val('1').show();
 								$select.eq(1).hide();
 							}else if($(this).val()=='2'){
 								$select.eq(0).hide();
 								$select.eq(1).show();
 							}
 						});
-						 $('#selectBox').val($('#pro-value').val());
+						 $('#selectBox2').val($('#pro-value2').val());
+						 $('#selectBox1').val($('#pro-value1').val());
+						 if($('#pro-value1').val()=='2'){
+							 $select.eq(0).hide();
+							 $select.eq(1).show();
+						 } 
 						 /*var proImgUrl=$('#img-url').val();
 						$('#preview').append('<img src="../../../../f:\temp\startimg\goodsImg\'+ proImgUrl +'" />'); */
 						

@@ -16,7 +16,7 @@
 			
 			<div class="panel-heading">
 				<h4 class="panel-title"><span class="text-bold">发货</span></h4>
-				<div class="panel-tools">										
+				<div class="panel-tools">								
 					<% include("/common/panel-tools.html"){} %>
 				</div>
 			</div>
@@ -64,28 +64,11 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">快递公司</label>
 						<div class="col-sm-4">
-							<select name="express" class="combox">
-									<option value="中通" >中通</option>
-									<option value="顺丰" >顺丰</option>
-									<option value="申通" >申通</option>
-									<option value="圆通速递" >圆通速递</option>
-									<option value="韵达快运" >韵达快运</option>
-									<option value="德邦物流" >德邦物流</option>
-									<option value="ems快递" >ems快递</option>
-									<option value="快捷速递" >快捷速递</option>
-									<option value="天天快递" >天天快递</option>
-									<option value="如风达" >如风达</option>
-									<option value="安捷快递" >安捷快递</option>
-									<option value="国通快递" >国通快递</option>
-									<option value="宅急送" >宅急送</option>
-									<option value="安信达快递" >安信达快递</option>
-									<option value="中邮物流" >中邮物流</option>
-									<option value="联邦快递（国内）" >联邦快递（国内）</option>
+							<select name="express" class="combox1">
+							
 							</select>
-							<!-- <input type="text" id="express" name="express" value="${escapeXml(tradeLog.express!)}" 
-								class="form-control" maxlength="50" vMin="2" vType="text" onblur="platform_verify.onblurVali(this);"> -->
 						</div>
-						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>输入发货快递公司名 </span>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>选择发货快递公司名 </span>
 					</div>
 					
 					<div class="form-group">
@@ -105,6 +88,20 @@
 					<script type="text/javascript">
 						jQuery(document).ready(function() {
 							common_form.init();
+						});
+						
+						$.ajax({
+							type:"post",
+							url: "/jf/platform/tradeLog/dynamicName", 
+							/* url: "/jxsqAdm/jf/platform/tradeLog/dynamicName", */
+							async:true,
+							success:function(data){
+								var str='';
+								for(var i=0;i<data.length;i++){
+									str+='<option value="'+ data[i].name +'">'+ data[i].name +'</option>';
+								}
+								$('.combox1').append(str);
+							}
 						});
 					</script>
 					

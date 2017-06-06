@@ -1,0 +1,6 @@
+2017-02-16 10:07:17.065 [] [] INFO [main] <ToolMail.java [62] - sendTextMail> <发送文本邮件>
+2017-02-16 10:10:30.317 [] [] INFO [main] <ToolMail.java [62] - sendTextMail> <发送文本邮件>
+2017-02-16 10:12:15.473 [] [] INFO [main] <ToolMail.java [62] - sendTextMail> <发送文本邮件>
+2017-02-16 10:24:30.450 [] [] INFO [main] <ToolMail.java [62] - sendTextMail> <发送文本邮件>
+2017-02-16 10:24:32.127 [] [] ERROR [Thread-1] <ToolMail.java [265] - sendTextMail> <发送文本邮件异常：554 DT:SPM 163 smtp13,EcCowACXvyNfDaVY17f_Ig--.18894S2 1487211873,please see http://mail.163.com/help/help_spam_16.htm?ip=183.129.199.162&hostid=smtp13&time=1487211873
+>

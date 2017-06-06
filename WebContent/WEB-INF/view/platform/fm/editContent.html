@@ -1,0 +1,158 @@
+
+    <script type="text/javascript">
+	var cxt = "${cxt!}";
+	var x = "${result!}";
+	if (x != null && x != '') {
+		toastr.warning(x);
+	}
+</script>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="${cxt!}/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript">
+			
+		function getContent() {
+	        return UE.getEditor('editor').getContent();
+	    }
+		
+		function validateInput()
+		{
+			
+		}
+	</script>
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#"
+				onclick="common_ajax.ajaxMainPanel('/jf/platform/found/content');">主页</a></li>
+			<li><a href="#"
+				onclick="common_ajax.ajaxMainPanel('/jf/platform/fm');">音频列表</a></li>
+			<li class="active">信息录入</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="text-bold">信息录入</span>
+				</h4>
+				<div class="panel-tools"><%
+					include("/common/panel-tools.html"){} %></div>
+			</div>
+
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/fm/updateContent"
+					method="POST" role="form" class="form-horizontal" >
+			<input type="hidden" id="content" name="fm.content" value="${escapeXml(fm.content!)}">
+				
+				<input type="hidden" id="id" name="fm.id" value="${escapeXml(fm.id!)}">
+				    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<button type="button" class="btn btn-red" onclick="platform_fm.submitValiFunc(this.form,true);">
+								${i18nMap["admin.common.submit"]} <i
+									class="fa fa-arrow-circle-right"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+
+var ue = UE.getEditor('editor', {
+	toolbars: [
+	           [
+	               'undo', //撤销
+	               'bold', //加粗
+	               'indent', //首行缩进
+	               'italic', //斜体
+	               'underline', //下划线
+	               'strikethrough', //删除线
+	               'fontborder', //字符边框
+	               'formatmatch', //格式刷
+	               'pasteplain', //纯文本粘贴模式
+	               'selectall', //全选
+	               'removeformat', //清除格式
+	               'time', //时间
+	               'date', //日期
+	               'cleardoc', //清空文档
+	               'fontfamily', //字体
+	               'fontsize', //字号
+	               'link', //超链接
+	               'justifyleft', //居左对齐
+	               'justifyright', //居右对齐
+	               'justifycenter', //居中对齐
+	               'justifyjustify', //两端对齐
+	               'forecolor', //字体颜色
+	               'backcolor', //背景色
+	               'insertorderedlist', //有序列表
+	               'insertunorderedlist', //无序列表
+	               'directionalityltr', //从左向右输入
+	               'directionalityrtl', //从右向左输入
+	               'rowspacingtop', //段前距
+	               'rowspacingbottom', //段后距
+	               'lineheight', //行间距
+	               'autotypeset', //自动排版
+
+	           ]
+	       ],
+    autoHeightEnabled: true,
+    autoFloatEnabled: true
+});
+
+function setContent(con) {
+    var x = UE.getEditor('editor');
+   x.setContent(con);
+}
+
+
+	setTimeout(function ()
+		{
+			var c = "${fm.content!}";
+			var x = UE.getEditor('editor');
+		   x.setContent(c);
+		}	, 300
+	);
+	
+	/**
+	 * 问答新增验证
+	 */
+	var platform_fm = function() {
+		
+		var dataVali = function (form, isAdd){
+			
+			var content = getContent();
+			if (content == null || content == '')
+			{
+				toastr.warning("请输入文稿内容！");
+			 	 return false;
+			}
+			$('#content').val(content);
+				
+			common_ajax.ajaxFormMainPanel("editForm");
+		}
+		return {
+			submitValiFunc: dataVali
+		};
+	}();
+
+	
+</script>
+</div>

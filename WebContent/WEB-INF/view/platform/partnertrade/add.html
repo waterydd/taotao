@@ -1,6 +1,13 @@
-<style type="text/css">  
+<script type="text/javascript">
+			var cxt = "${cxt!}";
+			var x = "${result!}";
+			if (x != null && x != '') { 
+				toastr.warning(x);
+			}
+</script>
+<style type="text/css">
 	 #preview, .img, .imgg {  width:375px; height:268px;}  
-	 #preview { border:1px solid #000; }  
+	 #preview { border:1px solid #000; }
  </style>
  
 <div class="row">

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.fm"> <!-- OK！ -->
+
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_fm
+		where 1=1 
+			<% if(!isEmpty(subject)){ %>
+					and subject like #'%''$subject$''%'#
+			<% } %>
+			order by create_datetime desc
+		]]>
+	</sql>
+
+</sql-statement>

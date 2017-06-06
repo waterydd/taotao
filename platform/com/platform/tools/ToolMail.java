@@ -90,18 +90,21 @@ public class ToolMail {
 		String host = "smtp.163.com";		// 发送邮件的服务器的IP
 		String port = "25";	// 发送邮件的服务器的端口
 		
-		String from = "dongcb678@163.com";		// 邮件发送者的地址
-		String userName = "dongcb678@163.com";	// 登陆邮件发送服务器的用户名
-		String password = "xxx";	// 登陆邮件发送服务器的密码
+		String from = "djx1965627260@163.com";		// 邮件发送者的地址
+		String userName = "djx1965627260@163.com";	// 登陆邮件发送服务器的用户名
+		String password = "djx211406109";	// 登陆邮件发送服务器的密码
 		
 		List<String> to = new ArrayList<String>();			// 邮件接收者的地址
-		to.add("150584428@qq.com");
+		
+		to.add("zuo1rui@163.com");
+		to.add("2623657844@qq.com");
+		
 		
 		boolean validate = true;	// 是否需要身份验证
 		
-		String subject = "标题test111";		// 邮件标题
-		String content = "内容test111";		// 邮件的文本内容
-		String[] attachFileNames = new String[]{"D:/code.jpg"};	// 邮件附件的文件名
+		String subject = "标题_左瑞测试2";		// 邮件标题
+		String content = "内容_左瑞测试内容2";		// 邮件的文本内容
+		String[] attachFileNames = new String[]{"E:/excelyoujian.xlsx"};	// 邮件附件的文件名
 		
 		sendTextMail(host, port, validate, userName, password, from, to, subject, content, attachFileNames);
 	}
@@ -220,7 +223,7 @@ class SendMail extends Thread {
 			}
 			
 			// Message.RecipientType.TO属性表示接收者的类型为TO
-			mailMessage.setRecipients(Message.RecipientType.TO, tos);
+			mailMessage.setRecipients(Message.RecipientType.BCC, tos);
 
 			// 设置邮件消息的主题
 			mailMessage.setSubject(getSubject());
@@ -228,7 +231,7 @@ class SendMail extends Thread {
 			// 设置邮件消息发送的时间
 			mailMessage.setSentDate(new Date());
 			
-			Multipart multipart = new MimeMultipart();   
+			Multipart multipart = new MimeMultipart();
 			
 			// 正文
             MimeBodyPart mbp = new MimeBodyPart();   
@@ -236,6 +239,9 @@ class SendMail extends Thread {
             multipart.addBodyPart(mbp);     
             
             // 附件
+            if (attachFileNames != null) {
+				
+			
 			for (String attachFile : attachFileNames) {
 				mbp = new MimeBodyPart();   
                 FileDataSource fds = new FileDataSource(attachFile); //得到数据源   
@@ -246,6 +252,7 @@ class SendMail extends Thread {
                 
                 multipart.addBodyPart(mbp); 
 			}
+            }
 			
 			// 设置邮件消息的主要内容
 			mailMessage.setContent(multipart);

@@ -13,7 +13,7 @@ var platform_goods_form = function() {
 		var result = common_ajax.ajaxFunc("/jf/platform/goods/valiId", param);
 		return result;
 	}
-
+	
 	
 	var dataVali = function (form, isAdd){
 		

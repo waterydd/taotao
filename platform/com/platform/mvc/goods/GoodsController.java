@@ -41,23 +41,6 @@ public class GoodsController extends BaseController {
 	}
 	
 	/**
-	 * /jf/platform/goods/dropdownValue
-	 * 下拉框值
-	 */
-/*	public void dropdownValue() {
-		String type = getPara("name");
-		String sql = "select * from pre_eb_goods_attribute where type = '"
-				+ "0"
-				+ "'";
-	
-		String sql = "select * from pre_eb_goods_attribute where type = ?";
-		ArrayList<GoodsAttribute> goodsAttribute = (ArrayList<GoodsAttribute>) GoodsAttribute.dao.find(sql ,type);
-		renderJson(goodsAttribute);
-		
-	}*/
-	
-	
-	/**
 	 *  /jf/platform/goods/save
 	 *  添加
 	 */

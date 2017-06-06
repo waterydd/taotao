@@ -7,7 +7,7 @@
 		</ol>
 	</div>
 </div>
-	
+
 <div class="row">
 	<div class="col-md-12">
 		<!-- start: BORDERED TABLE PANEL -->
@@ -63,23 +63,8 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">快递公司</label>
 						<div class="col-sm-4">
-							<select name="logistics_msg" class="combox">
-									<option value="中通" >中通</option>
-									<option value="顺丰" >顺丰</option>
-									<option value="申通" >申通</option>
-									<option value="圆通速递" >圆通速递</option>
-									<option value="韵达快运" >韵达快运</option>
-									<option value="德邦物流" >德邦物流</option>
-									<option value="ems快递" >ems快递</option>
-									<option value="快捷速递" >快捷速递</option>
-									<option value="天天快递" >天天快递</option>
-									<option value="如风达" >如风达</option>
-									<option value="安捷快递" >安捷快递</option>
-									<option value="国通快递" >国通快递</option>
-									<option value="宅急送" >宅急送</option>
-									<option value="安信达快递" >安信达快递</option>
-									<option value="中邮物流" >中邮物流</option>
-									<option value="联邦快递（国内）" >联邦快递（国内）</option>
+							<select name="logistics_msg" class="combox1">
+							
 							</select>
 							<!-- <input type="text" id="logistics_msg" name="logistics_msg"
 								class="form-control" maxlength="50" vMin="2" vType="text" onblur="platform_verify.onblurVali(this);"> -->
@@ -100,6 +85,20 @@
 					<script type="text/javascript">
 						jQuery(document).ready(function() {
 							common_form.init();
+						});
+						
+						$.ajax({
+							type:"post",
+							url: "/jf/platform/tradeLog/dynamicName", 
+							/* url: "/jf/platform/tradeLog/dynamicName", */
+							async:true,
+							success:function(data){
+								var str='';
+								for(var i=0;i<data.length;i++){
+									str+='<option value="'+ data[i].name +'">'+ data[i].name +'</option>';
+								}
+								$('.combox1').append(str);
+							}
 						});
 					</script>
 					

@@ -125,10 +125,10 @@ public class HomeTopPost extends BaseModel<HomeTopPost> {
 	private Long dateline;
 	
 	
-	public Integer getTid() {
+	public String getTid() {
 		return get(column_tid);
 	}
-	public void setTid(Integer tid) {
+	public void setTid(String tid) {
 		set(column_tid, tid);
 	}
 	public String getSubject() {
@@ -186,6 +186,12 @@ public class HomeTopPost extends BaseModel<HomeTopPost> {
 	public void setDateline(Long dateline) {
 		set(column_dateline, dateline);
 	}
+	public void setQuestionStatus(java.lang.String questionStatus) {
+		set("question_status", questionStatus);
+	}
+	public java.lang.String getQuestionStatus() {
+		return get("question_status");
+	}
 	
 	@Override
 	public String toString() {
@@ -196,6 +202,4 @@ public class HomeTopPost extends BaseModel<HomeTopPost> {
 				+ ", views=" + views + ", dateline=" + dateline + "]";
 	}
 	
-		
-
 }

@@ -1,0 +1,83 @@
+<script type="text/javascript">
+			var cxt = "${cxt!}";
+			var x = "${result!}";
+			if (x != null && x != '') { 
+				toastr.warning(x);
+			}	
+				
+</script>
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/express');">快递列表</a></li>
+			<li class="active">快递录入</li>
+		</ol>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">快递录入</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/express/save" method="POST" role="form" class="form-horizontal">
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递代码</label>
+						<div class="col-sm-5">
+							<input type="text" id="code" name="express.code" value="${escapeXml(express.code!)}" 
+								class="form-control" maxlength="80" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入快递代码</span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递名字</label>
+						<div class="col-sm-5">
+							<input type="text" id="name" name="express.name" value="${escapeXml(express.name!)}" 
+								class="form-control" maxlength="100" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入快递名</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">快递名显示顺序</label>
+						<div class="col-sm-5">
+							<input type="text" id="display_order" name="express.display_order" value="${escapeXml(express.display_order!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-4"> <i class="fa fa-info-circle"></i>请输入显示顺序，数字小的显示在前 大的在后 </span>
+					</div>
+
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/express/form.js"></script>
+
+					<script type="text/javascript">
+						jQuery(document).ready(function() {
+							common_form.init();
+						});
+					</script>
+					
+					<div class="form-group">
+						<div class="col-sm-2 col-sm-offset-3">
+							<% if(authUrl("/jf/platform/express/save")){ %>
+									<button type="button" class="btn btn-red" onclick="platform_express_form.submitValiFunc(this.form,true);">
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+								</button>
+							<% } %>
+						</div>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

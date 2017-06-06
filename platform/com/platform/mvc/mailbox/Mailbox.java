@@ -7,11 +7,16 @@ import com.platform.mvc.base.BaseModel;
 import com.platform.mvc.forum.HomeTopPost;
 
 @SuppressWarnings("unused")
-@Table(tableName = HomeTopPost.table_name, pkName = "id")
+@Table(tableName = Mailbox.table_name, pkName = "id")
 public class Mailbox extends BaseModel<Mailbox> {
 
-	private static final long serialVersionUID = -6648384439202520119L;
+//	private static final long serialVersionUID = -6648384439202520119L;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1036646263556503067L;
+
 	private static Logger log = Logger.getLogger(Mailbox.class);
 	
 	private static final Mailbox dao = new Mailbox();
@@ -32,6 +37,12 @@ public class Mailbox extends BaseModel<Mailbox> {
 	 * 字段类型：varchar(40)  长度：40
 	 */
 	public static final String column_email = "email";
+	
+	/**
+	 * sqlId : platform.mailbox.splitPageFrom
+	 * 描述：分页from
+	 */
+	public static final String sqlId_splitPageFrom = "platform.mailbox.splitPageFrom";
 	
 	private Integer id;
 	private String email;

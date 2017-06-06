@@ -1,0 +1,116 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li class="active">邮箱列表</li>
+		</ol>
+	</div>
+</div>
+						
+	<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/mailbox/form.js"></script>	
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title"><span class="text-bold">商品属性列表</span></h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				<form id="editForm" action="${cxt!}/jf/platform/mailbox/impdata" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="focusedInput">导入数据</label>
+							<div class="col-sm-4">
+								<input type="file" id="excelfile" name="excelfile"/>
+							</div>
+					  	</div>
+					  	
+					  	
+						<div class="form-group">
+							<div class="col-sm-5 col-sm-offset-5">
+								<button type="button" class="btn btn-primary" onclick="platform_mailbox_form.submitValiFunc(this.form,false);">导入</button>
+								
+							</div>
+					  	</div>
+					</div>
+				</form>
+			
+			</div>
+		</div>
+	</div>
+	
+	<form id="splitPage" action="${cxt!}/jf/platform/mailbox" method="POST" role="form" class="form-horizontal">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- start: BORDERED TABLE PANEL -->
+			<div class="panel panel-white">
+				
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<span class="text-bold">邮箱列表</span>
+					</h4>
+					<div class="panel-tools">										
+						<% include("/common/panel-tools.html"){} %>
+					</div>
+				</div>
+				
+				<%
+					var edit = authUrl("/jf/platform/user/edit");
+					var delete = authUrl("/jf/platform/user/delete");
+				%>
+				
+				
+				<div class="panel-body" style="height:400px;overflow:auto;">	
+					<div class="row">
+						<div class="col-md-12 space20">
+							<% if(authUrl("/platform/mailbox/add.html")){ %>
+								<button type="button" class="btn btn-success add-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/mailbox/toUrl?toUrl=/platform/mailbox/add.html');">
+									发送邮件 <i class="fa fa-plus"></i>
+								</button>
+							<% } %>
+							
+						</div>
+					</div>	
+					<table class="table table-bordered table-hover" id="dataTable" >
+						<thead>
+							<tr>
+								<th  style="text-align:center;"    class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									ID
+								</th>
+								<th  style="text-align:center;"    class="hidden-xs" onclick="common_splitPage.orderbyFun('mainPanel', 'splitPage', '')">
+									邮箱地址
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(mailbox in splitPage.list){ %>
+								<tr>
+									<td align="center">${escapeXml(mailbox["id"]!)}</td>
+									<td align="center">${escapeXml(mailbox["email"]!)}</td>
+								</tr>
+							<% } %>
+						</tbody>
+					</table>
+					
+					<div class="row" id="splitPageDiv">
+						<% include("/common/splitPage.html", {"divId" : "mainPanel", "formId" : "splitPage", "splitPageDiv" : "splitPageDiv"}){} %>
+					</div>
+					
+				</div>
+			
+			</div>
+			<!-- end: BORDERED TABLE PANEL -->
+		</div>
+	</div>
+	
+</form>	
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		common_form.init();
+	});
+</script>

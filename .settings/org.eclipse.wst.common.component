@@ -2,10 +2,8 @@
     <wb-module deploy-name="jxsqAdm">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/platform"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/junit"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/jfinal22"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/platform"/>
         <property name="java-output-path" value="/jxsqAdm/build/classes"/>
         <property name="context-root" value="jxsqAdm"/>
     </wb-module>

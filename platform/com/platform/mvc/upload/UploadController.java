@@ -71,7 +71,7 @@ public class UploadController extends BaseController {
 		}
 		List<UploadFile> files = getFiles(path, PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
 		*/
-		List<UploadFile> files = getFiles("/upload", PropKit.getInt(ConstantInit.config_maxPostSize_key), ToolString.encoding);
+		List<UploadFile> files = getFiles("/upload", 104857600, ToolString.encoding);
 		
 		List<Map<String, String>> list = uploadService.upload(pathType, files);
 		renderJson(list);

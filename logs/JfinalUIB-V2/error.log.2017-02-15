@@ -1,0 +1,11 @@
+2017-02-13 11:25:10.814 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:258)> 发送文本邮件异常：550 User has no permission
+
+2017-02-13 11:28:56.672 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:258)> 发送文本邮件异常：550 User has no permission
+
+2017-02-13 11:30:06.305 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:258)> 发送文本邮件异常：550 User has no permission
+
+2017-02-13 11:47:17.885 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:258)> 发送文本邮件异常：550 User has no permission
+
+2017-02-13 15:45:49.413 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:261)> 发送文本邮件异常：Invalid Addresses
+2017-02-13 16:21:00.368 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:261)> 发送文本邮件异常：Illegal semicolon, not in group
+2017-02-15 16:33:35.629 [] [] ERROR [Thread-1] <com.platform.tools.SendMail.sendTextMail(ToolMail.java:261)> 发送文本邮件异常：IOException while sending message

@@ -13,6 +13,8 @@ import com.platform.annotation.Service;
 import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseService;
 import com.platform.mvc.partner.PartnerService;
+import com.platform.mvc.question.Question;
+import com.platform.mvc.question.QuestionService;
 import com.platform.util.StringUtil;
 
 /**
@@ -72,16 +74,33 @@ public class HomeTopPostService extends BaseService {
 		String advertisement = "AD";//广告
 		if (advertisement.equals(forumname)) {
 			homeTopPost.setForumName(advertisement);
-			homeTopPost.setTid(StringUtil.getStringRandom(7));
+			homeTopPost.setTid(StringUtil.getStringRandomReturnInt(7) + "");
 			homeTopPost.setDateline(new Date().getTime() / 1000);
-		}else {
+			
+			//新增时 如果forumName 为AD 则加入那四个的默认值
+			homeTopPost.setAuthor_name("社区小编001");//作者名字
+			homeTopPost.setAuthor_id(22309);// 作者 ID
+			homeTopPost.setReplies(0);
+			homeTopPost.setViews((long) 0);
+				
+		} else if (forumname.equals("QUESTION"))
+		{
+			Question question = new QuestionService().findById(homeTopPost.getTid().toString());
+			homeTopPost.setForumName("QUESTION");
+			homeTopPost.setDateline(new Date().getTime() / 1000);
+			homeTopPost.setAuthor_name("社区小编001");//作者名字
+			homeTopPost.setAuthor_id(22309);// 作者 ID
+			homeTopPost.setReplies(0);
+			homeTopPost.setViews((long) 0);
+			homeTopPost.setQuestionStatus(question.getStatus());
+		} else {
 			ForumThread forumThread = valiSubjectInfo(homeTopPost.getSubject());//调用Service的验证标题是否存在方法
 			Integer fid = forumThread.getFid();
 			
 			ForumForum name = ForumForum.dao.findFirst(sql,fid );//forumThread.getFid() 取到的fid值
 			homeTopPost.setForumName(name.getName());
 			
-			homeTopPost.setTid(forumThread.getTid());// 取tid 并存到homeTopPost里
+			homeTopPost.setTid(forumThread.getTid() + "");// 取tid 并存到homeTopPost里
 			homeTopPost.setAuthor_name(forumThread.getAuthor()); // 作者 并存到homeTopPost里
 			homeTopPost.setAuthor_id(forumThread.getAuthorid()); //作者 id 并存到homeTopPost里
 			homeTopPost.setDateline(forumThread.getDateline()); //发稿日期 并存到homeTopPost里

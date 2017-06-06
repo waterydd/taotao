@@ -1,0 +1,105 @@
+<script type="text/javascript">
+			var cxt = "${cxt!}";
+			var x = "${result!}";
+			if (x != null && x != '') { 
+				toastr.warning(x);
+			}	
+				
+</script>
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/indexForum');">首页板块列表</a></li>
+			<li class="active">板块信息更新</li>
+		</ol>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">板块信息更新</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			<div class="panel-body">
+				<form id="editForm" action="${cxt!}/jf/platform/indexForum/update" method="POST" role="form" class="form-horizontal">
+					
+					<input type="hidden" id="id" name="indexForum.id" value="${escapeXml(indexForum.id!)}" >
+					<div class="form-group">
+						<label class="col-sm-2 control-label">板块名</label>
+						<div class="col-sm-5">
+							<input type="text" id="name" name="indexForum.name" value="${escapeXml(indexForum.name!)}" 
+								class="form-control" maxlength="300" vMin="1" vType="length" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-2"> <i class="fa fa-info-circle"></i>请输入板块名</span>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">板块显示顺序</label>
+						<div class="col-sm-5">
+							<input type="text" id="displayOrder" name="indexForum.display_order" value="${escapeXml(indexForum.display_order!)}" 
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline col-sm-4"> <i class="fa fa-info-circle"></i>请输入显示顺序，数字小的显示在前 大的在后 </span>
+					</div>
+						
+					<div class="form-group">
+						<label class="col-sm-2 control-label">板块类型</label>
+						<div class="col-sm-5">
+							<% if(indexForum["type"] == "post"){%>
+								<input type="text" readonly="readonly"  class="form-control" value="帖子" disabled>
+								<input type="hidden" readonly="readonly" id="selectBox3" name="indexForum.type" class="form-control" value="post">
+							<% } else if(indexForum["type"] == "album") {%>
+								<input type="text" readonly="readonly" class="form-control" value="专辑" disabled>
+								<input type="hidden" readonly="readonly" id="selectBox3" name="indexForum.type" class="form-control" value="album">
+							<% } else if(indexForum["type"] == "investment") {%>
+								<input type="text" readonly="readonly" class="form-control" value="投资" disabled>
+								<input type="hidden" readonly="readonly" id="selectBox3" name="indexForum.type" class="form-control" value="investment">
+							<% } else if(indexForum["type"] == "fm") {%>
+								<input type="text" readonly="readonly" class="form-control" value="录音" disabled>
+								<input type="hidden" readonly="readonly" id="selectBox3" name="indexForum.type" class="form-control" value="fm">
+							<% } else if(indexForum["type"] == "question") {%>
+								<input type="text" readonly="readonly" class="form-control" value="问答" disabled>
+								<input type="hidden" readonly="readonly" id="selectBox3" name="indexForum.type" class="form-control" value="question">
+							<% } else if(indexForum["type"] == "ad" || indexForum["type"] == "广告") {%>
+								<input type="text" readonly="readonly" class="form-control" value="广告" disabled>
+								<input type="hidden" readonly="readonly" id="selectBox3" name="indexForum.type" class="form-control" value="ad">
+							<% } %>
+						</div>
+					</div>
+										
+					<div class="form-group" >
+						<label class="col-sm-2 control-label">FID</label>
+						<div class="col-sm-5">
+							<!-- <input type="text" style="display:none" id="fid" name="indexForum.fid" value="${escapeXml(indexForum.fid!)}"  -->
+							<input type="text" id="fid" name="indexForum.fid"  value="${escapeXml(indexForum.fid!)}"
+								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+						</div>
+						<span class="help-inline"> <i class="fa fa-info-circle"></i>请输入帖子所属 板块编号 或
+							0：默认固定排序规则的数据(全数据范围)
+							-1：最新
+							-2：最热
+							-3：待回答的问题
+						</span>
+					</div>
+					
+					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/indexForum/form.js"></script>
+						
+					<div class="form-actions">
+						<% if(authUrl("/jf/platform/indexForum/update")){ %>
+							<button type="button" class="btn btn-red" onclick="platform_indexForum.submitValiFunc(this.form, true);">
+								${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						<% } %>
+					</div>
+				</form>
+			</div>
+		
+		</div>
+	</div>
+</div>	

@@ -51,6 +51,9 @@ public class HomeTopPostController extends BaseController {
 			String imgpath = uf.getFileName();
 //			new Thread(new OssUploadThread(imgpath, imgTotalPath, PropertyUtil.getAdImgUploadRemotePath())).start();
 			
+			//上传本地轮播图片至远端
+			String totalCarouseImgPath = PropertyUtil.getCarouselImgPath() + imgpath;
+			new Thread(new OssUploadThread(imgpath, totalCarouseImgPath, PropertyUtil.getCarouselImgRemotePath())).start();
 			
 			
 			HomeTopPost homeTopPost = getModel(HomeTopPost.class);
@@ -151,6 +154,10 @@ public class HomeTopPostController extends BaseController {
 		String subjectOld= StringUtil.getValue(homeTopPostOld.getSubject());
 		String subjectNew= StringUtil.getValue(homeTopPost2.getSubject());
 		
+		String imgpath = uf.getFileName();
+		String totalCarouseImgPath = PropertyUtil.getCarouselImgPath() + imgpath;
+		new Thread(new OssUploadThread(imgpath, totalCarouseImgPath, PropertyUtil.getCarouselImgRemotePath())).start();
+		
 		// 判断标题是否改动过
 		if (subjectOld.equals(subjectNew)) { // true 为没改动
 			// 走 修改信息
@@ -159,7 +166,7 @@ public class HomeTopPostController extends BaseController {
 			homeTopPost2.setForumName(ForumNameNew);
 			
 			if (uf != null) { //当上传的文件不为空
-				String imgpath = uf.getFileName();
+				//String imgpath = uf.getFileName();
 				homeTopPost2.setImage_url(imgpath);
 			}
 			

@@ -8,6 +8,7 @@ import com.platform.constant.ConstantInit;
 import com.platform.mvc.base.BaseController;
 import com.platform.mvc.base.BaseModel;
 import com.platform.util.PropertyUtil;
+import com.platform.util.oss.OssUploadThread;
 
 
 @Controller(controllerKey = "/jf/platform/validatecode")
@@ -38,9 +39,14 @@ public class ValidatecodeController extends BaseController {
 	 * /jf/platform/validatecode/save
 	 */
 	public void save() {
+		//上传本地启动图片至远端
 		//UploadFile uf = getFile("image_url");
 		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getStartImgPath());
 		String imgpath = uf.getFileName();
+		
+		String totalStartImgPath = PropertyUtil.getStartImgPath() + imgpath;
+		new Thread(new OssUploadThread(imgpath, totalStartImgPath, PropertyUtil.getStartImgRemotePath())).start();
+		
 	
 		// 每次变动修改pre_common_validatecode 表validate_code字段的值
 		Validatecode validatecode = Validatecode.dao.findById(0);

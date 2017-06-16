@@ -30,7 +30,7 @@ public class OssUploadThread implements Runnable {
 	@Override
 	public void run() {
 		OssUtil.uploadLocalFile(localFilePath, remoteFilePath + remoteFileName);
-		//用完后删除
+		//上传远端完成后，删除本地文件
 		File file = new File(localFilePath);
 		if (file.exists())
 			file.delete();

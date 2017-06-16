@@ -38,7 +38,7 @@ public class PropertyUtil {
 	
 	
 	/**
-	 * 邮箱服务器地址
+	 * 获得邮箱服务器地址
 	 * @return
 	 * 
 	 */
@@ -47,7 +47,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 端口号
+	 * 获得端口号
 	 * @return
 	 * 
 	 */
@@ -57,7 +57,7 @@ public class PropertyUtil {
 	
 	
 	/**
-	 * from
+	 * 获得from
 	 * @return
 	 * 
 	 */
@@ -67,7 +67,7 @@ public class PropertyUtil {
 	
 	
 	/**
-	 * 邮箱用户名
+	 * 获得邮箱用户名
 	 * @return
 	 * 
 	 */
@@ -77,7 +77,7 @@ public class PropertyUtil {
 	
 	
 	/**
-	 * 用户密码
+	 * 获得用户密码
 	 * @return
 	 * 
 	 */
@@ -90,7 +90,7 @@ public class PropertyUtil {
 	
 	
 	/**
-	 * 轮播图地址
+	 * 获得轮播图地址
 	 * @return
 	 * 
 	 */
@@ -100,7 +100,15 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 启动图地址
+	 * 获得【轮播图远端地址】
+	 */
+	public static String getCarouselImgRemotePath()
+	{
+		return propFileUpload.get("homeTopFloat.upload.remote.path");
+	}
+	
+	/**
+	 * 获得启动图地址
 	 * @return
 	 */
 	public static String getStartImgPath()
@@ -109,7 +117,16 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 商品图地址
+	 * 获得【启动图上传远端地址】
+	 */
+	public static String getStartImgRemotePath(){
+		return propFileUpload.get("startImg.upload.remote.path");
+	}
+	
+	
+	
+	/**
+	 * 获得商品图地址
 	 * @return
 	 */
 	public static String getGoodsImgPath()
@@ -118,7 +135,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * appId
+	 * 获得appId
 	 * @return
 	 */
 	public static String getAppId()
@@ -127,7 +144,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 签名秘钥KEY
+	 * 获得签名秘钥KEY
 	 * @return
 	 */
 	public static String getDesKey()
@@ -136,7 +153,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 【后台】接口的HTTPS地址
+	 * 获得【后台】接口的HTTPS地址
 	 * @return
 	 */
 	public static String getReqHttpsUrl()
@@ -213,7 +230,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频文件获取远程地址
+	 * 获得音频文件获取远程地址
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -223,7 +240,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 广告图片获取远程地址
+	 * 获得广告图片获取远程地址
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -233,7 +250,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频图片本地路径
+	 * 获得音频图片本地路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -243,7 +260,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频图片远程路径
+	 * 获得音频图片远程路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -253,7 +270,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频文件本地路径
+	 * 获得音频文件本地路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -263,7 +280,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频文件远程路径
+	 * 获得音频文件远程路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -273,7 +290,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频本地文件获取路径
+	 * 获得音频本地文件获取路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */
@@ -283,7 +300,7 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 音频本地文件获取路径
+	 * 获得音频本地文件获取路径
 	 * @return
 	 * 2017年2月23日 下午3:12:02
 	 */

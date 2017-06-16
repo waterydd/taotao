@@ -55,4 +55,3 @@ encoding//platform/log4j.properties=UTF-8
 encoding//platform/message_ja.properties=UTF-8
 encoding//platform/message_zh_CN.properties=ISO-8859-1
 encoding//platform/ossClient.properties=UTF-8
-encoding/<project>=UTF-8

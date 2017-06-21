@@ -108,6 +108,13 @@ public class PropertyUtil {
 	}
 	
 	/**
+	 * 获得【oss服务器轮播图地址】
+	 */
+	public static String getCarouselImgPathFromOSSClient(){
+		return oss.get("homeTopFloat.img.get.remoteUrl");
+	}
+	
+	/**
 	 * 获得启动图地址
 	 * @return
 	 */
@@ -121,6 +128,13 @@ public class PropertyUtil {
 	 */
 	public static String getStartImgRemotePath(){
 		return propFileUpload.get("startImg.upload.remote.path");
+	}
+	
+	/**
+	 * 获得【oss服务器启动图地址】
+	 */
+	public static String getStartImgPathFromOSSClient(){
+		return oss.get("start.img.get.remoteUrl");
 	}
 	
 	

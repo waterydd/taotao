@@ -1,10 +1,10 @@
 <script type="text/javascript" src="${cxt!}/ui/rapido/assets/js/pages-calendar.js"></script>
 
 
-<div class="row">
+<div class="row"><div> <!-- <div> 标签可以把文档分割为独立的、不同的部分 -->
 	<div class="col-md-12">
 		<ol class="breadcrumb">
-			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">${i18nMap["admin.common.mainPage"]}</a></li>	<!-- 主页 -->
 			<li class="active">帖子信息列表</li>
 		</ol>
 	</div>
@@ -18,14 +18,15 @@
 			<div class="panel panel-white">
 				
 				<div class="panel-heading">
-					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.partner.list.select"]}</span></h4>
+					<h4 class="panel-title"><span class="text-bold">${i18nMap["admin.partner.list.select"]}</span></h4>	
 					<div class="panel-tools">										
 						<% include("/common/panel-tools.html"){} %>
 					</div>
 				</div>
 				
 				<div class="panel-body">			
-					<div class="form-group">
+					<div class="form-group"><!-- div form-group相当于段落标签，两个表单元素间距变大 -->
+						<!-- 把标签和控件放在一个带有 class .form-group 的 <div> 中。这是获取最佳间距所必需的 -->
 						<label class="col-sm-2 control-label" for="focusedInput">标题</label>
 						<div class="col-sm-4">
 					  		<input class="form-control focused" type="text" name="_query.subject" value='${escapeXml(paramMap["_query.subject"])}' maxlength="80" >
@@ -35,7 +36,7 @@
 					<div class="form-group">
 						<div class="col-sm-5 col-sm-offset-5">
 							<button type="button" class="btn btn-primary" onclick='common_ajax.ajaxFormMainPanel("splitPage");'>查询</button>
-							<button type="reset" class="btn">重置</button>
+							<button type="reset" class="btn"  value="Reset">清除</button>
 						</div>
 				  	</div>
 				</div>
@@ -51,7 +52,7 @@
 				
 				<div class="panel-heading">
 					<h4 class="panel-title">
-						<span class="text-bold">轮播图信息列表</span>
+						<span class="text-bold">轮播图信息列表</span><!-- <span> 标签被用来组合文档中的行内元素。 -->
 					</h4>
 					<div class="panel-tools">										
 						<% include("/common/panel-tools.html"){} %>
@@ -66,7 +67,7 @@
 					
 				%>
 				
-				<div class="panel-body" style="height:400px;overflow:auto;">
+				<div class="panel-body" style="height:400px;overflow:auto;"><!-- auto(内容超出时显示滚动条) -->
 				<div class="row">
 						<div class="col-md-12 space20">
 							<% if(authUrl("/platform/forum/add.html")){ %>
@@ -133,7 +134,6 @@
 									
 									<td class="hidden-xs"><!--  操作 -->
 										
-										
 										<% if(edit == true){ %>
 											<button type="button" class="btn btn-green edit-row" onclick="common_ajax.ajaxMainPanel('/jf/platform/homeTopPost/edit/${escapeXml(homeTopPost['tid']!)}');"> 
 												${i18nMap["admin.common.edit"]} <i class="fa fa-edit"></i>
@@ -181,7 +181,6 @@
 		var minutes=toTwo(time.getMinutes());
 		var seconds=toTwo(time.getSeconds());
 		$('.datatime').eq(i).html(year+'-'+month+'-'+day+' '+hours+':'+minutes+':'+seconds);
-		
 	}
 	
 </script>

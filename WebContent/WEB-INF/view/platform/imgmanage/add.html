@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row">	<!-- 一个面板 -->
 	<div class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">主页</a></li>
@@ -13,8 +13,10 @@
 		<!-- start: BORDERED TABLE PANEL -->
 		<div class="panel panel-white">
 			
-			<div class="panel-heading">
-				<h4 class="panel-title"><span class="text-bold">启动图录入</span></h4>
+			<div class="panel-heading">		<!-- 添加标题容器 -->
+				<h4 class="panel-title">	<!--添加定义样式的标题-->
+					<span class="text-bold">启动图录入</span>
+				</h4>
 				<div class="panel-tools">										
 					<% include("/common/panel-tools.html"){} %>
 				</div>
@@ -33,12 +35,12 @@
 						<div class="col-sm-3">
 							<input type="file" id="image_url" name="image_url" onchange="preview(this)" />  
 						</div>
-						 <i class="fa fa-info-circle"></i>类型为 gif,jpg,jpeg,bmp,png </span>
+						 <i class="fa fa-info-circle"></i> 图片类型为 gif,jpg,jpeg,bmp,png </span>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">图片预览</label>
 						 <div class="col-sm-4">
-							<div id="preview"></div>
+							<div id="preview"><img class="imgg" src="${readImg}" /></div>
 						</div>
 					</div>
 					<script type="text/javascript" src="${cxt!}/jsFile/rapido/platform/imgmanage/form.js"></script> 
@@ -49,7 +51,7 @@
 						});
 						/* ************************************ */
 						function preview(file) {  
-						 var prevDiv = document.getElementById('preview');  
+						 var prevDiv = document.getElementById('preview');  //在id='preview'的元素上輸出prevDiv.innerHTML=''里面的內容
 						 if (file.files && file.files[0]) {  
 							 var reader = new FileReader();  
 							 reader.onload = function(evt){  
@@ -67,7 +69,7 @@
 						<div class="col-sm-2 col-sm-offset-3">
 							<% if(authUrl("/jf/platform/validatecode/save")){ %>   
 								<button type="button" class="btn btn-red" onclick="platform_imgmanage_form.submitValiFunc(this.form,true);"> <!-- 【需要修改】 -->
-									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i>
+									${i18nMap["admin.common.submit"]}	<i class="fa fa-arrow-circle-right"></i><!-- 提交 -->
 								</button>
 							<% } %>	
 						</div>

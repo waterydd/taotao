@@ -118,10 +118,16 @@ public class HomeTopPostController extends BaseController {
 	 * 准备更新
 	 */
 	public void edit() {
-		HomeTopPost homeTopPost = HomeTopPost.dao.findById(getPara());//根据ID查询信息
+		HomeTopPost homeTopPost = HomeTopPost.dao.findById(getPara());//根据ID查询轮播图信息
+		String image_url = homeTopPost.getImage_url();//获取轮播图图片名称
+		
 		setAttr("homeTopPost", homeTopPost);//将查询到的信息给界面
 		
-		render("/platform/forum/update.html");// 返回一个界面修改界面
+		String imgpath = PropertyUtil.getCarouselImgPathFromOSSClient();//获得oss数据库轮播图文件地址（ossClient.properties）
+
+		setAttr("readImg", imgpath+image_url).render("/platform/forum/update.html");// 返回一个界面修改界面
+		
+		
 	}
 
 	/**

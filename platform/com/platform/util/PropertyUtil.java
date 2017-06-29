@@ -154,7 +154,6 @@ public class PropertyUtil {
 	}
 	
 	
-	
 	/**
 	 * 获得商品图地址
 	 * @return

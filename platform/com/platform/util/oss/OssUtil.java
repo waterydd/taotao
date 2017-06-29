@@ -40,7 +40,7 @@ public class OssUtil {
 	 * @YDD
 	 * @param bucketName 存储空间的名称
 	 * @param Objectkey 上传到oss起的名称
-	 * @param fileName 本地文件名
+	 * @param localFilePath 本地文件路径
 	 */
 	public static void uploadFileToOSSClient(String bucketName, String Objectkey, String localFilePath){
 		//调用oss/getToken接口查询临时授权所需信息
@@ -143,10 +143,14 @@ public class OssUtil {
 //	public static void main(String[] args) {
 //		uploadFileTest();
 //	}
+
 	
-	
-//	//测试新增的临时上传文件至oss方法：uploadFileToOSSClient
-//	//@YDD
+//	/**
+//	 * 测试新增的临时上传文件至oss方法：uploadFileToOSSClient
+//	 * @YDD
+//	 * @param args
+//	 */
+//
 //	public static void main(String[]  args){
 //		String fileName = "1.png";
 //		InputStream inputStream = null;

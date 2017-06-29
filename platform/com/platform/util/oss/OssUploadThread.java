@@ -30,15 +30,13 @@ public class OssUploadThread implements Runnable {
 		this.remoteFilePath = remoteFilePath;
 	}
 
+	/**
+	 * 通过获取临时授权上传文件
+	 * @YDD修改
+	 */
 
 	@Override
 	public void run() {
-//		HashMap<String, String> getToken = new UploadOssFileService().getTemporaryToken();//返回oss/getToken接口查询信息
-//		String accessKeyId = getToken.get("accessKeyId");
-//		String accessKeySecret = getToken.get("securityToken");
-//		String securityToken = getToken.get("securityToken");
-//		
-//		OSSClient ossClient = new OSSClient(PropertyUtil.getEndPoint(), accessKeyId,accessKeySecret, securityToken);
 
 		OssUtil.uploadFileToOSSClient(PropertyUtil.getDefaultBucketName(), remoteFilePath + remoteFileName,localFilePath);
 //		OssUtil.uploadLocalFile(localFilePath, remoteFilePath + remoteFileName);

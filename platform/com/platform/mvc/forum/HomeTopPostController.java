@@ -43,6 +43,7 @@ public class HomeTopPostController extends BaseController {
 
 	/**
 	 * 保存
+	 * @YDD增加
 	 */
 	public void save() {
 		try {
@@ -116,6 +117,7 @@ public class HomeTopPostController extends BaseController {
 	
 	/**
 	 * 准备更新
+	 * @YDD修改
 	 */
 	public void edit() {
 		HomeTopPost homeTopPost = HomeTopPost.dao.findById(getPara());//根据ID查询轮播图信息

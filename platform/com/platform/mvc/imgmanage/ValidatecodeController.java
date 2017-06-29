@@ -20,7 +20,7 @@ public class ValidatecodeController extends BaseController {
 	
 	/**
 	 * /platform/imgmanage/add.html
-	 * @YDD
+	 * @YDD修改
 	 */
 	public void index() {
 		
@@ -46,7 +46,7 @@ public class ValidatecodeController extends BaseController {
 	/**
 	 * 增加
 	 * /jf/platform/validatecode/save
-	 * @YDD
+	 * @YDD增加
 	 */
 	public void save() {
 		//上传本地启动图片至远端

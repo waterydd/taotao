@@ -35,6 +35,20 @@ public class PropertyUtil {
 	 * oss配置
 	 */
 	private static Prop oss = PropKit.use("ossClient.properties");
+	/**
+	 * oss临时授权上传配置
+	 * @YDD
+	 */
+	private static Prop ossMapUid = PropKit.use("ossMapUid.properties");
+	
+	/**
+	 * 获得临时授权用户Map_uid
+	 * @YDD
+	 * @return
+	 */
+	public static String getOssMapUid() {
+		return ossMapUid.get("uploadMapUid");
+	}
 	
 	
 	/**
@@ -100,7 +114,8 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 获得【轮播图远端地址】
+	 * 获得【轮播图oss远端地址】
+	 * @YDD
 	 */
 	public static String getCarouselImgRemotePath()
 	{
@@ -124,7 +139,8 @@ public class PropertyUtil {
 	}
 	
 	/**
-	 * 获得【启动图上传远端地址】
+	 * 获得【启动图上传oss远端地址】
+	 * @YDD
 	 */
 	public static String getStartImgRemotePath(){
 		return propFileUpload.get("startImg.upload.remote.path");
@@ -202,6 +218,7 @@ public class PropertyUtil {
 	{
 		return oss.get("endPoint");
 	}
+
 	
 	/**
 	 * 获得默认的bucketName

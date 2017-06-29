@@ -1,6 +1,5 @@
 package com.platform.mvc.imgmanage;
 
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -21,6 +20,7 @@ public class ValidatecodeController extends BaseController {
 	
 	/**
 	 * /platform/imgmanage/add.html
+	 * @YDD
 	 */
 	public void index() {
 		
@@ -30,7 +30,7 @@ public class ValidatecodeController extends BaseController {
 		String comment = validatecode.getComment();// 取到启动图图片comment内容中，“|”后面的字符串
 	 	String zi = comment.substring(comment.lastIndexOf('|')+1 ,comment.length());
 		
-		setAttr("readImg", imgpath+zi).render("/platform/imgmanage/add.html");
+		setAttr("readImg", imgpath+zi).render("/platform/imgmanage/add.html");//将参数“readImg”传入给前端页面 add.html
 		
 	}
 	/**
@@ -46,16 +46,16 @@ public class ValidatecodeController extends BaseController {
 	/**
 	 * 增加
 	 * /jf/platform/validatecode/save
+	 * @YDD
 	 */
 	public void save() {
 		//上传本地启动图片至远端
 		//UploadFile uf = getFile("image_url");
-		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getStartImgPath());
-		String imgpath = uf.getFileName();
+		UploadFile uf = getFileByConfigPath("image_url", PropertyUtil.getStartImgPath());//获得图片本地地址
+		String imgpath = uf.getFileName();//获得上传图片名称
 		
-		String totalStartImgPath = PropertyUtil.getStartImgPath() + imgpath;
-		new Thread(new OssUploadThread(imgpath, totalStartImgPath, PropertyUtil.getStartImgRemotePath())).start();
-		
+		String totalStartImgPath = PropertyUtil.getStartImgPath() + imgpath;//完整图片路径名
+		new Thread(new OssUploadThread(imgpath, totalStartImgPath, PropertyUtil.getStartImgRemotePath())).start();//上传至OSS路径
 		
 		
 		// 每次变动修改pre_common_validatecode 表validate_code字段的值
@@ -68,7 +68,5 @@ public class ValidatecodeController extends BaseController {
 	
 		render("/platform/imgmanage/succeed.html");	
 	}
-	
-
 
 }

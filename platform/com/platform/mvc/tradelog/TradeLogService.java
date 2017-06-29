@@ -99,7 +99,7 @@ public class TradeLogService extends BaseService {
 	 * @throws Exception
 	 */
 	public static List<NameValuePair> setTotalParam(String tranData) throws Exception {
-		String randomNum = getRandomCharAndNumr(6); //随机数 6个随机数
+		String randomNum = getRandomCharAndNumr(6); //随机 6个随机数
 		String appId = PropertyUtil.getAppId(); //APP ID 【？】
 		String randomKey = EncDecUtil.enc(PropertyUtil.getDesKey(), randomNum); // 随机 KEY
 		
@@ -131,7 +131,6 @@ public class TradeLogService extends BaseService {
 	    String flowNo = UUID.randomUUID().toString()+"BACK";// 流水号 UUID+BACK
 		String uid = tradeLog.getBuyerid().toString();// uid 用户ID
 		Members members = Members.dao.findFirst("Select map_uid from pre_common_member where uid = ?", uid);
-		
 		String tradeLogId = tradeLog.getOrderid().toString();// tradeLogId 订单 ID
 //*******************我是一条分割线******************************************************
 		HashMap<String, String> jsonMap = new HashMap<String, String>();
@@ -162,5 +161,5 @@ public class TradeLogService extends BaseService {
 		}
 		return rspMsg;
 	}
-
+	
 }

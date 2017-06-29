@@ -7,11 +7,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
+import com.platform.mvc.oss.UploadOssFileService;
 import com.platform.util.PropertyUtil;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 
 
 /**
@@ -33,6 +36,32 @@ public class OssUtil {
 	}
 	
 	/**
+	 * 临时授权上传文件至【oss】
+	 * @YDD
+	 * @param bucketName 存储空间的名称
+	 * @param Objectkey 上传到oss起的名称
+	 * @param fileName 本地文件名
+	 */
+	public static void uploadFileToOSSClient(String bucketName, String Objectkey, String localFilePath){
+		//调用oss/getToken接口查询临时授权所需信息
+		HashMap<String, String> getToken = new UploadOssFileService().getTemporaryToken();
+		//(客户端)使用使用url签名发送请求
+		OSSClient ossClient = new OSSClient(PropertyUtil.getEndPoint(), getToken.get("accessKeyId"),getToken.get("accessKeySecret"),getToken.get("securityToken"));
+		
+		InputStream inputStream = null;
+		try {
+			inputStream = new FileInputStream(localFilePath);
+		} catch (FileNotFoundException e) {
+			log.error("【oss上传文件】 失败");
+			//日志
+			e.printStackTrace();
+		}
+		ossClient.putObject(bucketName, Objectkey, inputStream);
+		ossClient.shutdown();
+	}
+	
+	
+	/**
 	 * 上传本地文件
 	 * @param file
 	 * @param bucketName
@@ -45,6 +74,8 @@ public class OssUtil {
 		ossClient.putObject(bucketName, key, file);
 		ossClient.shutdown();
 	}
+	
+	
 	
 	/**
 	 * 上传本地文件
@@ -103,13 +134,27 @@ public class OssUtil {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-//		ossClient.putObject("manggoooo", "audio/imgs/" + fileName, inputStream);
+//		ossClient.putObject("manggoooo", "images/" + fileName, inputStream);
 		boolean found = ossClient.doesObjectExist("manggoooo", "forum/201705/11/20170511113000027146126394560.jpg");
 		System.out.println("found：" + found);
 		ossClient.shutdown();
 	}
 	
-	public static void main(String[] args) {
-		uploadFileTest();
-	}
+//	public static void main(String[] args) {
+//		uploadFileTest();
+//	}
+	
+	
+//	//测试新增的临时上传文件至oss方法：uploadFileToOSSClient
+//	//@YDD
+//	public static void main(String[]  args){
+//		String fileName = "1.png";
+//		InputStream inputStream = null;
+//		try {
+//			inputStream = new FileInputStream("f:\\" + fileName);
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		uploadFileToOSSClient("manggoooo","images/"+fileName, inputStream);
+//	}
 }

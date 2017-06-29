@@ -4,6 +4,12 @@
 package com.platform.util.oss;
 
 import java.io.File;
+import java.util.HashMap;
+
+import com.aliyun.oss.OSSClient;
+import com.jfinal.upload.UploadFile;
+import com.platform.mvc.oss.UploadOssFileService;
+import com.platform.util.PropertyUtil;
 
 
 /**
@@ -25,11 +31,17 @@ public class OssUploadThread implements Runnable {
 	}
 
 
-
-
 	@Override
 	public void run() {
-		OssUtil.uploadLocalFile(localFilePath, remoteFilePath + remoteFileName);
+//		HashMap<String, String> getToken = new UploadOssFileService().getTemporaryToken();//返回oss/getToken接口查询信息
+//		String accessKeyId = getToken.get("accessKeyId");
+//		String accessKeySecret = getToken.get("securityToken");
+//		String securityToken = getToken.get("securityToken");
+//		
+//		OSSClient ossClient = new OSSClient(PropertyUtil.getEndPoint(), accessKeyId,accessKeySecret, securityToken);
+
+		OssUtil.uploadFileToOSSClient(PropertyUtil.getDefaultBucketName(), remoteFilePath + remoteFileName,localFilePath);
+//		OssUtil.uploadLocalFile(localFilePath, remoteFilePath + remoteFileName);
 		//上传远端完成后，删除本地文件
 		File file = new File(localFilePath);
 		if (file.exists())

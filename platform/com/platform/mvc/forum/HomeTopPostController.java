@@ -127,7 +127,7 @@ public class HomeTopPostController extends BaseController {
 
 		setAttr("readImg", imgpath+image_url).render("/platform/forum/update.html");// 返回一个界面修改界面
 		
-		
+
 	}
 
 	/**
@@ -160,6 +160,7 @@ public class HomeTopPostController extends BaseController {
 		String subjectOld= StringUtil.getValue(homeTopPostOld.getSubject());
 		String subjectNew= StringUtil.getValue(homeTopPost2.getSubject());
 		
+		//上传本地轮播图片至远端
 		String imgpath = uf.getFileName();
 		String totalCarouseImgPath = PropertyUtil.getCarouselImgPath() + imgpath;
 		new Thread(new OssUploadThread(imgpath, totalCarouseImgPath, PropertyUtil.getCarouselImgRemotePath())).start();

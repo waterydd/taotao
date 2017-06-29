@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSONObject;
 import com.platform.annotation.Service;
 import com.platform.mvc.base.BaseService;
+import com.platform.tools.ToolSetTotalParam;
 import com.platform.util.Base64EncryptManner;
 import com.platform.util.EncDecUtil;
 import com.platform.util.HmacHanlder;
@@ -83,45 +84,7 @@ public class PushInfoSettingsService extends BaseService {
 		return urlTotal;
 	}
 	
-	/**
-	 * 产生随机数
-	 * @param length
-	 * @return
-	 */
-	public static String getRandomCharAndNumr(Integer length) {  
-	    String str = "";  
-	    Random random = new Random();  
-	    for (int i = 0; i < length; i++) {  
-	        boolean b = random.nextBoolean();  
-	        if (b) { // 字符串  
-	            // int choice = random.nextBoolean() ? 65 : 97; 取得65大写字母还是97小写字母  
-	            str += (char) (65 + random.nextInt(26));// 取得大写字母  
-	        } else { // 数字  
-	            str += String.valueOf(random.nextInt(10));  
-	        }  
-	    }  
-	    return str;  
-	} 
 	
-	/**
-	 * 
-	 * @param tranData
-	 * @return
-	 * @throws Exception
-	 */
-	public static List<NameValuePair> setTotalParam(String tranData) throws Exception {
-		String randomNum = getRandomCharAndNumr(6); //随机数 6个随机数
-		String appId = PropertyUtil.getAppId(); //APP ID 【？】
-		String randomKey = EncDecUtil.enc(PropertyUtil.getDesKey(), randomNum); // 随机 KEY
-		
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("appId", appId));// APP ID
-		params.add(new BasicNameValuePair("version", "APP2.0")); // 版本号
-		params.add(new BasicNameValuePair("tranData", new Base64EncryptManner().encode(tranData))); // 通过加密后的参数
-		params.add(new BasicNameValuePair("signature", new HmacHanlder(randomNum).encrypt(tranData)));// 签名
-		params.add(new BasicNameValuePair("ciphertext", randomKey)); // 随机 KEY
-		return params;
-	}
 	
 	private String getResult(String result) {
         String[] fileds = result.split("&");
@@ -159,7 +122,7 @@ public class PushInfoSettingsService extends BaseService {
 			jsonMap.put("timestamp", new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())); // timestamp 时间戳
 			
 			try {
-				String msg = doPost("push/pushAllUser", setTotalParam(JSONObject.toJSONString(jsonMap)));
+				String msg = doPost("push/pushAllUser", ToolSetTotalParam.setTotalParam(JSONObject.toJSONString(jsonMap)));
 				
 				msg = getResult(msg);
 				msg = new Base64EncryptManner().decode(msg);

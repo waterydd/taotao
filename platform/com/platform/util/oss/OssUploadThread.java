@@ -4,11 +4,6 @@
 package com.platform.util.oss;
 
 import java.io.File;
-import java.util.HashMap;
-
-import com.aliyun.oss.OSSClient;
-import com.jfinal.upload.UploadFile;
-import com.platform.mvc.oss.UploadOssFileService;
 import com.platform.util.PropertyUtil;
 
 

@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
 import com.platform.mvc.oss.UploadOssFileService;
 import com.platform.util.PropertyUtil;
 import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 
 
 /**
@@ -74,8 +73,6 @@ public class OssUtil {
 		ossClient.putObject(bucketName, key, file);
 		ossClient.shutdown();
 	}
-	
-	
 	
 	/**
 	 * 上传本地文件

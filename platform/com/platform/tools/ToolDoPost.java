@@ -61,12 +61,13 @@ public class ToolDoPost {
 			e.printStackTrace();
 		}finally{
 			httpPost.releaseConnection();
-			instream.close();
+			if (instream != null)
+				instream.close();
 			if (response != null)
 				EntityUtils.consume(response.getEntity());
 			if (httpPost != null)
 				httpPost.abort();
 	    }
-		return urlTotal;
+		return null;
 	}
 }

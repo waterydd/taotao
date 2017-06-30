@@ -6,6 +6,7 @@ package com.platform.util.oss;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 
@@ -13,7 +14,9 @@ import org.apache.log4j.Logger;
 
 import com.platform.mvc.oss.UploadOssFileService;
 import com.platform.util.PropertyUtil;
+import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSSException;
 
 
 /**
@@ -41,22 +44,32 @@ public class OssUtil {
 	 * @param Objectkey 上传到oss起的名称
 	 * @param localFilePath 本地文件路径
 	 */
-	public static void uploadFileToOSSClient(String bucketName, String Objectkey, String localFilePath){
+	public static void uploadFileToOSSClient(String bucketName, String Objectkey, String localFilePath) {
 		//调用oss/getToken接口查询临时授权所需信息
 		HashMap<String, String> getToken = new UploadOssFileService().getTemporaryToken();
 		//(客户端)使用使用url签名发送请求
-		OSSClient ossClient = new OSSClient(PropertyUtil.getEndPoint(), getToken.get("accessKeyId"),getToken.get("accessKeySecret"),getToken.get("securityToken"));
-		
-		InputStream inputStream = null;
-		try {
-			inputStream = new FileInputStream(localFilePath);
-		} catch (FileNotFoundException e) {
-			log.error("【oss上传文件】 失败");
-			//日志
-			e.printStackTrace();
+		if(getToken != null){
+			OSSClient ossClient = new OSSClient(PropertyUtil.getEndPoint(), getToken.get("accessKeyId"),getToken.get("accessKeySecret"),getToken.get("securityToken"));
+			InputStream inputStream = null;
+			try{
+				inputStream = new FileInputStream(localFilePath);
+				ossClient.putObject(bucketName, Objectkey, inputStream);
+			}catch(FileNotFoundException e){
+				log.error("本地文件不存在！" + localFilePath + e.getMessage());
+			}catch (OSSException e) {
+				log.error("【oss上传文件】 失败" + ossClient);
+			} catch (ClientException e) {
+				log.error("【oss上传文件】 失败" + ossClient);
+			}finally{
+				if(inputStream != null)
+					try {
+						inputStream.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				ossClient.shutdown();
+			}
 		}
-		ossClient.putObject(bucketName, Objectkey, inputStream);
-		ossClient.shutdown();
 	}
 	
 	

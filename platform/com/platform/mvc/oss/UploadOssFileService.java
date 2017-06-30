@@ -51,35 +51,43 @@ private static Logger log = Logger.getLogger(UploadOssFileService.class);
 				if(msg != null){
 					msg = getResult(msg);
 					msg = new Base64EncryptManner().decode(msg);
-					JSONObject jsonObject = JSONObject.parseObject(msg);
-		
-					String rspCode = (String) jsonObject.get("rspCode"); // 是否成功标记数
-					rspMsg = (String) jsonObject.get("rspMsg");
-					String accessKeyId = (String) jsonObject.get("accessKeyId"); // 返回accessKeyId
-					String accessKeySecret = (String) jsonObject.get("accessKeySecret"); // 返回accessKeyId
-					String securityToken = (String) jsonObject.get("securityToken"); // 返回accessKeyId
-					String success = "0001"; // 成功为 0001
-		
-					HashMap<String, String> map = new HashMap<>();
-		
-					if (!success.equals(rspCode)) {// 判断是否退款成功 【失败 就return】0001
-						log.info("获取临时授权不成功 ，非'0001'成功状态！");
-						map.put("rspMsg", rspMsg);
-						return map;
-					}
-					map.put("accessKeyId", accessKeyId);
-					map.put("accessKeySecret", accessKeySecret);
-					map.put("securityToken", securityToken);
-					return map;
-				}else{
-					System.out.println("doPost获取msg失败！" );
-					return null;
-				}
+					JSONObject jsonObject = JSONObject.parseObject(msg);		
 					
+					String rspCode = (String) jsonObject.get("rspCode"); // 是否成功标记数
+					String success = "0001"; // 成功为 0001
+					
+					if(rspCode != null){
+						if (!success.equals(rspCode)) {// 判断是否成功 【失败 就return】0001
+							log.info("获取临时授权不成功 ，非'0001'成功状态！");
+							return null;
+						}
+						rspMsg = (String) jsonObject.get("rspMsg");
+						if(rspMsg != null){
+							HashMap<String, String> map = new HashMap<>();						
+							
+							String accessKeyId = (String) jsonObject.get("accessKeyId"); // 返回accessKeyId
+							String accessKeySecret = (String) jsonObject.get("accessKeySecret"); // 返回accessKeyId
+							String securityToken = (String) jsonObject.get("securityToken"); // 返回accessKeyId
+
+							map.put("accessKeyId", accessKeyId);
+							map.put("accessKeySecret", accessKeySecret);
+							map.put("securityToken", securityToken);
+							return map;
+						}else{
+							log.error("获取rspMsg失败！"+ rspMsg );
+							return null;
+						}
+					}else{
+						log.error("获取rspCode失败！"+ rspCode );
+					}					
+				}else{
+					log.error("doPost获取msg失败！"+ msg );
+					return null;
+				}					
 			} catch (Exception e) {
-				log.error("[xxxchuyic出异常]uid" +uid );
-				e.printStackTrace();
+				log.error("[用户id出异常]uid" +uid +e.getMessage());
 				return null;
 			}
+		return null;
 	}
 }

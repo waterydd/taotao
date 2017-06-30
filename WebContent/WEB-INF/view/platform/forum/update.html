@@ -26,10 +26,10 @@
 			<div class="panel-body">
 				<form id="editForm" action="${cxt!}/jf/platform/homeTopPost/update" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-sm-2 control-label">Tid</label>
+						<label class="col-sm-2 control-label">编号</label>
 						<div class="col-sm-7">
 							<input type="text" id="tid" name="homeTopPost.tid" readonly="readonly" value="${escapeXml(homeTopPost.tid!)}" 
-								class="form-control" maxlength="8" vMin="1" vType="number" onblur="platform_verify.onblurVali(this);">
+								class="form-control" maxlength="80" vMin="1" onblur="platform_verify.onblurVali(this);">
 						</div>
 					</div>
 															

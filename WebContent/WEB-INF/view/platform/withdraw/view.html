@@ -1,0 +1,162 @@
+<!-- YDD 2017.07.05 -->
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/index/content');">首页</a></li>
+			<li><a href="#" onclick="common_ajax.ajaxMainPanel('/jf/platform/withdraw');">申请审核列表</a></li>
+			<li class="active">查看审核信息</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- start: BORDERED TABLE PANEL -->
+		<div class="panel panel-white">
+			
+			<div class="panel-heading">
+				<h4 class="panel-title"><span class="text-bold">查看审核信息</span></h4>
+				<div class="panel-tools">										
+					<% include("/common/panel-tools.html"){} %>
+				</div>
+			</div>
+			
+			<div class="panel-body">	
+				<form role="form" class="form-horizontal">
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.id!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">提现金额</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.amount!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">创建日期 </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(scoreLog.create_datetime!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">提现账户ID</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.id!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">提现账户类型</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.take_amount_type!)}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">提现账户号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.take_account_no!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">审核状态</label>
+						<div class="col-sm-7">
+							<% if(withdraw["status"] == "AUDITING"){%>
+								<span class="label label-success">待处理</span>
+							<% }else if(withdraw["status"] == "AUDIT_SUCCESS") {%>
+								<span class="label label-success">成功</span> 
+							<% } else if(withdraw["status"] == "AUDIT_FAILURE") {%>
+								<span class="label label-warning">失败</span> 
+							<% } else if(withdraw["status"] == "PAID") {%>
+								<span class="label label-purple">已打款</span> 
+							<% } %>
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">更新日期 </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.update_datetime!)}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">成功日期 </label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.success_datetime!)}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">打款账户类型</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.pay_amount_type!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">打款账户号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.pay_account_no!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">提现的现金账户编号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.cash_account_id!)}">
+						</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="col-sm-2 control-label">审核备注</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.audit_remark!)}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">审核用户编号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.audit_uid!)}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">审核用户名</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.audit_username!)}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">提现单号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.order_no!)}">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">成功支付流水号</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" readonly="readonly" value="${escapeXml(withdraw.success_pay_flowno!)}">
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>	
+
+					
+				

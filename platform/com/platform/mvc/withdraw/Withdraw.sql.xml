@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql-statement namespace="platform.withdraw"> <!-- OK！ -->
+	
+	<!-- 分页查询：from 参数为空就查询所有的，不为空根据参数查询 -->
+	<sql id="splitPageFrom">
+		<![CDATA[ 
+       	from 
+      		   pre_cash_take_money
+		where 1=1 
+			<% if(!isEmpty(status)){ %>
+					and status = #'$status$'#
+			<% } %>
+
+			<% if(!isEmpty(uid)){ %>
+					and uid like #'%''$uid$''%'#
+			<% } %>
+			<% if(!isEmpty(order_no)){ %>
+					and order_no like #'%''$order_no$''%'#
+			<% } %>
+
+    	]]>
+	</sql>
+	
+</sql-statement>
